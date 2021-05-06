@@ -1,4 +1,5 @@
-# SkyClient MacOS Installer
- Skyclient installer for Linux
+# SkyClient Java Installer
+ Skyclient installer but in java
  
- GUI soon:tm:
+ GUI NOW
+
