@@ -1,4 +1,4 @@
-package io.github.koxx12_dev.skyclient_installer_macos;
+package io.github.koxx12_dev.skyclient_installer_java;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;

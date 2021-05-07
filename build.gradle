@@ -25,7 +25,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'io.github.koxx12_dev.skyclient_installer_macos.MainGui'
+        attributes 'Main-Class': 'io.github.koxx12_dev.skyclient_installer_java.MainGui'
     }
 
     from {
