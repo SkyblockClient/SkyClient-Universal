@@ -25,6 +25,7 @@ hs_err_pid*
 
 /.idea/
 /update.txt
+/out/
 /out/*
 /.gradle/
 /build/
