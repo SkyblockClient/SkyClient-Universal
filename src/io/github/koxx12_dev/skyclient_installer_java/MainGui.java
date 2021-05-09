@@ -13,6 +13,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Mod info (github, yt ,discord)
+//TODO: Mod Warnings
+
 public class MainGui extends Utils {
 
     public static void main(String[] args) throws IOException {
