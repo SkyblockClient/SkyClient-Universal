@@ -10,8 +10,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build linux:
-
+  build_linux:
+    
     runs-on: ubuntu-latest
 
     steps:
@@ -29,10 +29,12 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: compiled
-        path: build/libs/*.jar
+        path: build/libs/*.jar  
         
-  build mac:
-
+  build_mac:
+    
+    needs: build_linux
+    
     runs-on: 	macos-latest
 
     steps:
@@ -52,8 +54,10 @@ jobs:
         name: compiled
         path: build/libs/*.jar
         
-  build windows:
-
+  build_windows:
+    
+    needs: build_mac
+    
     runs-on: 	windows-latest
 
     steps:
