@@ -225,7 +225,7 @@ public class MainGui extends Utils {
 
 
 
-        JFrame frame = new JFrame("Popup");
+        JFrame frame = new JFrame("Guide");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
