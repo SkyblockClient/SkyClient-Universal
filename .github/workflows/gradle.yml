@@ -28,9 +28,9 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: compiled
+        name: jar_linux
         path: build/libs/*.jar  
-        
+  
   build_mac:
     
     needs: build_linux
@@ -51,7 +51,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: compiled
+        name: jar_mac
         path: build/libs/*.jar
         
   build_windows:
@@ -74,5 +74,5 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: compiled
+        name: jar_windows
         path: build/libs/*.jar
