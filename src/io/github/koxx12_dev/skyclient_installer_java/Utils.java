@@ -1,15 +1,21 @@
 package io.github.koxx12_dev.skyclient_installer_java;
 
+import com.github.rjeschke.txtmark.Processor;
 import org.apache.commons.lang.SystemUtils;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Utils {
@@ -61,6 +67,7 @@ public class Utils {
 
         return path.replaceAll("\\|\\|",plc);
     }
+
     public static String urlEncode(String toEncode){
         //if null, keep null (no gain or loss of safety)
         if (toEncode==null)
@@ -104,6 +111,53 @@ public class Utils {
                 default: sb.append(character);//if it does not need to be escaped, add the character itself to the StringBuilder
             }
         return sb.toString();//build the string, and return
+    }
+
+    public static java.util.List<JLabel> mdToList(String mdString){
+        // separate input by spaces ( URLs don't have spaces )
+        java.util.List<JLabel> labels = new ArrayList<>();
+
+        String textParsed = Processor.process(mdString);
+
+        java.util.List<String> lines = Arrays.asList(textParsed.split("\n"));
+        System.out.println(lines);
+        for (int i = 0; i < (lines.size()); i++) {
+
+            String line = lines.get(i);
+
+            if(line.contains("img"))
+            {
+                //System.out.println(line+" , img");
+                String[] img = line.split("\"");
+                for (String imgsplitted : img){
+                    try {
+                        URL url = new URL(imgsplitted);
+
+                        final HttpURLConnection connection = (HttpURLConnection) url
+                                .openConnection();
+                        connection.setRequestProperty(
+                                "User-Agent",
+                                "NING/1.0");
+
+                        BufferedImage myPicture = ImageIO.read(connection.getInputStream());
+                        labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture,myPicture.getWidth()/2,myPicture.getWidth()/4))));
+
+
+
+                    } catch (Exception ignored){
+
+                    }
+                }
+            } else {
+
+                labels.add(new JLabel("<html>"+line+"<br></html>"));
+            }
+
+
+        }
+
+        return labels;
+
     }
 
 }

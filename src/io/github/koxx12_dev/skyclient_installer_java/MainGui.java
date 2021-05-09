@@ -221,4 +221,49 @@ public class MainGui extends Utils {
 
     }
 
+    public static Boolean Guide(String text) throws IOException {
+
+
+
+        JFrame frame = new JFrame("Popup");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
+        frame.setResizable(false);
+
+        JLabel label;
+        JPanel pane = new JPanel();
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        frame.setLayout(gridbag);
+        pane.setLayout(gridbag);
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        java.util.List<JLabel> labels = mdToList(text);
+
+        //System.out.println(textParsed);
+
+        for (int i = 0; i < (labels.size()); i++)  {
+            label = labels.get(i);
+            label.setVerticalAlignment(JLabel.TOP);
+            c.gridx = 0;
+            c.gridy = i;
+            gridbag.setConstraints(label, c);
+            pane.add(label);
+            System.out.println(label);
+        }
+
+        JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sp.setPreferredSize(new Dimension(800, 600));
+        c.gridwidth = 0;
+        c.gridx = 0;
+        c.gridy = 0;
+        gridbag.setConstraints(sp, c);
+        frame.add(sp);
+
+        frame.pack();
+        frame.setVisible(true);
+
+        return true;
+    }
+
 }
