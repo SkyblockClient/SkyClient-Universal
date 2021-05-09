@@ -10,7 +10,9 @@ on:
     branches: [ main ]
 
 jobs:
+  
   build_linux:
+    name: Build with linux
     
     runs-on: ubuntu-latest
 
@@ -32,6 +34,7 @@ jobs:
         path: build/libs/*.jar  
   
   build_mac:
+    name: Build with mac os
     
     needs: build_linux
     
@@ -55,6 +58,7 @@ jobs:
         path: build/libs/*.jar
         
   build_windows:
+    name: Build with windows
     
     needs: build_mac
     
