@@ -22,8 +22,8 @@ public class MainGui extends Utils {
 
     public static void main(String[] args) throws IOException {
 
-        PrintStream fileOut = new PrintStream("./out.txt");
-        //System.setOut(fileOut);
+        PrintStream fileOut = new PrintStream("./log.txt");
+        System.setOut(fileOut);
 
         List<String> displayed = new ArrayList<>();
 
