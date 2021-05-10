@@ -1,5 +1,7 @@
 package io.github.koxx12_dev.skyclient_installer_java;
 
+import com.github.weisj.darklaf.LafManager;
+import com.github.weisj.darklaf.theme.DarculaTheme;
 import org.apache.commons.lang.SystemUtils;
 import org.json.JSONArray;
 
@@ -20,10 +22,13 @@ import java.util.List;
 
 public class MainGui extends Utils {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        LafManager.enableLogging(false);
+        LafManager.install(new DarculaTheme());
 
         PrintStream fileOut = new PrintStream("./log.txt");
-        System.setOut(fileOut);
+        //System.setOut(fileOut);
 
         List<String> displayed = new ArrayList<>();
 
@@ -62,6 +67,8 @@ public class MainGui extends Utils {
         System.out.println(displayed);
 
 
+        //Guide(request("https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/guides/qol.md?raw=true"));
+
         GuiInit(displayed,modsjson,packsjson);
     }
 
@@ -75,7 +82,37 @@ public class MainGui extends Utils {
         frame.setVisible(true);
     }
 
-    public static void Gui(Container truepane,List list,JSONArray modsjson,JSONArray packsjson) {
+    public static void Gui(Container truepane,List list,JSONArray modsjson,JSONArray packsjson) throws MalformedURLException {
+
+        JFrame frame = new JFrame("Skyclient Installer");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
+        frame.setResizable(false);
+        GridBagLayout gb = new GridBagLayout();
+        GridBagConstraints c2 = new GridBagConstraints();
+        frame.setLayout(gb);
+        c2.fill = GridBagConstraints.HORIZONTAL;
+        c2.insets = new Insets(1,1,1,1);
+
+        JLabel lbar = new JLabel("Loading Checkboxes and images for Mods");
+        lbar.setPreferredSize(new Dimension(500,40));
+        c2.gridx = 0;
+        c2.gridy = 0;
+
+        gb.setConstraints(lbar,c2);
+        frame.add(lbar);
+
+        JProgressBar bar = new JProgressBar();
+        bar.setPreferredSize(new Dimension(500,40));
+        bar.setStringPainted(true);
+        bar.setMaximum(6);
+        c2.gridy = 1;
+
+        gb.setConstraints(bar,c2);
+        frame.add(bar);
+
+        frame.pack();
+        frame.setVisible(true);
 
         JPanel pane = new JPanel();
         JPanel pane2 = new JPanel();
@@ -125,6 +162,9 @@ public class MainGui extends Utils {
 
         }
 
+        lbar.setText("Loading Checkboxes and images for Packs");
+        bar.setValue(1);
+
         for (int i = 0; i < packsjson.length(); i++) {
             try {
                 String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/"+packsjson.getJSONObject(i).get("icon");
@@ -158,6 +198,9 @@ public class MainGui extends Utils {
 
         }
 
+        lbar.setText("Loading Popup Menus for Mods");
+        bar.setValue(2);
+
         for (int i = 0; i < Labels.size(); i++) {
             JLabel lab = Labels.get(i);
             JSONArray json = modsjson.getJSONObject(i).getJSONArray("actions");
@@ -176,6 +219,9 @@ public class MainGui extends Utils {
                 }
                 });
         }
+
+        lbar.setText("Loading Popup Menus for Packs");
+        bar.setValue(3);
 
         for (int i = 0; i < Labels2.size(); i++) {
             JLabel lab = Labels2.get(i);
@@ -199,6 +245,9 @@ public class MainGui extends Utils {
 
             }
         }
+
+        lbar.setText("Loading Warnings for Mods");
+        bar.setValue(4);
 
         for (int i = 0; i < Checkboxes.size(); i++) {
             JCheckBox lab = Checkboxes.get(i);
@@ -232,6 +281,9 @@ public class MainGui extends Utils {
 
         }
 
+        lbar.setText("Loading Buttons and Labels");
+        bar.setValue(5);
+
         button = new JButton("Install");
         button.setPreferredSize(new Dimension(200,30));
         c.insets = new Insets(1,1,1,3);
@@ -250,6 +302,7 @@ public class MainGui extends Utils {
         truepane.add(Label);
         
         JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sp.getVerticalScrollBar().setUnitIncrement(16);
         sp.setPreferredSize(new Dimension(270, 400));
         c.gridwidth = 2;
         c.gridx = 0;
@@ -268,12 +321,16 @@ public class MainGui extends Utils {
         truepane.add(Label);
 
         JScrollPane sp2 = new JScrollPane(pane2,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sp2.getVerticalScrollBar().setUnitIncrement(16);
         sp2.setPreferredSize(new Dimension(270, 400));
         c.gridwidth = 2;
         c.gridx = 2;
         c.gridy = 1;
         gridbag.setConstraints(sp2, c);
         truepane.add(sp2);
+
+        lbar.setText("Loading Click Detectors");
+        bar.setValue(5);
 
         button.addActionListener(ae -> {
 
@@ -303,6 +360,10 @@ public class MainGui extends Utils {
 
         });
 
+        lbar.setText("Loaded everything!");
+        bar.setValue(6);
+
+        frame.dispose();
 
     }
 
@@ -338,6 +399,7 @@ public class MainGui extends Utils {
         }
 
         JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        sp.getVerticalScrollBar().setUnitIncrement(16);
         sp.setPreferredSize(new Dimension(800, 600));
         c.gridwidth = 0;
         c.gridx = 0;
@@ -354,6 +416,7 @@ public class MainGui extends Utils {
 
         JPopupMenu popupMenu = new JPopupMenu();
         List<JMenuItem> items = new ArrayList<>();
+
 
         for (int i = 0; i < (array.length()); i++) {
 
@@ -397,6 +460,8 @@ public class MainGui extends Utils {
             }
 
         }
+        popupMenu.setSize(popupMenu.getWidth()*4, popupMenu.getHeight()*4);
+
         return popupMenu;
     }
 

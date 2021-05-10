@@ -30,17 +30,31 @@ public class Utils {
 
     }
 
-    public static void Download(String URL, String Loc) throws IOException {
-        java.net.URL url = new URL(URL);
-        URLConnection urlConnection = url.openConnection();
-        urlConnection.setRequestProperty("User-Agent", "NING/1.0");
-        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-        FileOutputStream fileOS = new FileOutputStream(Loc);
-        byte[] data = new byte[1024];
-        int byteContent;
-        while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-            fileOS.write(data, 0, byteContent);
-        }
+    public static void Download(String URL, String Loc) {
+        Runnable downloadThread = () -> {
+            try {
+                java.net.URL url = new URL(URL);
+                URLConnection urlConnection = url.openConnection();
+                urlConnection.setRequestProperty("User-Agent", "NING/1.0");
+                long completeFileSize = urlConnection.getContentLength();
+                BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                FileOutputStream fileOS = new FileOutputStream(Loc);
+                byte[] data = new byte[1024];
+                long downloadedFileSize = 0;
+                int byteContent;
+                while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
+                    downloadedFileSize += byteContent;
+                    final int currentProgress = (int) ((((double) downloadedFileSize) / ((double) completeFileSize)) * 100000d);
+
+                    fileOS.write(data, 0, byteContent);
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        };
+
+        new Thread(downloadThread).start();
+
     }
 
     public static Image getScaledImage(Image srcImg, int w, int h){
