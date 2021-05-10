@@ -140,7 +140,7 @@ public class Utils {
                                 "NING/1.0");
 
                         BufferedImage myPicture = ImageIO.read(connection.getInputStream());
-                        labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture,myPicture.getWidth()/2,myPicture.getWidth()/4))));
+                        labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture,myPicture.getWidth()/2,myPicture.getHeight()/2))));
 
 
 
@@ -150,7 +150,7 @@ public class Utils {
                 }
             } else {
 
-                labels.add(new JLabel("<html>"+line+"<br></html>"));
+                labels.add(new JLabel("<html>"+line+"</html>"));
             }
 
 

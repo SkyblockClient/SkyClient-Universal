@@ -189,7 +189,7 @@ public class MainCode extends Utils {
 
         Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar",mc + "/libraries/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9.jar");
 
-        JOptionPane.showMessageDialog(null, "Installed Skyclient", "Done", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Installed SkyClient", "Done", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
 
     }

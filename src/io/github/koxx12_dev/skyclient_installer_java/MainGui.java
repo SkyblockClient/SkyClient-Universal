@@ -6,19 +6,24 @@ import org.json.JSONArray;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Mod info (github, yt ,discord)
-//TODO: Mod Warnings
-
 public class MainGui extends Utils {
 
     public static void main(String[] args) throws IOException {
+
+        PrintStream fileOut = new PrintStream("./out.txt");
+        //System.setOut(fileOut);
 
         List<String> displayed = new ArrayList<>();
 
@@ -56,6 +61,7 @@ public class MainGui extends Utils {
 
         System.out.println(displayed);
 
+
         GuiInit(displayed,modsjson,packsjson);
     }
 
@@ -76,6 +82,8 @@ public class MainGui extends Utils {
         List<JCheckBox> Checkboxes = new ArrayList<>();
         List<JCheckBox> Checkboxes2 = new ArrayList<>();
         JButton button;
+        List<JLabel> Labels = new ArrayList<>();
+        List<JLabel> Labels2 = new ArrayList<>();
         JLabel Label;
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -88,13 +96,13 @@ public class MainGui extends Utils {
             try {
                 String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/"+modsjson.getJSONObject(i).get("icon");
                 BufferedImage myPicture = ImageIO.read(new URL(url.replaceAll(" ","%20")));
-                Label = new JLabel(new ImageIcon(getScaledImage(myPicture,50,50)));
-                Label.setPreferredSize(new Dimension(50, 50));
+                Labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture,50,50))));
+                Labels.get(Labels.size()-1).setPreferredSize(new Dimension(50, 50));
                 c.insets = new Insets(1,1,1,1);
                 c.gridx = 0;
                 c.gridy = i;
-                gridbag.setConstraints(Label, c);
-                pane.add(Label);
+                gridbag.setConstraints(Labels.get(Labels.size()-1), c);
+                pane.add(Labels.get(Labels.size()-1));
             } catch (Exception ignored){
 
             }
@@ -121,13 +129,13 @@ public class MainGui extends Utils {
             try {
                 String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/"+packsjson.getJSONObject(i).get("icon");
                 BufferedImage myPicture = ImageIO.read(new URL(url.replaceAll(" ","%20")));
-                Label = new JLabel(new ImageIcon(getScaledImage(myPicture,50,50)));
-                Label.setPreferredSize(new Dimension(50, 50));
+                Labels2.add(new JLabel(new ImageIcon(getScaledImage(myPicture,50,50))));
+                Labels2.get(Labels2.size()-1).setPreferredSize(new Dimension(50, 50));
                 c.insets = new Insets(1,1,1,1);
                 c.gridx = 0;
                 c.gridy = i;
-                gridbag.setConstraints(Label, c);
-                pane2.add(Label);
+                gridbag.setConstraints(Labels2.get(Labels2.size()-1), c);
+                pane2.add(Labels2.get(Labels2.size()-1));
             } catch (Exception ignored){
 
             }
@@ -147,6 +155,80 @@ public class MainGui extends Utils {
             c.gridy = i;
             gridbag.setConstraints(Checkboxes2.get(i), c);
             pane2.add(Checkboxes2.get(i));
+
+        }
+
+        for (int i = 0; i < Labels.size(); i++) {
+            JLabel lab = Labels.get(i);
+            JSONArray json = modsjson.getJSONObject(i).getJSONArray("actions");
+
+            final JPopupMenu menu = Popup(json);
+
+            lab.addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    if (e.isPopupTrigger())
+                        menu.show(e.getComponent(), e.getX(), e.getY());
+                }
+
+                public void mouseReleased(MouseEvent e) {
+                    if (e.isPopupTrigger())
+                        menu.show(e.getComponent(), e.getX(), e.getY());
+                }
+                });
+        }
+
+        for (int i = 0; i < Labels2.size(); i++) {
+            JLabel lab = Labels2.get(i);
+            try {
+                JSONArray json = packsjson.getJSONObject(i).getJSONArray("actions");
+
+                final JPopupMenu menu = Popup(json);
+
+                lab.addMouseListener(new MouseAdapter() {
+                    public void mousePressed(MouseEvent e) {
+                        if (e.isPopupTrigger())
+                            menu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+
+                    public void mouseReleased(MouseEvent e) {
+                        if (e.isPopupTrigger())
+                            menu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+                });
+            } catch (Exception ignored) {
+
+            }
+        }
+
+        for (int i = 0; i < Checkboxes.size(); i++) {
+            JCheckBox lab = Checkboxes.get(i);
+            try {
+                JSONArray json = modsjson.getJSONObject(i).getJSONObject("warning").getJSONArray("lines");
+
+
+                lab.addMouseListener(new MouseAdapter() {
+                    public void mousePressed(MouseEvent e) {
+                        Boolean selected = false;
+
+                        lab.setSelected(false);
+                        try {
+                            selected = Warning(json);
+                        } catch (MalformedURLException malformedURLException) {
+                            malformedURLException.printStackTrace();
+                        }
+
+                        lab.setSelected(selected);
+
+                    }
+//
+                    //public void mouseReleased(MouseEvent e) {
+                    //    if (e.isPopupTrigger())
+                    //        menu.show(e.getComponent(), e.getX(), e.getY());
+                    //}
+                });
+            } catch (Exception ignored) {
+
+            }
 
         }
 
@@ -224,12 +306,12 @@ public class MainGui extends Utils {
 
     }
 
-    public static Boolean Guide(String text) throws IOException {
+    public static void Guide(String text) throws IOException {
 
 
 
         JFrame frame = new JFrame("Guide");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
 
@@ -266,7 +348,69 @@ public class MainGui extends Utils {
         frame.pack();
         frame.setVisible(true);
 
-        return true;
     }
 
+    public static JPopupMenu Popup(final JSONArray array) {
+
+        JPopupMenu popupMenu = new JPopupMenu();
+        List<JMenuItem> items = new ArrayList<>();
+
+        for (int i = 0; i < (array.length()); i++) {
+
+            try {
+                final String md = (String)array.getJSONObject(i).get("document");
+
+                items.add(new JMenuItem("Guide (Markdown Reader)"));
+                popupMenu.add(items.get(i));
+
+                items.get(i).addMouseListener(new MouseAdapter() {
+
+                    public void mouseReleased(MouseEvent e) {
+                            try {
+                                Guide(request(md));
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                    }
+                });
+
+            } catch (Exception e) {
+                final String text = (String)array.getJSONObject(i).get("text");
+                final String link = (String)array.getJSONObject(i).get("link");
+
+                items.add(new JMenuItem(text));
+                popupMenu.add(items.get(i));
+
+                items.get(i).addMouseListener(new MouseAdapter() {
+
+                    public void mouseReleased(MouseEvent e) {
+                        try {
+                            URI uri = new URI(link);
+
+                            java.awt.Desktop.getDesktop().browse(uri);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+
+            }
+
+        }
+        return popupMenu;
+    }
+
+    public static Boolean Warning(final JSONArray array) throws MalformedURLException {
+
+        String arrrayJoined = "<html><div style='text-align: center;'>" + array.join("<br>") + "</div></html>";
+        boolean val = false;
+
+        int option = JOptionPane.showConfirmDialog(null, arrrayJoined.replaceAll("\"", ""), "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+
+        if (option == JOptionPane.YES_OPTION){
+            val = true;
+        }
+
+        return val;
+    }
 }
