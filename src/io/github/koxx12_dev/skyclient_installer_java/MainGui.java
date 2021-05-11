@@ -119,6 +119,8 @@ public class MainGui extends Utils {
         JPanel pane2 = new JPanel();
         List<JCheckBox> Checkboxes = new ArrayList<>();
         List<JCheckBox> Checkboxes2 = new ArrayList<>();
+        List<JButton> buttons = new ArrayList<>();
+        List<JButton> buttons2 = new ArrayList<>();
         JButton button;
         List<JLabel> Labels = new ArrayList<>();
         List<JLabel> Labels2 = new ArrayList<>();
@@ -192,6 +194,14 @@ public class MainGui extends Utils {
             gridbag.setConstraints(Checkboxes.get(i), c);
             pane.add(Checkboxes.get(i));
 
+            buttons.add(new JButton("^"));
+            buttons.get(i).setName((String) modsjson.getJSONObject(i).get("id"));
+            c.gridx = 2;
+            c.gridy = i;
+            gridbag.setConstraints(buttons.get(i), c);
+            pane.add(buttons.get(i));
+
+
         }
 
         lbar.setText("Loading Checkboxes and images for Packs");
@@ -257,25 +267,30 @@ public class MainGui extends Utils {
             gridbag.setConstraints(Checkboxes2.get(i), c);
             pane2.add(Checkboxes2.get(i));
 
+            buttons2.add(new JButton("^"));
+            buttons2.get(i).setName((String) packsjson.getJSONObject(i).get("id"));
+            c.gridx = 2;
+            c.gridy = i;
+            gridbag.setConstraints(buttons2.get(i), c);
+            pane2.add(buttons2.get(i));
+
         }
 
         lbar.setText("Loading Popup Menus for Mods");
         bar.setValue(2);
 
-        for (int i = 0; i < Labels.size(); i++) {
-            JLabel lab = Labels.get(i);
+        for (int i = 0; i < buttons.size(); i++) {
+            JButton lab = buttons.get(i);
             JSONArray json = modsjson.getJSONObject(i).getJSONArray("actions");
 
             final JPopupMenu menu = Popup(json);
 
             lab.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
-                    if (e.isPopupTrigger())
                         menu.show(e.getComponent(), e.getX(), e.getY());
                 }
 
                 public void mouseReleased(MouseEvent e) {
-                    if (e.isPopupTrigger())
                         menu.show(e.getComponent(), e.getX(), e.getY());
                 }
                 });
@@ -284,8 +299,8 @@ public class MainGui extends Utils {
         lbar.setText("Loading Popup Menus for Packs");
         bar.setValue(3);
 
-        for (int i = 0; i < Labels2.size(); i++) {
-            JLabel lab = Labels2.get(i);
+        for (int i = 0; i < buttons2.size(); i++) {
+            JButton lab = buttons2.get(i);
             try {
                 JSONArray json = packsjson.getJSONObject(i).getJSONArray("actions");
 
@@ -293,17 +308,19 @@ public class MainGui extends Utils {
 
                 lab.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
-                        if (e.isPopupTrigger())
                             menu.show(e.getComponent(), e.getX(), e.getY());
                     }
 
                     public void mouseReleased(MouseEvent e) {
-                        if (e.isPopupTrigger())
                             menu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 });
             } catch (Exception ignored) {
-
+                lab.setOpaque(false);
+                lab.setContentAreaFilled(false);
+                lab.setBorderPainted(false);
+                lab.setText("");
+                lab.setEnabled(false);
             }
         }
 
@@ -364,7 +381,7 @@ public class MainGui extends Utils {
         
         JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp.getVerticalScrollBar().setUnitIncrement(16);
-        sp.setPreferredSize(new Dimension(270, 400));
+        sp.setPreferredSize(new Dimension(370, 500));
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 1;
@@ -383,7 +400,7 @@ public class MainGui extends Utils {
 
         JScrollPane sp2 = new JScrollPane(pane2,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp2.getVerticalScrollBar().setUnitIncrement(16);
-        sp2.setPreferredSize(new Dimension(270, 400));
+        sp2.setPreferredSize(new Dimension(370, 500));
         c.gridwidth = 2;
         c.gridx = 2;
         c.gridy = 1;
