@@ -1,16 +1,6 @@
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
-    }
-}
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceSets {
     main {

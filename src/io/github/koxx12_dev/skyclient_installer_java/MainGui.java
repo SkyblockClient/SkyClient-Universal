@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -459,13 +461,16 @@ public class MainGui extends Utils {
             frame2.pack();
             frame2.setVisible(true);
 
-            path.addActionListener(e -> {
-                if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
+            path.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
 
-                    LPath.setText(path.getSelectedFile().getAbsolutePath());
-                    frame2.dispose();
-                } else if (e.getActionCommand().equals(JFileChooser.CANCEL_SELECTION)) {
-                    frame2.dispose();
+                        LPath.setText(path.getSelectedFile().getAbsolutePath());
+                        frame2.dispose();
+                    } else if (e.getActionCommand().equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
+                        frame2.dispose();
+                    }
                 }
             });
 
@@ -511,7 +516,7 @@ public class MainGui extends Utils {
 
     }
 
-    public static void Guide(String text) {
+    public static void Guide(String text) throws IOException {
 
 
         Runnable guideThread = () -> {
