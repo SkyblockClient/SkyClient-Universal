@@ -1,7 +1,6 @@
-package io.github.koxx12_dev.skyclient_installer_macos;
+package io.github.koxx12_dev.skyclient_installer_java;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.SystemUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,14 +8,15 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.*;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MainCode extends Utils {
 
-    public void code(List<String> mods, List<String> packs) throws IOException, URISyntaxException {
+    public void code(List<String> mods, List<String> packs, String mc) throws IOException, URISyntaxException {
 
         Map<String, String> modidToUrl = new HashMap<>();
         Map<String, String> packidToUrl = new HashMap<>();
@@ -25,7 +25,6 @@ public class MainCode extends Utils {
 
         String path = MainGui.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String decodedPath = URLDecoder.decode(path, "UTF-8");
-        String mc = "";
 
         String modsrq = request("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json");
         String packsrq = request("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json");
@@ -36,14 +35,6 @@ public class MainCode extends Utils {
         modsjson.remove(modsjson.length()-1);
 
         //System.out.println(decodedPath);
-
-        if (SystemUtils.IS_OS_WINDOWS) {
-            mc = System.getenv("APPDATA") +"\\.minecraft";
-        } else if (SystemUtils.IS_OS_MAC)  {
-            mc = System.getenv("HOME") +"/Library/Application Support/minecraft";
-        } else if (SystemUtils.IS_OS_LINUX) {
-            mc = System.getenv("HOME") +"/.minecraft";
-        }
 
         File verMcForge = new File(mc+"/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9");
         File scMc = new File(mc+"/skyclient");
@@ -63,7 +54,7 @@ public class MainCode extends Utils {
             JOptionPane.showMessageDialog(null, "Failed to detect \""+mc+"\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-
+        System.out.println(mc+" exists");
         if (!new File(mc+"/versions/1.8.9").exists()) {
             JOptionPane.showMessageDialog(null, "Failed to detect \""+mc+"\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
@@ -136,26 +127,25 @@ public class MainCode extends Utils {
         }
 
 
+        for (String mod : mods) {
 
-        for (int i = 0; i < mods.size(); i++) {
+            String Name = modidToFile.get(mod);
+            String Url = modidToUrl.get(mod);
 
-           String Name = modidToFile.get(mods.get(i));
-           String Url = modidToUrl.get(mods.get(i));
+            Download(Url, mc + "/skyclient/mods/" + Name);
 
-            Download(Url,mc+"/skyclient/mods/"+Name);
-
-            System.out.println("Downloaded: "+Url +" , "+Name);
+            System.out.println("Downloaded: " + Url + " , " + Name);
 
         }
 
-        for (int i = 0; i < packs.size(); i++) {
+        for (String pack : packs) {
 
-            String Name = packidToFile.get(packs.get(i));
-            String Url = packidToUrl.get(packs.get(i));
+            String Name = packidToFile.get(pack);
+            String Url = packidToUrl.get(pack);
 
-            Download(Url,mc+"/skyclient/resourcepacks/"+Name);
+            Download(Url, mc + "/skyclient/resourcepacks/" + Name);
 
-            System.out.println("Downloaded: "+Url +" , "+Name);
+            System.out.println("Downloaded: " + Url + " , " + Name);
 
         }
 
@@ -189,7 +179,7 @@ public class MainCode extends Utils {
 
         Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar",mc + "/libraries/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9.jar");
 
-        JOptionPane.showMessageDialog(null, "Installed Skyclient", "Done", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Installed SkyClient", "Done", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
 
     }
