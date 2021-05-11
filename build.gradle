@@ -13,7 +13,14 @@ apply plugin: 'eclipse'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceSets {
-    main.java.srcDirs = ['src']
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
 }
 
 dependencies {

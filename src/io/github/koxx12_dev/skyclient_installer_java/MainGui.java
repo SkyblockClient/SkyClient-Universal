@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -19,6 +20,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class MainGui extends Utils {
 
@@ -28,7 +31,7 @@ public class MainGui extends Utils {
         LafManager.install(new DarculaTheme());
 
         PrintStream fileOut = new PrintStream("./log.txt");
-        //System.setOut(fileOut);
+        System.setOut(fileOut);
 
         List<String> displayed = new ArrayList<>();
 
@@ -66,9 +69,6 @@ public class MainGui extends Utils {
 
         System.out.println(displayed);
 
-
-        //Guide(request("https://github.com/nacrt/SkyblockClient-REPO/blob/main/files/guides/qol.md?raw=true"));
-
         GuiInit(displayed,modsjson,packsjson);
     }
 
@@ -84,7 +84,7 @@ public class MainGui extends Utils {
 
     public static void Gui(Container truepane,List list,JSONArray modsjson,JSONArray packsjson) throws MalformedURLException {
 
-        JFrame frame = new JFrame("Skyclient Installer");
+        JFrame frame = new JFrame("Skyclient Loader");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
@@ -101,6 +101,7 @@ public class MainGui extends Utils {
 
         gb.setConstraints(lbar,c2);
         frame.add(lbar);
+
 
         JProgressBar bar = new JProgressBar();
         bar.setPreferredSize(new Dimension(500,40));
@@ -131,8 +132,39 @@ public class MainGui extends Utils {
 
         for (int i = 0; i < list.size(); i++) {
             try {
-                String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/"+modsjson.getJSONObject(i).get("icon");
-                BufferedImage myPicture = ImageIO.read(new URL(url.replaceAll(" ","%20")));
+
+                String loc = "resources/images/icons/"+modsjson.getJSONObject(i).get("icon");
+
+                System.out.println("loc: "+loc);
+
+                BufferedImage myPicture;
+                JarEntry entry = null;
+                JarFile jar = null;
+
+                InputStream is = MainGui.class.getResourceAsStream("/"+loc);
+
+                System.out.println("is: "+is);
+
+                try {
+                    jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
+                            .getCodeSource()
+                            .getLocation()
+                            .getPath())
+                            .getName());
+                    entry = jar.getJarEntry(loc);
+                } catch (Exception ignored){
+
+                }
+
+                System.out.println("jar: "+jar);
+                System.out.println("entry: "+entry);
+
+                if (entry != null && is != null) {
+                    myPicture = ImageIO.read(is);
+                } else {
+                    String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + modsjson.getJSONObject(i).get("icon");
+                    myPicture = ImageIO.read(new URL(url.replaceAll(" ", "%20")));
+                }
                 Labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture,50,50))));
                 Labels.get(Labels.size()-1).setPreferredSize(new Dimension(50, 50));
                 c.insets = new Insets(1,1,1,1);
@@ -167,8 +199,37 @@ public class MainGui extends Utils {
 
         for (int i = 0; i < packsjson.length(); i++) {
             try {
-                String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/"+packsjson.getJSONObject(i).get("icon");
-                BufferedImage myPicture = ImageIO.read(new URL(url.replaceAll(" ","%20")));
+
+                String loc = "resources/images/icons/"+packsjson.getJSONObject(i).get("icon");
+
+                System.out.println("loc: "+loc);
+
+                JarEntry entry = null;
+                JarFile jar = null;
+                BufferedImage myPicture;
+
+                InputStream is = MainGui.class.getResourceAsStream("/"+loc);
+
+                System.out.println("is: "+is);
+                try {
+                    jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
+                            .getCodeSource()
+                            .getLocation()
+                            .getPath())
+                            .getName());
+                    entry = jar.getJarEntry(loc);
+                } catch (Exception ignored){
+
+                }
+                System.out.println("jar: "+jar);
+                System.out.println("entry: "+entry);
+
+                if (entry != null && is != null) {
+                    myPicture = ImageIO.read(is);
+                } else {
+                    String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + packsjson.getJSONObject(i).get("icon");
+                    myPicture = ImageIO.read(new URL(url.replaceAll(" ", "%20")));
+                }
                 Labels2.add(new JLabel(new ImageIcon(getScaledImage(myPicture,50,50))));
                 Labels2.get(Labels2.size()-1).setPreferredSize(new Dimension(50, 50));
                 c.insets = new Insets(1,1,1,1);
@@ -398,7 +459,7 @@ public class MainGui extends Utils {
             System.out.println(label);
         }
 
-        JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         sp.getVerticalScrollBar().setUnitIncrement(16);
         sp.setPreferredSize(new Dimension(800, 600));
         c.gridwidth = 0;
