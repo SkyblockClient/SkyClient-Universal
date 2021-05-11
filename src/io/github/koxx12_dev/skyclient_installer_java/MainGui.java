@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -25,7 +26,7 @@ import java.util.jar.JarFile;
 
 public class MainGui extends Utils {
 
-    public static void main(String[] args) throws IOException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws IOException {
 
         LafManager.enableLogging(false);
         LafManager.install(new DarculaTheme());
@@ -83,6 +84,16 @@ public class MainGui extends Utils {
     }
 
     public static void Gui(Container truepane,List list,JSONArray modsjson,JSONArray packsjson) throws MalformedURLException {
+
+        String mc = "";
+
+        if (SystemUtils.IS_OS_WINDOWS) {
+            mc = System.getenv("APPDATA") +"\\.minecraft";
+        } else if (SystemUtils.IS_OS_MAC)  {
+            mc = System.getenv("HOME") +"/Library/Application Support/minecraft";
+        } else if (SystemUtils.IS_OS_LINUX) {
+            mc = System.getenv("HOME") +"/.minecraft";
+        }
 
         JFrame frame = new JFrame("Skyclient Loader");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -209,7 +220,6 @@ public class MainGui extends Utils {
 
         for (int i = 0; i < packsjson.length(); i++) {
             try {
-
                 String loc = "resources/images/icons/"+packsjson.getJSONObject(i).get("icon");
 
                 System.out.println("loc: "+loc);
@@ -371,6 +381,24 @@ public class MainGui extends Utils {
         gridbag.setConstraints(button, c);
         truepane.add(button);
 
+        JButton button2 = new JButton("Select Path");
+        button2.setPreferredSize(new Dimension(50,30));
+        c.insets = new Insets(1,1,1,3);
+        c.gridwidth = 1;
+        c.gridx = 3;
+        c.gridy = 3;
+        gridbag.setConstraints(button2, c);
+        truepane.add(button2);
+
+        JLabel LPath = new JLabel(mc);
+        LPath.setPreferredSize(new Dimension(150,30));
+        c.insets = new Insets(1,1,1,3);
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 3;
+        gridbag.setConstraints(LPath, c);
+        truepane.add(LPath);
+
         Label = new JLabel("Mods", SwingConstants.CENTER);
         Label.setPreferredSize(new Dimension(200,30));
         c.gridwidth = 2;
@@ -410,8 +438,46 @@ public class MainGui extends Utils {
         lbar.setText("Loading Click Detectors");
         bar.setValue(5);
 
-        button.addActionListener(ae -> {
+        button2.addActionListener(ae -> {
 
+            JFrame frame2 = new JFrame("Select Path");
+            frame2.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            try {
+                frame2.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
+            } catch (MalformedURLException ignored) {
+            }
+            frame2.setResizable(false);
+
+            JFileChooser path = new JFileChooser();
+            path.setCurrentDirectory(new File(LPath.getText()));
+            path.setDialogTitle("select folder");
+            path.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            path.setAcceptAllFileFilterUsed(false);
+
+            frame2.add(path);
+
+            frame2.pack();
+            frame2.setVisible(true);
+
+            path.addActionListener(e -> {
+                if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
+
+                    LPath.setText(path.getSelectedFile().getAbsolutePath());
+                    frame2.dispose();
+                } else if (e.getActionCommand().equals(JFileChooser.CANCEL_SELECTION)) {
+                    frame2.dispose();
+                }
+            });
+
+
+
+
+        });
+
+
+
+        button.addActionListener(ae -> {
+            String finalMc = LPath.getText();
             List<String> packs = new ArrayList<>();
             List<String> mods = new ArrayList<>();
             MainCode main = new MainCode();
@@ -431,7 +497,7 @@ public class MainGui extends Utils {
             button.setEnabled(false);
 
             try {
-                main.code(mods,packs);
+                main.code(mods,packs, finalMc);
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -445,48 +511,55 @@ public class MainGui extends Utils {
 
     }
 
-    public static void Guide(String text) throws IOException {
+    public static void Guide(String text) {
 
 
+        Runnable guideThread = () -> {
+            JFrame frame = new JFrame("Guide");
+            frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            try {
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
+            } catch (MalformedURLException ignored) {
 
-        JFrame frame = new JFrame("Guide");
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
-        frame.setResizable(false);
+            }
+            frame.setResizable(false);
 
-        JLabel label;
-        JPanel pane = new JPanel();
-        GridBagLayout gridbag = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
-        frame.setLayout(gridbag);
-        pane.setLayout(gridbag);
-        c.fill = GridBagConstraints.HORIZONTAL;
+            JLabel label;
+            JPanel pane = new JPanel();
+            GridBagLayout gridbag = new GridBagLayout();
+            GridBagConstraints c = new GridBagConstraints();
+            frame.setLayout(gridbag);
+            pane.setLayout(gridbag);
+            c.fill = GridBagConstraints.HORIZONTAL;
 
-        java.util.List<JLabel> labels = mdToList(text);
+            java.util.List<JLabel> labels = mdToList(text);
 
-        //System.out.println(textParsed);
+            //System.out.println(textParsed);
 
-        for (int i = 0; i < (labels.size()); i++)  {
-            label = labels.get(i);
-            label.setVerticalAlignment(JLabel.TOP);
+            for (int i = 0; i < (labels.size()); i++) {
+                label = labels.get(i);
+                label.setVerticalAlignment(JLabel.TOP);
+                c.gridx = 0;
+                c.gridy = i;
+                gridbag.setConstraints(label, c);
+                pane.add(label);
+                System.out.println(label);
+            }
+
+            JScrollPane sp = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            sp.getVerticalScrollBar().setUnitIncrement(16);
+            sp.setPreferredSize(new Dimension(800, 600));
+            c.gridwidth = 0;
             c.gridx = 0;
-            c.gridy = i;
-            gridbag.setConstraints(label, c);
-            pane.add(label);
-            System.out.println(label);
-        }
+            c.gridy = 0;
+            gridbag.setConstraints(sp, c);
+            frame.add(sp);
 
-        JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        sp.getVerticalScrollBar().setUnitIncrement(16);
-        sp.setPreferredSize(new Dimension(800, 600));
-        c.gridwidth = 0;
-        c.gridx = 0;
-        c.gridy = 0;
-        gridbag.setConstraints(sp, c);
-        frame.add(sp);
+            frame.pack();
+            frame.setVisible(true);
+        };
 
-        frame.pack();
-        frame.setVisible(true);
+        new Thread(guideThread).start();
 
     }
 
