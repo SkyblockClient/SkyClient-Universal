@@ -8,8 +8,6 @@ import org.json.JSONArray;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -44,7 +42,7 @@ public class MainGui extends Utils {
         JSONArray packsjson = new JSONArray(packsrq);
         JSONArray modsjson = new JSONArray(modsrq);
 
-        modsjson.remove(modsjson.length()-1);
+        modsjson.remove(modsjson.length() - 1);
         String os = "";
 
         if (SystemUtils.IS_OS_WINDOWS) {
@@ -63,38 +61,38 @@ public class MainGui extends Utils {
 
                 Boolean temp = (Boolean) modsjson.getJSONObject(i).get("hidden");
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 displayed.add((String) modsjson.getJSONObject(i).get("display"));
             }
 
-            
+
         }
 
         System.out.println(displayed);
 
-        GuiInit(displayed,modsjson,packsjson);
+        GuiInit(displayed, modsjson, packsjson);
     }
 
-    public static void GuiInit(List list,JSONArray modsjson,JSONArray packsjson) throws IOException {
+    public static void GuiInit(List<String> list, JSONArray modsjson, JSONArray packsjson) throws IOException {
         JFrame frame = new JFrame("Skyclient Installer");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
-        Gui(frame.getContentPane(),list,modsjson,packsjson);
+        Gui(frame.getContentPane(), list, modsjson, packsjson);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void Gui(Container truepane,List list,JSONArray modsjson,JSONArray packsjson) throws MalformedURLException {
+    public static void Gui(Container truepane, List<String> list, JSONArray modsjson, JSONArray packsjson) throws MalformedURLException {
 
         String mc = "";
 
         if (SystemUtils.IS_OS_WINDOWS) {
-            mc = System.getenv("APPDATA") +"\\.minecraft";
-        } else if (SystemUtils.IS_OS_MAC)  {
-            mc = System.getenv("HOME") +"/Library/Application Support/minecraft";
+            mc = System.getenv("APPDATA") + "\\.minecraft";
+        } else if (SystemUtils.IS_OS_MAC) {
+            mc = System.getenv("HOME") + "/Library/Application Support/minecraft";
         } else if (SystemUtils.IS_OS_LINUX) {
-            mc = System.getenv("HOME") +"/.minecraft";
+            mc = System.getenv("HOME") + "/.minecraft";
         }
 
         JFrame frame = new JFrame("Skyclient Loader");
@@ -105,24 +103,24 @@ public class MainGui extends Utils {
         GridBagConstraints c2 = new GridBagConstraints();
         frame.setLayout(gb);
         c2.fill = GridBagConstraints.HORIZONTAL;
-        c2.insets = new Insets(1,1,1,1);
+        c2.insets = new Insets(1, 1, 1, 1);
 
         JLabel lbar = new JLabel("Loading Checkboxes and images for Mods");
-        lbar.setPreferredSize(new Dimension(500,40));
+        lbar.setPreferredSize(new Dimension(500, 40));
         c2.gridx = 0;
         c2.gridy = 0;
 
-        gb.setConstraints(lbar,c2);
+        gb.setConstraints(lbar, c2);
         frame.add(lbar);
 
 
         JProgressBar bar = new JProgressBar();
-        bar.setPreferredSize(new Dimension(500,40));
+        bar.setPreferredSize(new Dimension(500, 40));
         bar.setStringPainted(true);
         bar.setMaximum(6);
         c2.gridy = 1;
 
-        gb.setConstraints(bar,c2);
+        gb.setConstraints(bar, c2);
         frame.add(bar);
 
         frame.pack();
@@ -130,35 +128,44 @@ public class MainGui extends Utils {
 
         JPanel pane = new JPanel();
         JPanel pane2 = new JPanel();
+
         List<JCheckBox> Checkboxes = new ArrayList<>();
         List<JCheckBox> Checkboxes2 = new ArrayList<>();
+
         List<JButton> buttons = new ArrayList<>();
         List<JButton> buttons2 = new ArrayList<>();
+
         JButton button;
+
         List<JLabel> Labels = new ArrayList<>();
         List<JLabel> Labels2 = new ArrayList<>();
+
         JLabel Label;
+
         GridBagLayout gridbag = new GridBagLayout();
+
         GridBagConstraints c = new GridBagConstraints();
+
         truepane.setLayout(gridbag);
         pane.setLayout(gridbag);
         pane2.setLayout(gridbag);
+
         c.fill = GridBagConstraints.HORIZONTAL;
 
         for (int i = 0; i < list.size(); i++) {
             try {
 
-                String loc = "resources/images/icons/"+modsjson.getJSONObject(i).get("icon");
+                String loc = "resources/images/icons/" + modsjson.getJSONObject(i).get("icon");
 
-                System.out.println("loc: "+loc);
+                System.out.println("loc: " + loc);
 
                 BufferedImage myPicture;
                 JarEntry entry = null;
                 JarFile jar = null;
 
-                InputStream is = MainGui.class.getResourceAsStream("/"+loc);
+                InputStream is = MainGui.class.getResourceAsStream("./" + loc);
 
-                System.out.println("is: "+is);
+                System.out.println("is: " + is);
 
                 try {
                     jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
@@ -167,12 +174,12 @@ public class MainGui extends Utils {
                             .getPath())
                             .getName());
                     entry = jar.getJarEntry(loc);
-                } catch (Exception ignored){
+                } catch (Exception ignored) {
 
                 }
 
-                System.out.println("jar: "+jar);
-                System.out.println("entry: "+entry);
+                System.out.println("jar: " + jar);
+                System.out.println("entry: " + entry);
 
                 if (entry != null && is != null) {
                     myPicture = ImageIO.read(is);
@@ -180,38 +187,52 @@ public class MainGui extends Utils {
                     String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + modsjson.getJSONObject(i).get("icon");
                     myPicture = ImageIO.read(new URL(url.replaceAll(" ", "%20")));
                 }
-                Labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture,50,50))));
-                Labels.get(Labels.size()-1).setPreferredSize(new Dimension(50, 50));
-                c.insets = new Insets(1,1,1,1);
+                Labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture, 50, 50))));
+
+                Labels.get(Labels.size() - 1).setPreferredSize(new Dimension(50, 50));
+
+                c.insets = new Insets(1, 1, 1, 1);
                 c.gridx = 0;
                 c.gridy = i;
-                gridbag.setConstraints(Labels.get(Labels.size()-1), c);
-                pane.add(Labels.get(Labels.size()-1));
-            } catch (Exception ignored){
+
+                gridbag.setConstraints(Labels.get(Labels.size() - 1), c);
+
+                pane.add(Labels.get(Labels.size() - 1));
+            } catch (Exception ignored) {
 
             }
 
-            Checkboxes.add(new JCheckBox((String) list.get(i)));
+            Checkboxes.add(new JCheckBox(list.get(i)));
+
             Checkboxes.get(i).setName((String) modsjson.getJSONObject(i).get("id"));
 
             try {
                 if ((Boolean) modsjson.getJSONObject(i).get("enabled")) {
+
                     Checkboxes.get(i).setSelected(true);
+
                 }
-            } catch (Exception ignore){
+            } catch (Exception ignore) {
+
                 Checkboxes.get(i).setSelected(false);
+
             }
 
             c.gridx = 1;
             c.gridy = i;
+
             gridbag.setConstraints(Checkboxes.get(i), c);
+
             pane.add(Checkboxes.get(i));
 
             buttons.add(new JButton("^"));
             buttons.get(i).setName((String) modsjson.getJSONObject(i).get("id"));
+
             c.gridx = 2;
             c.gridy = i;
+
             gridbag.setConstraints(buttons.get(i), c);
+
             pane.add(buttons.get(i));
 
 
@@ -222,17 +243,17 @@ public class MainGui extends Utils {
 
         for (int i = 0; i < packsjson.length(); i++) {
             try {
-                String loc = "resources/images/icons/"+packsjson.getJSONObject(i).get("icon");
+                String loc = "resources/images/icons/" + packsjson.getJSONObject(i).get("icon");
 
-                System.out.println("loc: "+loc);
+                System.out.println("loc: " + loc);
 
                 JarEntry entry = null;
                 JarFile jar = null;
                 BufferedImage myPicture;
 
-                InputStream is = MainGui.class.getResourceAsStream("/"+loc);
+                InputStream is = MainGui.class.getResourceAsStream("/" + loc);
 
-                System.out.println("is: "+is);
+                System.out.println("is: " + is);
                 try {
                     jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
                             .getCodeSource()
@@ -240,11 +261,11 @@ public class MainGui extends Utils {
                             .getPath())
                             .getName());
                     entry = jar.getJarEntry(loc);
-                } catch (Exception ignored){
+                } catch (Exception ignored) {
 
                 }
-                System.out.println("jar: "+jar);
-                System.out.println("entry: "+entry);
+                System.out.println("jar: " + jar);
+                System.out.println("entry: " + entry);
 
                 if (entry != null && is != null) {
                     myPicture = ImageIO.read(is);
@@ -252,14 +273,14 @@ public class MainGui extends Utils {
                     String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + packsjson.getJSONObject(i).get("icon");
                     myPicture = ImageIO.read(new URL(url.replaceAll(" ", "%20")));
                 }
-                Labels2.add(new JLabel(new ImageIcon(getScaledImage(myPicture,50,50))));
-                Labels2.get(Labels2.size()-1).setPreferredSize(new Dimension(50, 50));
-                c.insets = new Insets(1,1,1,1);
+                Labels2.add(new JLabel(new ImageIcon(getScaledImage(myPicture, 50, 50))));
+                Labels2.get(Labels2.size() - 1).setPreferredSize(new Dimension(50, 50));
+                c.insets = new Insets(1, 1, 1, 1);
                 c.gridx = 0;
                 c.gridy = i;
-                gridbag.setConstraints(Labels2.get(Labels2.size()-1), c);
-                pane2.add(Labels2.get(Labels2.size()-1));
-            } catch (Exception ignored){
+                gridbag.setConstraints(Labels2.get(Labels2.size() - 1), c);
+                pane2.add(Labels2.get(Labels2.size() - 1));
+            } catch (Exception ignored) {
 
             }
 
@@ -270,7 +291,7 @@ public class MainGui extends Utils {
                 if ((Boolean) packsjson.getJSONObject(i).get("enabled")) {
                     Checkboxes2.get(i).setSelected(true);
                 }
-            } catch (Exception ignore){
+            } catch (Exception ignore) {
                 Checkboxes2.get(i).setSelected(false);
             }
 
@@ -299,13 +320,13 @@ public class MainGui extends Utils {
 
             lab.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
-                        menu.show(e.getComponent(), e.getX(), e.getY());
+                    menu.show(e.getComponent(), e.getX(), e.getY());
                 }
 
                 public void mouseReleased(MouseEvent e) {
-                        menu.show(e.getComponent(), e.getX(), e.getY());
+                    menu.show(e.getComponent(), e.getX(), e.getY());
                 }
-                });
+            });
         }
 
         lbar.setText("Loading Popup Menus for Packs");
@@ -320,11 +341,11 @@ public class MainGui extends Utils {
 
                 lab.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
-                            menu.show(e.getComponent(), e.getX(), e.getY());
+                        menu.show(e.getComponent(), e.getX(), e.getY());
                     }
 
                     public void mouseReleased(MouseEvent e) {
-                            menu.show(e.getComponent(), e.getX(), e.getY());
+                        menu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 });
             } catch (Exception ignored) {
@@ -375,8 +396,8 @@ public class MainGui extends Utils {
         bar.setValue(5);
 
         button = new JButton("Install");
-        button.setPreferredSize(new Dimension(200,30));
-        c.insets = new Insets(1,1,1,3);
+        button.setPreferredSize(new Dimension(200, 30));
+        c.insets = new Insets(1, 1, 1, 3);
         c.gridwidth = 4;
         c.gridx = 0;
         c.gridy = 2;
@@ -384,8 +405,8 @@ public class MainGui extends Utils {
         truepane.add(button);
 
         JButton button2 = new JButton("Select Path");
-        button2.setPreferredSize(new Dimension(50,30));
-        c.insets = new Insets(1,1,1,3);
+        button2.setPreferredSize(new Dimension(50, 30));
+        c.insets = new Insets(1, 1, 1, 3);
         c.gridwidth = 1;
         c.gridx = 3;
         c.gridy = 3;
@@ -393,8 +414,8 @@ public class MainGui extends Utils {
         truepane.add(button2);
 
         JLabel LPath = new JLabel(mc);
-        LPath.setPreferredSize(new Dimension(150,30));
-        c.insets = new Insets(1,1,1,3);
+        LPath.setPreferredSize(new Dimension(150, 30));
+        c.insets = new Insets(1, 1, 1, 3);
         c.gridwidth = 3;
         c.gridx = 0;
         c.gridy = 3;
@@ -402,14 +423,14 @@ public class MainGui extends Utils {
         truepane.add(LPath);
 
         Label = new JLabel("Mods", SwingConstants.CENTER);
-        Label.setPreferredSize(new Dimension(200,30));
+        Label.setPreferredSize(new Dimension(200, 30));
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 0;
         gridbag.setConstraints(Label, c);
         truepane.add(Label);
-        
-        JScrollPane sp = new JScrollPane(pane,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        JScrollPane sp = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp.getVerticalScrollBar().setUnitIncrement(16);
         sp.setPreferredSize(new Dimension(370, 500));
         c.gridwidth = 2;
@@ -421,14 +442,14 @@ public class MainGui extends Utils {
         //line 2
 
         Label = new JLabel("Packs", SwingConstants.CENTER);
-        Label.setPreferredSize(new Dimension(200,30));
+        Label.setPreferredSize(new Dimension(200, 30));
         c.gridwidth = 2;
         c.gridx = 2;
         c.gridy = 0;
         gridbag.setConstraints(Label, c);
         truepane.add(Label);
 
-        JScrollPane sp2 = new JScrollPane(pane2,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane sp2 = new JScrollPane(pane2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp2.getVerticalScrollBar().setUnitIncrement(16);
         sp2.setPreferredSize(new Dimension(370, 500));
         c.gridwidth = 2;
@@ -461,24 +482,18 @@ public class MainGui extends Utils {
             frame2.pack();
             frame2.setVisible(true);
 
-            path.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (e.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
+            path.addActionListener(e -> {
+                if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
 
-                        LPath.setText(path.getSelectedFile().getAbsolutePath());
-                        frame2.dispose();
-                    } else if (e.getActionCommand().equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
-                        frame2.dispose();
-                    }
+                    LPath.setText(path.getSelectedFile().getAbsolutePath());
+                    frame2.dispose();
+                } else if (e.getActionCommand().equals(JFileChooser.CANCEL_SELECTION)) {
+                    frame2.dispose();
                 }
             });
 
 
-
-
         });
-
 
 
         button.addActionListener(ae -> {
@@ -495,14 +510,14 @@ public class MainGui extends Utils {
 
             for (JCheckBox checkbox : Checkboxes2) {
                 if (checkbox.isSelected()) {
-                  packs.add(checkbox.getName());
+                    packs.add(checkbox.getName());
                 }
             }
 
             button.setEnabled(false);
 
             try {
-                main.code(mods,packs, finalMc);
+                main.code(mods, packs, finalMc);
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -516,7 +531,7 @@ public class MainGui extends Utils {
 
     }
 
-    public static void Guide(String text) throws IOException {
+    public static void Guide(String text) {
 
 
         Runnable guideThread = () -> {
@@ -577,7 +592,7 @@ public class MainGui extends Utils {
         for (int i = 0; i < (array.length()); i++) {
 
             try {
-                final String md = (String)array.getJSONObject(i).get("document");
+                final String md = (String) array.getJSONObject(i).get("document");
 
                 items.add(new JMenuItem("Guide (Markdown Reader)"));
                 popupMenu.add(items.get(i));
@@ -585,17 +600,17 @@ public class MainGui extends Utils {
                 items.get(i).addMouseListener(new MouseAdapter() {
 
                     public void mouseReleased(MouseEvent e) {
-                            try {
-                                Guide(request(md));
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
+                        try {
+                            Guide(request(md));
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 });
 
             } catch (Exception e) {
-                final String text = (String)array.getJSONObject(i).get("text");
-                final String link = (String)array.getJSONObject(i).get("link");
+                final String text = (String) array.getJSONObject(i).get("text");
+                final String link = (String) array.getJSONObject(i).get("link");
 
                 items.add(new JMenuItem(text));
                 popupMenu.add(items.get(i));
@@ -616,7 +631,7 @@ public class MainGui extends Utils {
             }
 
         }
-        popupMenu.setSize(popupMenu.getWidth()*4, popupMenu.getHeight()*4);
+        popupMenu.setSize(popupMenu.getWidth() * 4, popupMenu.getHeight() * 4);
 
         return popupMenu;
     }
@@ -626,9 +641,9 @@ public class MainGui extends Utils {
         String arrrayJoined = "<html><div style='text-align: center;'>" + array.join("<br>") + "</div></html>";
         boolean val = false;
 
-        int option = JOptionPane.showConfirmDialog(null, arrrayJoined.replaceAll("\"", ""), "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        int option = JOptionPane.showConfirmDialog(null, arrrayJoined.replaceAll("\"", ""), "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-        if (option == JOptionPane.YES_OPTION){
+        if (option == JOptionPane.YES_OPTION) {
             val = true;
         }
 

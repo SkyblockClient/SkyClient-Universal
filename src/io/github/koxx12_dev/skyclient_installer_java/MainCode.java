@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,24 +22,21 @@ public class MainCode extends Utils {
         Map<String, String> modidToFile = new HashMap<>();
         Map<String, String> packidToFile = new HashMap<>();
 
-        String path = MainGui.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        String decodedPath = URLDecoder.decode(path, "UTF-8");
-
         String modsrq = request("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json");
         String packsrq = request("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json");
 
         JSONArray packsjson = new JSONArray(packsrq);
         JSONArray modsjson = new JSONArray(modsrq);
 
-        modsjson.remove(modsjson.length()-1);
+        modsjson.remove(modsjson.length() - 1);
 
         //System.out.println(decodedPath);
 
-        File verMcForge = new File(mc+"/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9");
-        File scMc = new File(mc+"/skyclient");
-        File scMcCfg = new File(mc+"/skyclient/config");
-        File scMcMods = new File(mc+"/skyclient/mods");
-        File scMcRP = new File(mc+"/skyclient/resourcepacks");
+        File verMcForge = new File(mc + "/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9");
+        File scMc = new File(mc + "/skyclient");
+        File scMcCfg = new File(mc + "/skyclient/config");
+        File scMcMods = new File(mc + "/skyclient/mods");
+        File scMcRP = new File(mc + "/skyclient/resourcepacks");
 
         verMcForge.mkdir();
         scMc.mkdir();
@@ -48,15 +44,15 @@ public class MainCode extends Utils {
         scMcMods.mkdir();
         scMcRP.mkdir();
 
-        Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json",mc+"/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json");
+        Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json", mc + "/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json");
 
         if (!new File(mc).exists()) {
-            JOptionPane.showMessageDialog(null, "Failed to detect \""+mc+"\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to detect \"" + mc + "\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-        System.out.println(mc+" exists");
-        if (!new File(mc+"/versions/1.8.9").exists()) {
-            JOptionPane.showMessageDialog(null, "Failed to detect \""+mc+"\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
+        System.out.println(mc + " exists");
+        if (!new File(mc + "/versions/1.8.9").exists()) {
+            JOptionPane.showMessageDialog(null, "Failed to detect \"" + mc + "\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
 
@@ -65,10 +61,10 @@ public class MainCode extends Utils {
 
             mods.add("scrollabletooltips");
 
-            new File(mc+"/skyclient/config/itlt").mkdir();
+            new File(mc + "/skyclient/config/itlt").mkdir();
 
-            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png",mc+"/skyclient/config/itlt/icon.png");
-            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/itlt.cfg",mc+"/skyclient/config/itlt.cfg");
+            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png", mc + "/skyclient/config/itlt/icon.png");
+            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/itlt.cfg", mc + "/skyclient/config/itlt.cfg");
 
         }
         if (mods.contains("cmm")) {
@@ -76,10 +72,10 @@ public class MainCode extends Utils {
 
             mods.add("smoothscrollingeverywhere");
 
-            new File(mc+"/skyclient/config/CustomMainMenu").mkdir();
+            new File(mc + "/skyclient/config/CustomMainMenu").mkdir();
 
-            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/play.json",mc+"/skyclient/config/CustomMainMenu/play.json");
-            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/mainmenu.json",mc+"/skyclient/config/CustomMainMenu/mainmenu.json");
+            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/play.json", mc + "/skyclient/config/CustomMainMenu/play.json");
+            Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/mainmenu.json", mc + "/skyclient/config/CustomMainMenu/mainmenu.json");
 
         }
         if (mods.contains("antidreamskin")) {
@@ -93,7 +89,7 @@ public class MainCode extends Utils {
         for (int i = 0; i < modsjson.length(); i++) {
 
             String id = (String) modsjson.getJSONObject(i).get("id");
-            String url = "";
+            String url;
             String file = (String) modsjson.getJSONObject(i).get("file");
 
             if (id.equals("rpm")) {
@@ -102,27 +98,25 @@ public class MainCode extends Utils {
                 url = (String) modsjson.getJSONObject(i).get("url");
             }
 
-            modidToFile.put(id,file);
-            modidToUrl.put(id,url);
+            modidToFile.put(id, file);
+            modidToUrl.put(id, url);
 
         }
 
         for (int i = 0; i < packsjson.length(); i++) {
 
-            Map<String, String> map = new HashMap<>();
-
             String id = (String) packsjson.getJSONObject(i).get("id");
-            String url = "";
+            String url;
             String file = (String) packsjson.getJSONObject(i).get("file");
 
             try {
                 url = (String) packsjson.getJSONObject(i).get("url");
             } catch (Exception e) {
-                url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/packs/"+urlEncode((String) packsjson.getJSONObject(i).get("file"));
+                url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/packs/" + urlEncode((String) packsjson.getJSONObject(i).get("file"));
             }
 
-            packidToFile.put(id,file);
-            packidToUrl.put(id,url);
+            packidToFile.put(id, file);
+            packidToUrl.put(id, url);
 
         }
 
@@ -149,7 +143,7 @@ public class MainCode extends Utils {
 
         }
 
-        JSONObject profilesjson = new JSONObject(FileUtils.readFileToString(new File(mc + "/launcher_profiles.json"),"UTF-8"));
+        JSONObject profilesjson = new JSONObject(FileUtils.readFileToString(new File(mc + "/launcher_profiles.json"), "UTF-8"));
 
         JSONObject sc_pf = new JSONObject();
         sc_pf.put("created", JSONObject.NULL);
@@ -161,7 +155,7 @@ public class MainCode extends Utils {
         sc_pf.put("name", "SkyClient");
         sc_pf.put("type", "custom");
 
-        profilesjson.getJSONObject("profiles").put("SkyClient",sc_pf);
+        profilesjson.getJSONObject("profiles").put("SkyClient", sc_pf);
 
         try (FileWriter file = new FileWriter(mc + "/launcher_profiles.json")) {
             file.write(profilesjson.toString(4));
@@ -177,7 +171,7 @@ public class MainCode extends Utils {
         f.mkdir();
         numbers.mkdir();
 
-        Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar",mc + "/libraries/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9.jar");
+        Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar", mc + "/libraries/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9.jar");
 
         JOptionPane.showMessageDialog(null, "Installed SkyClient", "Done", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
