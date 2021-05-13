@@ -20,6 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -68,7 +69,7 @@ public class MainGui extends Utils {
 
         }
 
-        System.out.println(displayed);
+        sendLog(displayed+"",MainGui.class,LogType.INFO);
 
         GuiInit(displayed, modsjson, packsjson);
     }
@@ -157,7 +158,7 @@ public class MainGui extends Utils {
 
                 String loc = "resources/images/icons/" + modsjson.getJSONObject(i).get("icon");
 
-                System.out.println("loc: " + loc);
+                sendLog("loc: " + loc,MainGui.class,LogType.INFO);
 
                 BufferedImage myPicture;
                 JarEntry entry = null;
@@ -165,7 +166,7 @@ public class MainGui extends Utils {
 
                 InputStream is = MainGui.class.getResourceAsStream("./" + loc);
 
-                System.out.println("is: " + is);
+                sendLog("is: " + is,MainGui.class,LogType.INFO);
 
                 try {
                     jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
@@ -178,8 +179,8 @@ public class MainGui extends Utils {
 
                 }
 
-                System.out.println("jar: " + jar);
-                System.out.println("entry: " + entry);
+                sendLog("jar: " + jar,MainGui.class,LogType.INFO);
+                sendLog("entry: " + entry,MainGui.class,LogType.INFO);
 
                 if (entry != null && is != null) {
                     myPicture = ImageIO.read(is);
@@ -245,7 +246,7 @@ public class MainGui extends Utils {
             try {
                 String loc = "resources/images/icons/" + packsjson.getJSONObject(i).get("icon");
 
-                System.out.println("loc: " + loc);
+                sendLog("loc: " + loc,MainGui.class,LogType.INFO);
 
                 JarEntry entry = null;
                 JarFile jar = null;
@@ -253,7 +254,8 @@ public class MainGui extends Utils {
 
                 InputStream is = MainGui.class.getResourceAsStream("/" + loc);
 
-                System.out.println("is: " + is);
+                sendLog("is: " + is,MainGui.class,LogType.INFO);
+
                 try {
                     jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
                             .getCodeSource()
@@ -264,8 +266,9 @@ public class MainGui extends Utils {
                 } catch (Exception ignored) {
 
                 }
-                System.out.println("jar: " + jar);
-                System.out.println("entry: " + entry);
+
+                sendLog("jar: " + jar,MainGui.class,LogType.INFO);
+                sendLog("entry: " + entry,MainGui.class,LogType.INFO);
 
                 if (entry != null && is != null) {
                     myPicture = ImageIO.read(is);
@@ -373,8 +376,8 @@ public class MainGui extends Utils {
                         lab.setSelected(false);
                         try {
                             selected = Warning(json);
-                        } catch (MalformedURLException malformedURLException) {
-                            malformedURLException.printStackTrace();
+                        } catch (MalformedURLException ex) {
+                            sendLog(Arrays.toString(ex.getStackTrace()),MainGui.class,LogType.ERROR);
                         }
 
                         lab.setSelected(selected);
@@ -519,7 +522,7 @@ public class MainGui extends Utils {
             try {
                 main.code(mods, packs, finalMc);
             } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
+                sendLog(Arrays.toString(e.getStackTrace()),MainGui.class,LogType.ERROR);
             }
 
         });
@@ -563,7 +566,7 @@ public class MainGui extends Utils {
                 c.gridy = i;
                 gridbag.setConstraints(label, c);
                 pane.add(label);
-                System.out.println(label);
+                sendLog(label+"",MainGui.class,LogType.INFO);
             }
 
             JScrollPane sp = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -603,7 +606,8 @@ public class MainGui extends Utils {
                         try {
                             Guide(request(md));
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+
+                            sendLog(Arrays.toString(ex.getStackTrace()),MainGui.class,LogType.ERROR);
                         }
                     }
                 });
@@ -623,7 +627,7 @@ public class MainGui extends Utils {
 
                             java.awt.Desktop.getDesktop().browse(uri);
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+                            sendLog(Arrays.toString(ex.getStackTrace()),MainGui.class,LogType.ERROR);
                         }
                     }
                 });

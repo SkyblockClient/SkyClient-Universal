@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,9 @@ public class MainCode extends Utils {
             JOptionPane.showMessageDialog(null, "Failed to detect \"" + mc + "\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-        System.out.println(mc + " exists");
+
+        sendLog(mc + " exists",MainCode.class,LogType.INFO);
+
         if (!new File(mc + "/versions/1.8.9").exists()) {
             JOptionPane.showMessageDialog(null, "Failed to detect \"" + mc + "\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
@@ -128,7 +131,7 @@ public class MainCode extends Utils {
 
             Download(Url, mc + "/skyclient/mods/" + Name);
 
-            System.out.println("Downloaded: " + Url + " , " + Name);
+            sendLog("Downloaded: " + Url + " , " + Name,MainCode.class,LogType.INFO);
 
         }
 
@@ -139,7 +142,7 @@ public class MainCode extends Utils {
 
             Download(Url, mc + "/skyclient/resourcepacks/" + Name);
 
-            System.out.println("Downloaded: " + Url + " , " + Name);
+            sendLog("Downloaded: " + Url + " , " + Name,MainCode.class,LogType.INFO);
 
         }
 
@@ -162,7 +165,9 @@ public class MainCode extends Utils {
             file.flush();
 
         } catch (IOException e) {
-            e.printStackTrace();
+
+            sendLog(Arrays.toString(e.getStackTrace()),MainCode.class,LogType.ERROR);
+
         }
         File mf = new File(mc + "/libraries/net/minecraftforge");
         File f = new File(mc + "/libraries/net/minecraftforge/forge");

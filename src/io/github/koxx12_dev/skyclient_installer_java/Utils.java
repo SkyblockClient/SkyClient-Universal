@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -31,24 +33,21 @@ public class Utils {
     }
 
     public static void Download(String URL, String Loc) {
-        Runnable downloadThread = () -> {
-            try {
-                java.net.URL url = new URL(URL);
-                URLConnection urlConnection = url.openConnection();
-                urlConnection.setRequestProperty("User-Agent", "NING/1.0");
-                BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-                FileOutputStream fileOS = new FileOutputStream(Loc);
-                byte[] data = new byte[1024];
-                int byteContent;
-                while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-                    fileOS.write(data, 0, byteContent);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            java.net.URL url = new URL(URL);
+            URLConnection urlConnection = url.openConnection();
+            urlConnection.setRequestProperty("User-Agent", "NING/1.0");
+            BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+            FileOutputStream fileOS = new FileOutputStream(Loc);
+            byte[] data = new byte[1024];
+            int byteContent;
+            while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
+                fileOS.write(data, 0, byteContent);
             }
-        };
+        } catch (Exception e) {
+            sendLog(Arrays.toString(e.getStackTrace()),Utils.class,LogType.ERROR);
 
-        new Thread(downloadThread).start();
+        }
 
     }
 
@@ -70,7 +69,8 @@ public class Utils {
         } else if (SystemUtils.IS_OS_MAC || SystemUtils.IS_OS_LINUX) {
             plc = "/";
         } else {
-            System.out.println("HOW TF DID YOU GOT HERE WITH " + System.getProperty("os.name") + "\nIT SHOULDN'T BE POSSIBLE");
+
+            sendLog("HOW TF DID YOU GOT HERE WITH " + System.getProperty("os.name") + "\nIT SHOULDN'T BE POSSIBLE",Utils.class,LogType.FATAL);
             System.exit(-1);
         }
 
@@ -194,7 +194,9 @@ public class Utils {
         String textParsed = Processor.process(mdString);
 
         java.util.List<String> lines = Arrays.asList(textParsed.split("\n"));
-        System.out.println(lines);
+
+        sendLog(lines+"",Utils.class,LogType.INFO);
+
         for (String line : lines) {
 
             if (line.contains("img")) {
@@ -227,6 +229,12 @@ public class Utils {
         }
 
         return labels;
+
+    }
+
+    public static void sendLog(String Message,Class<?> _class,LogType type) {
+
+        System.out.println("["+ DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now())+"] ["+_class.getSimpleName()+" / "+type+"]: "+Message);
 
     }
 
