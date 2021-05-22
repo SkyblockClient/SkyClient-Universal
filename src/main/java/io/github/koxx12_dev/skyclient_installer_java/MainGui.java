@@ -2,6 +2,7 @@ package io.github.koxx12_dev.skyclient_installer_java;
 
 import com.github.weisj.darklaf.LafManager;
 import com.github.weisj.darklaf.theme.DarculaTheme;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.json.JSONArray;
 
@@ -11,9 +12,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,10 +27,14 @@ public class MainGui extends Utils {
 
     public static void main(String[] args) throws IOException {
 
+        if (!System.getProperty("java.version").startsWith("1.8")) {
+            JOptionPane.showMessageDialog(null, "Ur using a wrong version of java\nu be using should 1.8 not "+System.getProperty("java.version"), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
         LafManager.enableLogging(false);
         LafManager.install(new DarculaTheme());
 
-        createLogFile();
+        //createLogFile();
 
         List<String> displayed = new ArrayList<>();
 
@@ -180,12 +183,27 @@ public class MainGui extends Utils {
                 sendLog("jar: " + jar,MainGui.class,LogType.INFO);
                 sendLog("entry: " + entry,MainGui.class,LogType.INFO);
 
-                if (entry != null && is != null) {
-                    myPicture = ImageIO.read(is);
+                URL url = new URL(("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + modsjson.getJSONObject(i).get("icon")).replaceAll(" ","%20"));
+                InputStream inputStream = url.openStream();
+
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                org.apache.commons.io.IOUtils.copy(is, baos);
+                byte[] isB = baos.toByteArray();
+
+                ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+                org.apache.commons.io.IOUtils.copy(inputStream, baos2);
+                byte[] inputStreamB = baos2.toByteArray();
+
+                if (entry != null && is != null && Arrays.equals(inputStreamB,isB)) {
+                    sendLog("same",MainGui.class,LogType.INFO);
+                    myPicture = ImageIO.read(new ByteArrayInputStream(isB));
                 } else {
-                    String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + modsjson.getJSONObject(i).get("icon");
-                    myPicture = ImageIO.read(new URL(url.replaceAll(" ", "%20")));
+                    myPicture = ImageIO.read(new ByteArrayInputStream(inputStreamB));
                 }
+
+                sendLog("mP: "+myPicture,MainGui.class,LogType.INFO);
+
                 Labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture, 50, 50))));
 
                 Labels.get(Labels.size() - 1).setPreferredSize(new Dimension(50, 50));
@@ -197,8 +215,8 @@ public class MainGui extends Utils {
                 gridbag.setConstraints(Labels.get(Labels.size() - 1), c);
 
                 pane.add(Labels.get(Labels.size() - 1));
-            } catch (Exception ignored) {
-
+            } catch (Exception e) {
+                sendLog(Arrays.toString(e.getStackTrace()),MainGui.class,LogType.ERROR);
             }
 
             Checkboxes.add(new JCheckBox(list.get(i)));
@@ -268,12 +286,26 @@ public class MainGui extends Utils {
                 sendLog("jar: " + jar,MainGui.class,LogType.INFO);
                 sendLog("entry: " + entry,MainGui.class,LogType.INFO);
 
-                if (entry != null && is != null) {
-                    myPicture = ImageIO.read(is);
+                URL url = new URL(("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + packsjson.getJSONObject(i).get("icon")).replaceAll(" ","%20"));
+                InputStream inputStream = url.openStream();
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                org.apache.commons.io.IOUtils.copy(is, baos);
+                byte[] isB = baos.toByteArray();
+
+                ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+                org.apache.commons.io.IOUtils.copy(inputStream, baos2);
+                byte[] inputStreamB = baos2.toByteArray();
+
+                if (entry != null && is != null && Arrays.equals(inputStreamB,isB)) {
+                    sendLog("same",MainGui.class,LogType.INFO);
+                    myPicture = ImageIO.read(new ByteArrayInputStream(isB));
                 } else {
-                    String url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + packsjson.getJSONObject(i).get("icon");
-                    myPicture = ImageIO.read(new URL(url.replaceAll(" ", "%20")));
+                    myPicture = ImageIO.read(new ByteArrayInputStream(inputStreamB));
                 }
+
+                sendLog("mP: "+myPicture,MainGui.class,LogType.INFO);
+
                 Labels2.add(new JLabel(new ImageIcon(getScaledImage(myPicture, 50, 50))));
                 Labels2.get(Labels2.size() - 1).setPreferredSize(new Dimension(50, 50));
                 c.insets = new Insets(1, 1, 1, 1);
@@ -281,8 +313,8 @@ public class MainGui extends Utils {
                 c.gridy = i;
                 gridbag.setConstraints(Labels2.get(Labels2.size() - 1), c);
                 pane2.add(Labels2.get(Labels2.size() - 1));
-            } catch (Exception ignored) {
-
+            } catch (Exception e) {
+                sendLog(Arrays.toString(e.getStackTrace()),MainGui.class,LogType.ERROR);
             }
 
             Checkboxes2.add(new JCheckBox((String) packsjson.getJSONObject(i).get("display")));
@@ -381,11 +413,7 @@ public class MainGui extends Utils {
                         lab.setSelected(selected);
 
                     }
-//
-                    //public void mouseReleased(MouseEvent e) {
-                    //    if (e.isPopupTrigger())
-                    //        menu.show(e.getComponent(), e.getX(), e.getY());
-                    //}
+
                 });
             } catch (Exception ignored) {
 

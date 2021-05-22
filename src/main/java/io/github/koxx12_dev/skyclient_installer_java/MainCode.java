@@ -176,6 +176,11 @@ public class MainCode extends Utils {
         f.mkdir();
         numbers.mkdir();
 
+        if (numbers.listFiles().length != 1) {
+            FileUtils.deleteDirectory(numbers);
+            numbers.mkdir();
+        }
+
         Download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar", mc + "/libraries/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9.jar");
 
         JOptionPane.showMessageDialog(null, "Installed SkyClient", "Done", JOptionPane.INFORMATION_MESSAGE);
