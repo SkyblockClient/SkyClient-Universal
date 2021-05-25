@@ -9,9 +9,13 @@ dependencies {
 
 }
 
+archivesBaseName = 'Skyclient-Universal-Installer'
+version = '1.1.0'
+
 jar {
     manifest {
         attributes 'Main-Class': 'io.github.koxx12_dev.skyclient_installer_java.MainGui'
+        attributes 'Version': project.version
     }
 
     from {

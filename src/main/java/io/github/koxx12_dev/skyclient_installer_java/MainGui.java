@@ -2,9 +2,9 @@ package io.github.koxx12_dev.skyclient_installer_java;
 
 import com.github.weisj.darklaf.LafManager;
 import com.github.weisj.darklaf.theme.DarculaTheme;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,12 +20,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 public class MainGui extends Utils {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
 
         if (!System.getProperty("java.version").startsWith("1.8")) {
             JOptionPane.showMessageDialog(null, "Ur using a wrong version of java\nu be using should 1.8 not "+System.getProperty("java.version"), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -33,6 +35,8 @@ public class MainGui extends Utils {
 
         LafManager.enableLogging(false);
         LafManager.install(new DarculaTheme());
+
+        UpdateCheck();
 
         //createLogFile();
 
@@ -678,5 +682,29 @@ public class MainGui extends Utils {
         }
 
         return val;
+    }
+
+    public static void UpdateCheck() throws IOException, URISyntaxException {
+
+        JarFile jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .getPath())
+                .getName());
+
+        Manifest manifest = jar.getManifest();
+        Attributes attr = manifest.getMainAttributes();
+
+        int ver = Integer.parseInt(attr.getValue("Version").replaceAll("\\.",""));
+
+        JSONObject gitVersionJson = new JSONObject(request("https://raw.githubusercontent.com/koxx12-dev/Skyclient-installer-Java/main/version.json"));
+        int gitVersion = Integer.parseInt(gitVersionJson.get("version").toString().replaceAll("\\.",""));
+
+        if (ver < gitVersion) {
+            JOptionPane.showMessageDialog(null, "Newer version of the installer was detected\nYour version is \""+attr.getValue("Version")+"\" newest one is \""+gitVersionJson.get("version")+"\"", "New version", JOptionPane.ERROR_MESSAGE);
+            java.awt.Desktop.getDesktop().browse(new URI("https://github.com/koxx12-dev/Skyclient-installer-Java/releases/latest"));
+            System.exit(0);
+        }
+
     }
 }
