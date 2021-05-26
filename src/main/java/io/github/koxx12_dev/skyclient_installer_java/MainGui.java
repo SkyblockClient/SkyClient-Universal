@@ -674,7 +674,7 @@ public class MainGui extends Utils {
 
     public static Boolean Warning(final JSONArray array) throws MalformedURLException {
 
-        String arrrayJoined = ("<html><div style='text-align: center;'>" + array.join("<br>") + "</div></html>").replaceAll("\n","<br>");
+        String arrrayJoined = "<html><div style='text-align: center;'>" + array.join("<br>") + "</div></html>";
         boolean val = false;
 
         int option = JOptionPane.showConfirmDialog(null, arrrayJoined.replaceAll("\"", ""), "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
