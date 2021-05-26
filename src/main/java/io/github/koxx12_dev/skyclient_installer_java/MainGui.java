@@ -31,14 +31,16 @@ public class MainGui extends Utils {
 
         if (!System.getProperty("java.version").startsWith("1.8")) {
             JOptionPane.showMessageDialog(null, "Ur using a wrong version of java\nu be using should 1.8 not "+System.getProperty("java.version"), "ERROR", JOptionPane.ERROR_MESSAGE);
+            java.awt.Desktop.getDesktop().browse(new URI("https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot"));
+            System.exit(0);
         }
 
         LafManager.enableLogging(false);
         LafManager.install(new DarculaTheme());
 
-        UpdateCheck();
-
         //createLogFile();
+
+        UpdateCheck();
 
         List<String> displayed = new ArrayList<>();
 
@@ -700,11 +702,16 @@ public class MainGui extends Utils {
         JSONObject gitVersionJson = new JSONObject(request("https://raw.githubusercontent.com/koxx12-dev/Skyclient-installer-Java/main/version.json"));
         int gitVersion = Integer.parseInt(gitVersionJson.get("version").toString().replaceAll("\\.",""));
 
+        sendLog("Installer version: "+attr.getValue("Version"),Utils.class,LogType.INFO);
+
         if (ver < gitVersion) {
+            sendLog("Newer version Detected ("+gitVersionJson.get("version")+")",Utils.class,LogType.INFO);
             JOptionPane.showMessageDialog(null, "Newer version of the installer was detected\nYour version is \""+attr.getValue("Version")+"\" newest one is \""+gitVersionJson.get("version")+"\"", "New version", JOptionPane.ERROR_MESSAGE);
             java.awt.Desktop.getDesktop().browse(new URI("https://github.com/koxx12-dev/Skyclient-installer-Java/releases/latest"));
             System.exit(0);
         }
+
+        sendLog("Version up to date",Utils.class,LogType.INFO);
 
     }
 }

@@ -55,7 +55,7 @@ public class MainCode extends Utils {
         sendLog(mc + " exists",MainCode.class,LogType.INFO);
 
         if (!new File(mc + "/versions/1.8.9").exists()) {
-            JOptionPane.showMessageDialog(null, "Failed to detect \"" + mc + "\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to detect \"" + mc +replaceWithOsPath("||versions||1.8.9")+ "\"\nExiting", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
 
@@ -131,8 +131,6 @@ public class MainCode extends Utils {
 
             Download(Url, mc + "/skyclient/mods/" + Name);
 
-            sendLog("Downloaded: " + Url + " , " + Name,MainCode.class,LogType.INFO);
-
         }
 
         for (String pack : packs) {
@@ -141,8 +139,6 @@ public class MainCode extends Utils {
             String Url = packidToUrl.get(pack);
 
             Download(Url, mc + "/skyclient/resourcepacks/" + Name);
-
-            sendLog("Downloaded: " + Url + " , " + Name,MainCode.class,LogType.INFO);
 
         }
 

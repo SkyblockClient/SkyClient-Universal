@@ -26,16 +26,23 @@ public class Utils {
 
     public static String request(String URL) throws IOException {
 
+        sendLog("Requested: "+URL,Utils.class,LogType.INFO);
+
         java.net.URL url = new URL(URL);
         URLConnection conn = url.openConnection();
         InputStream inputStream = conn.getInputStream();
         Scanner s = new Scanner(inputStream).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
+        String data = s.hasNext() ? s.next() : "";
+        sendLog("Returned: "+data,Utils.class,LogType.INFO);
+        return data;
 
     }
 
     public static void Download(String URL, String Loc) {
         try {
+
+            sendLog("Trying to download: "+URL,Utils.class,LogType.INFO);
+
             java.net.URL url = new URL(URL);
             URLConnection urlConnection = url.openConnection();
             urlConnection.setRequestProperty("User-Agent", "NING/1.0");
@@ -46,8 +53,14 @@ public class Utils {
             while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
                 fileOS.write(data, 0, byteContent);
             }
+
+            sendLog("Downloaded: " + URL,MainCode.class,LogType.INFO);
+
         } catch (Exception e) {
-            sendLog(Arrays.toString(e.getStackTrace()), Utils.class, LogType.ERROR);
+
+            StringWriter error = new StringWriter();
+            e.printStackTrace(new PrintWriter(error));
+            sendLog("Failed to download: "+URL+"\nReason: "+error, Utils.class, LogType.ERROR);
 
         }
 
