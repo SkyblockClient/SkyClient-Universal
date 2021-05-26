@@ -38,7 +38,7 @@ public class MainGui extends Utils {
         LafManager.enableLogging(false);
         LafManager.install(new DarculaTheme());
 
-        //createLogFile();
+        createLogFile();
 
         UpdateCheck();
 
