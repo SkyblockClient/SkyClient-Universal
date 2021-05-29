@@ -2,6 +2,7 @@ package io.github.koxx12_dev.skyclient_installer_java;
 
 import com.github.weisj.darklaf.LafManager;
 import com.github.weisj.darklaf.theme.DarculaTheme;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,8 +30,8 @@ public class MainGui extends Utils {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        if (!System.getProperty("java.version").startsWith("1.8")) {
-            JOptionPane.showMessageDialog(null, "Ur using a wrong version of java\nu be using should 1.8 not "+System.getProperty("java.version"), "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (!StringUtils.startsWithAny(System.getProperty("java.version"),  new String[] {"1.8", "11.0"})) {
+            JOptionPane.showMessageDialog(null, "This application was designed for java 1.8 (works with 11.0)\nYou're using "+System.getProperty("java.version")+"\nPlease download java 1.8 to continue", "ERROR", JOptionPane.ERROR_MESSAGE);
             java.awt.Desktop.getDesktop().browse(new URI("https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot"));
             System.exit(0);
         }
