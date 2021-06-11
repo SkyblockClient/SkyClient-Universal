@@ -83,7 +83,7 @@ public class MainGui extends Utils {
     }
 
     public static void GuiInit(List<String> list, JSONArray modsjson, JSONArray packsjson) throws IOException {
-        JFrame frame = new JFrame("Skyclient Installer");
+        JFrame frame = new JFrame("Skyclien\'t Installer");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
@@ -104,7 +104,7 @@ public class MainGui extends Utils {
             mc = System.getenv("HOME") + "/.minecraft";
         }
 
-        JFrame frame = new JFrame("Skyclient Loader");
+        JFrame frame = new JFrame("Skyclien\'t Loader");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
