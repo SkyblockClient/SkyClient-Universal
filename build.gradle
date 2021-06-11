@@ -9,7 +9,7 @@ dependencies {
 
 }
 
-archivesBaseName = 'Skyclient-Universal-Installer'
+archivesBaseName = 'Skyclien't-Universal-Installer'
 version = '1.0.3'
 
 jar {
