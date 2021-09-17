@@ -99,7 +99,7 @@ public class MainCode extends Utils {
                 url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/mods/" + file;
                 url = (String) modsjson.getJSONObject(i).get("url");
             }
-            catch (Exception) {
+            catch (Exception e) {
             }
 
             modidToFile.put(id, file);
