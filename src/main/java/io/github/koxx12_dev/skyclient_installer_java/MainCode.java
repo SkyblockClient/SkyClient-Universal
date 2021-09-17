@@ -95,10 +95,12 @@ public class MainCode extends Utils {
             String url;
             String file = (String) modsjson.getJSONObject(i).get("file");
 
-            if (id.equals("rpm")) {
-                url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/mods/Resource_Pack_Manager_1.2.jar";
-            } else {
-                url = (String) modsjson.getJSONObject(i).get("url");
+            boolean has_url = false;
+            try {
+                url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/mods/" + file
+                url = (String) modsjson.getJSONObject(i).get("url")
+            }
+            catch (Exception) {
             }
 
             modidToFile.put(id, file);
