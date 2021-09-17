@@ -95,10 +95,9 @@ public class MainCode extends Utils {
             String url;
             String file = (String) modsjson.getJSONObject(i).get("file");
 
-            boolean has_url = false;
             try {
-                url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/mods/" + file
-                url = (String) modsjson.getJSONObject(i).get("url")
+                url = "https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/mods/" + file;
+                url = (String) modsjson.getJSONObject(i).get("url");
             }
             catch (Exception) {
             }
