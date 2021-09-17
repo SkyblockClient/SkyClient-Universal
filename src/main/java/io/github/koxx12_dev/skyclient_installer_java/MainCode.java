@@ -110,7 +110,7 @@ public class MainCode extends Utils {
         for (int i = 0; i < packsjson.length(); i++) {
 
             String id = (String) packsjson.getJSONObject(i).get("id");
-            String url;
+            String url = "";
             String file = (String) packsjson.getJSONObject(i).get("file");
 
             try {
