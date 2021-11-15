@@ -1,4 +1,4 @@
-package io.github.koxx12_dev.skyclient_installer_java;
+package io.github.koxx12dev.skyclientinstaller;
 
 import com.github.weisj.darklaf.LafManager;
 import com.github.weisj.darklaf.theme.DarculaTheme;
@@ -30,9 +30,9 @@ public class MainGui extends Utils {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        if (!StringUtils.startsWithAny(System.getProperty("java.version"),  new String[] {"1.8", "11.0"})) {
-            JOptionPane.showMessageDialog(null, "This application was designed for java 1.8 (works with 11.0)\nYou're using "+System.getProperty("java.version")+"\nPlease download java 1.8 to continue", "ERROR", JOptionPane.ERROR_MESSAGE);
-            java.awt.Desktop.getDesktop().browse(new URI("https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot"));
+        if (!StringUtils.startsWithAny(System.getProperty("java.version"), new String[]{"1.8", "11.0"})) {
+            JOptionPane.showMessageDialog(null, "This application was designed for java 1.8 (works with 11.0)\nYou're using " + System.getProperty("java.version") + "\nPlease download java 1.8 to continue or uninstall newer versions of Java.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            java.awt.Desktop.getDesktop().browse(new URI("https://adoptium.net/?variant=openjdk8&jvmVariant=hotspot"));
             System.exit(0);
         }
 
@@ -41,58 +41,46 @@ public class MainGui extends Utils {
 
         createLogFile();
 
-        UpdateCheck();
+        checkUpdate();
 
         List<String> displayed = new ArrayList<>();
 
-        String modsrq = request("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json");
-        String packsrq = request("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json");
+        String modsrq = getStringResponse("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/mods.json");
+        String packsrq = getStringResponse("https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main/files/packs.json");
 
         JSONArray packsjson = new JSONArray(packsrq);
         JSONArray modsjson = new JSONArray(modsrq);
 
         modsjson.remove(modsjson.length() - 1);
-        String os = "";
 
-        if (SystemUtils.IS_OS_WINDOWS) {
-            os = "win";
-        } else if (SystemUtils.IS_OS_MAC) {
-            os = "mac";
-        } else if (SystemUtils.IS_OS_LINUX) {
-            os = "linux";
-        } else {
-            JOptionPane.showMessageDialog(null, "Looks like ur os isnt supported", "L", JOptionPane.ERROR_MESSAGE);
+        if (!(SystemUtils.IS_OS_WINDOWS || SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC)) {
+            JOptionPane.showMessageDialog(null, "You are using an unsupported operating system (" + System.getProperty("os.name") + "). If you believe this is an error, go to https://inv.wtf/skyclient.", "L", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
 
         for (int i = 0; i < modsjson.length(); i++) {
-            try {
-
-                Boolean temp = (Boolean) modsjson.getJSONObject(i).get("hidden");
-
-            } catch (Exception e) {
+            if (!modsjson.getJSONObject(i).has("hidden") || !modsjson.getJSONObject(i).getBoolean("hidden")) {
                 displayed.add((String) modsjson.getJSONObject(i).get("display"));
             }
 
-
         }
 
-        sendLog(displayed+"",MainGui.class,LogType.INFO);
+        sendLog(displayed + "", MainGui.class, LogType.INFO);
 
-        GuiInit(displayed, modsjson, packsjson);
+        initGUI(displayed, modsjson, packsjson);
     }
 
-    public static void GuiInit(List<String> list, JSONArray modsjson, JSONArray packsjson) throws IOException {
-        JFrame frame = new JFrame("Skyclien\'t Installer");
+    public static void initGUI(List<String> list, JSONArray modsjson, JSONArray packsjson) throws IOException {
+        JFrame frame = new JFrame("Skyclien't Installer");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
-        Gui(frame.getContentPane(), list, modsjson, packsjson);
+        initWindow(frame.getContentPane(), list, modsjson, packsjson);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void Gui(Container truepane, List<String> list, JSONArray modsjson, JSONArray packsjson) throws MalformedURLException {
+    public static void initWindow(Container truepane, List<String> list, JSONArray modsjson, JSONArray packsjson) throws MalformedURLException {
 
         String mc = "";
 
@@ -104,7 +92,7 @@ public class MainGui extends Utils {
             mc = System.getenv("HOME") + "/.minecraft";
         }
 
-        JFrame frame = new JFrame("Skyclien\'t Loader");
+        JFrame frame = new JFrame("Skyclien't Loader");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(new URL("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/config/icon.png")));
         frame.setResizable(false);
@@ -138,8 +126,8 @@ public class MainGui extends Utils {
         JPanel pane = new JPanel();
         JPanel pane2 = new JPanel();
 
-        List<JCheckBox> Checkboxes = new ArrayList<>();
-        List<JCheckBox> Checkboxes2 = new ArrayList<>();
+        List<JCheckBox> checkboxes = new ArrayList<>();
+        List<JCheckBox> checkboxes2 = new ArrayList<>();
 
         List<JButton> buttons = new ArrayList<>();
         List<JButton> buttons2 = new ArrayList<>();
@@ -166,7 +154,7 @@ public class MainGui extends Utils {
 
                 String loc = "resources/images/icons/" + modsjson.getJSONObject(i).get("icon");
 
-                sendLog("loc: " + loc,MainGui.class,LogType.INFO);
+                sendLog("loc: " + loc, MainGui.class, LogType.INFO);
 
                 BufferedImage myPicture;
                 JarEntry entry = null;
@@ -174,7 +162,7 @@ public class MainGui extends Utils {
 
                 InputStream is = MainGui.class.getResourceAsStream("/" + loc);
 
-                sendLog("is: " + is,MainGui.class,LogType.INFO);
+                sendLog("is: " + is, MainGui.class, LogType.INFO);
 
                 try {
                     jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
@@ -187,10 +175,10 @@ public class MainGui extends Utils {
 
                 }
 
-                sendLog("jar: " + jar,MainGui.class,LogType.INFO);
-                sendLog("entry: " + entry,MainGui.class,LogType.INFO);
+                sendLog("jar: " + jar, MainGui.class, LogType.INFO);
+                sendLog("entry: " + entry, MainGui.class, LogType.INFO);
 
-                URL url = new URL(("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + modsjson.getJSONObject(i).get("icon")).replaceAll(" ","%20"));
+                URL url = new URL(("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + modsjson.getJSONObject(i).get("icon")).replaceAll(" ", "%20"));
                 InputStream inputStream = url.openStream();
 
 
@@ -202,14 +190,14 @@ public class MainGui extends Utils {
                 org.apache.commons.io.IOUtils.copy(inputStream, baos2);
                 byte[] inputStreamB = baos2.toByteArray();
 
-                if (entry != null && is != null && Arrays.equals(inputStreamB,isB)) {
-                    sendLog("same",MainGui.class,LogType.INFO);
+                if (entry != null && is != null && Arrays.equals(inputStreamB, isB)) {
+                    sendLog("same", MainGui.class, LogType.INFO);
                     myPicture = ImageIO.read(new ByteArrayInputStream(isB));
                 } else {
                     myPicture = ImageIO.read(new ByteArrayInputStream(inputStreamB));
                 }
 
-                sendLog("mP: "+myPicture,MainGui.class,LogType.INFO);
+                sendLog("mP: " + myPicture, MainGui.class, LogType.INFO);
 
                 Labels.add(new JLabel(new ImageIcon(getScaledImage(myPicture, 50, 50))));
 
@@ -223,31 +211,31 @@ public class MainGui extends Utils {
 
                 pane.add(Labels.get(Labels.size() - 1));
             } catch (Exception e) {
-                sendLog(Arrays.toString(e.getStackTrace()),MainGui.class,LogType.ERROR);
+                sendLog(Arrays.toString(e.getStackTrace()), MainGui.class, LogType.ERROR);
             }
 
-            Checkboxes.add(new JCheckBox(list.get(i)));
+            checkboxes.add(new JCheckBox(list.get(i)));
 
-            Checkboxes.get(i).setName((String) modsjson.getJSONObject(i).get("id"));
+            checkboxes.get(i).setName((String) modsjson.getJSONObject(i).get("id"));
 
             try {
                 if ((Boolean) modsjson.getJSONObject(i).get("enabled")) {
 
-                    Checkboxes.get(i).setSelected(true);
+                    checkboxes.get(i).setSelected(true);
 
                 }
             } catch (Exception ignore) {
 
-                Checkboxes.get(i).setSelected(false);
+                checkboxes.get(i).setSelected(false);
 
             }
 
             c.gridx = 1;
             c.gridy = i;
 
-            gridbag.setConstraints(Checkboxes.get(i), c);
+            gridbag.setConstraints(checkboxes.get(i), c);
 
-            pane.add(Checkboxes.get(i));
+            pane.add(checkboxes.get(i));
 
             buttons.add(new JButton("^"));
             buttons.get(i).setName((String) modsjson.getJSONObject(i).get("id"));
@@ -269,7 +257,7 @@ public class MainGui extends Utils {
             try {
                 String loc = "resources/images/icons/" + packsjson.getJSONObject(i).get("icon");
 
-                sendLog("loc: " + loc,MainGui.class,LogType.INFO);
+                sendLog("loc: " + loc, MainGui.class, LogType.INFO);
 
                 JarEntry entry = null;
                 JarFile jar = null;
@@ -277,7 +265,7 @@ public class MainGui extends Utils {
 
                 InputStream is = MainGui.class.getResourceAsStream("/" + loc);
 
-                sendLog("is: " + is,MainGui.class,LogType.INFO);
+                sendLog("is: " + is, MainGui.class, LogType.INFO);
 
                 try {
                     jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
@@ -290,10 +278,10 @@ public class MainGui extends Utils {
 
                 }
 
-                sendLog("jar: " + jar,MainGui.class,LogType.INFO);
-                sendLog("entry: " + entry,MainGui.class,LogType.INFO);
+                sendLog("jar: " + jar, MainGui.class, LogType.INFO);
+                sendLog("entry: " + entry, MainGui.class, LogType.INFO);
 
-                URL url = new URL(("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + packsjson.getJSONObject(i).get("icon")).replaceAll(" ","%20"));
+                URL url = new URL(("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/icons/" + packsjson.getJSONObject(i).get("icon")).replaceAll(" ", "%20"));
                 InputStream inputStream = url.openStream();
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -304,14 +292,14 @@ public class MainGui extends Utils {
                 org.apache.commons.io.IOUtils.copy(inputStream, baos2);
                 byte[] inputStreamB = baos2.toByteArray();
 
-                if (entry != null && is != null && Arrays.equals(inputStreamB,isB)) {
-                    sendLog("same",MainGui.class,LogType.INFO);
+                if (entry != null && is != null && Arrays.equals(inputStreamB, isB)) {
+                    sendLog("same", MainGui.class, LogType.INFO);
                     myPicture = ImageIO.read(new ByteArrayInputStream(isB));
                 } else {
                     myPicture = ImageIO.read(new ByteArrayInputStream(inputStreamB));
                 }
 
-                sendLog("mP: "+myPicture,MainGui.class,LogType.INFO);
+                sendLog("mP: " + myPicture, MainGui.class, LogType.INFO);
 
                 Labels2.add(new JLabel(new ImageIcon(getScaledImage(myPicture, 50, 50))));
                 Labels2.get(Labels2.size() - 1).setPreferredSize(new Dimension(50, 50));
@@ -321,24 +309,24 @@ public class MainGui extends Utils {
                 gridbag.setConstraints(Labels2.get(Labels2.size() - 1), c);
                 pane2.add(Labels2.get(Labels2.size() - 1));
             } catch (Exception e) {
-                sendLog(Arrays.toString(e.getStackTrace()),MainGui.class,LogType.ERROR);
+                sendLog(Arrays.toString(e.getStackTrace()), MainGui.class, LogType.ERROR);
             }
 
-            Checkboxes2.add(new JCheckBox((String) packsjson.getJSONObject(i).get("display")));
-            Checkboxes2.get(i).setName((String) packsjson.getJSONObject(i).get("id"));
+            checkboxes2.add(new JCheckBox((String) packsjson.getJSONObject(i).get("display")));
+            checkboxes2.get(i).setName((String) packsjson.getJSONObject(i).get("id"));
 
             try {
                 if ((Boolean) packsjson.getJSONObject(i).get("enabled")) {
-                    Checkboxes2.get(i).setSelected(true);
+                    checkboxes2.get(i).setSelected(true);
                 }
             } catch (Exception ignore) {
-                Checkboxes2.get(i).setSelected(false);
+                checkboxes2.get(i).setSelected(false);
             }
 
             c.gridx = 1;
             c.gridy = i;
-            gridbag.setConstraints(Checkboxes2.get(i), c);
-            pane2.add(Checkboxes2.get(i));
+            gridbag.setConstraints(checkboxes2.get(i), c);
+            pane2.add(checkboxes2.get(i));
 
             buttons2.add(new JButton("^"));
             buttons2.get(i).setName((String) packsjson.getJSONObject(i).get("id"));
@@ -356,7 +344,7 @@ public class MainGui extends Utils {
             JButton lab = buttons.get(i);
             JSONArray json = modsjson.getJSONObject(i).getJSONArray("actions");
 
-            final JPopupMenu menu = Popup(json);
+            final JPopupMenu menu = displayMDGuide(json);
 
             lab.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
@@ -377,7 +365,7 @@ public class MainGui extends Utils {
             try {
                 JSONArray json = packsjson.getJSONObject(i).getJSONArray("actions");
 
-                final JPopupMenu menu = Popup(json);
+                final JPopupMenu menu = displayMDGuide(json);
 
                 lab.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
@@ -400,21 +388,21 @@ public class MainGui extends Utils {
         lbar.setText("Loading Warnings for Mods");
         bar.setValue(4);
 
-        for (int i = 0; i < Checkboxes.size(); i++) {
-            JCheckBox lab = Checkboxes.get(i);
+        for (int i = 0; i < checkboxes.size(); i++) {
+            JCheckBox lab = checkboxes.get(i);
             try {
                 JSONArray json = modsjson.getJSONObject(i).getJSONObject("warning").getJSONArray("lines");
 
 
                 lab.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
-                        Boolean selected = false;
+                        boolean selected = false;
 
                         lab.setSelected(false);
                         try {
-                            selected = Warning(json);
+                            selected = displayWarning(json);
                         } catch (MalformedURLException ex) {
-                            sendLog(Arrays.toString(ex.getStackTrace()),MainGui.class,LogType.ERROR);
+                            sendLog(Arrays.toString(ex.getStackTrace()), MainGui.class, LogType.ERROR);
                         }
 
                         lab.setSelected(selected);
@@ -538,13 +526,13 @@ public class MainGui extends Utils {
             List<String> mods = new ArrayList<>();
             MainCode main = new MainCode();
 
-            for (JCheckBox checkbox : Checkboxes) {
+            for (JCheckBox checkbox : checkboxes) {
                 if (checkbox.isSelected()) {
                     mods.add(checkbox.getName());
                 }
             }
 
-            for (JCheckBox checkbox : Checkboxes2) {
+            for (JCheckBox checkbox : checkboxes2) {
                 if (checkbox.isSelected()) {
                     packs.add(checkbox.getName());
                 }
@@ -553,9 +541,9 @@ public class MainGui extends Utils {
             button.setEnabled(false);
 
             try {
-                main.code(mods, packs, finalMc);
+                main.main(mods, packs, finalMc);
             } catch (IOException | URISyntaxException e) {
-                sendLog(Arrays.toString(e.getStackTrace()),MainGui.class,LogType.ERROR);
+                sendLog(Arrays.toString(e.getStackTrace()), MainGui.class, LogType.ERROR);
             }
 
         });
@@ -567,10 +555,8 @@ public class MainGui extends Utils {
 
     }
 
-    public static void Guide(String text) {
-
-
-        Runnable guideThread = () -> {
+    public static void displayGuide(String text) {
+        new Thread(() -> {
             JFrame frame = new JFrame("Guide");
             frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             try {
@@ -599,7 +585,7 @@ public class MainGui extends Utils {
                 c.gridy = i;
                 gridbag.setConstraints(label, c);
                 pane.add(label);
-                sendLog(label+"",MainGui.class,LogType.INFO);
+                sendLog(label + "", MainGui.class, LogType.INFO);
             }
 
             JScrollPane sp = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -613,13 +599,11 @@ public class MainGui extends Utils {
 
             frame.pack();
             frame.setVisible(true);
-        };
-
-        new Thread(guideThread).start();
+        }).start();
 
     }
 
-    public static JPopupMenu Popup(final JSONArray array) {
+    public static JPopupMenu displayMDGuide(final JSONArray array) {
 
         JPopupMenu popupMenu = new JPopupMenu();
         List<JMenuItem> items = new ArrayList<>();
@@ -637,10 +621,10 @@ public class MainGui extends Utils {
 
                     public void mouseReleased(MouseEvent e) {
                         try {
-                            Guide(request(md));
+                            displayGuide(getStringResponse(md));
                         } catch (Exception ex) {
 
-                            sendLog(Arrays.toString(ex.getStackTrace()),MainGui.class,LogType.ERROR);
+                            sendLog(Arrays.toString(ex.getStackTrace()), MainGui.class, LogType.ERROR);
                         }
                     }
                 });
@@ -660,7 +644,7 @@ public class MainGui extends Utils {
 
                             java.awt.Desktop.getDesktop().browse(uri);
                         } catch (Exception ex) {
-                            sendLog(Arrays.toString(ex.getStackTrace()),MainGui.class,LogType.ERROR);
+                            sendLog(Arrays.toString(ex.getStackTrace()), MainGui.class, LogType.ERROR);
                         }
                     }
                 });
@@ -673,7 +657,7 @@ public class MainGui extends Utils {
         return popupMenu;
     }
 
-    public static Boolean Warning(final JSONArray array) throws MalformedURLException {
+    public static boolean displayWarning(final JSONArray array) throws MalformedURLException {
 
         String arrrayJoined = "<html><div style='text-align: center;'>" + array.join("<br>") + "</div></html>";
         boolean val = false;
@@ -687,7 +671,7 @@ public class MainGui extends Utils {
         return val;
     }
 
-    public static void UpdateCheck() throws IOException, URISyntaxException {
+    public static void checkUpdate() throws IOException, URISyntaxException {
 
         JarFile jar = new JarFile(new java.io.File(MainGui.class.getProtectionDomain()
                 .getCodeSource()
@@ -698,21 +682,21 @@ public class MainGui extends Utils {
         Manifest manifest = jar.getManifest();
         Attributes attr = manifest.getMainAttributes();
 
-        int ver = Integer.parseInt(attr.getValue("Version").replaceAll("\\.",""));
+        int ver = Integer.parseInt(attr.getValue("Version").replaceAll("\\.", ""));
 
-        JSONObject gitVersionJson = new JSONObject(request("https://raw.githubusercontent.com/koxx12-dev/Skyclient-installer-Java/main/version.json"));
-        int gitVersion = Integer.parseInt(gitVersionJson.get("version").toString().replaceAll("\\.",""));
+        JSONObject gitVersionJson = new JSONObject(getStringResponse("https://raw.githubusercontent.com/koxx12-dev/Skyclient-installer-Java/main/version.json"));
+        int gitVersion = Integer.parseInt(gitVersionJson.get("version").toString().replaceAll("\\.", ""));
 
-        sendLog("Installer version: "+attr.getValue("Version"),Utils.class,LogType.INFO);
+        sendLog("Installer version: " + attr.getValue("Version"), Utils.class, LogType.INFO);
 
         if (ver < gitVersion) {
-            sendLog("Newer version Detected ("+gitVersionJson.get("version")+")",Utils.class,LogType.INFO);
-            JOptionPane.showMessageDialog(null, "Newer version of the installer was detected\nYour version is \""+attr.getValue("Version")+"\" newest one is \""+gitVersionJson.get("version")+"\"", "New version", JOptionPane.ERROR_MESSAGE);
+            sendLog("Newer version Detected (" + gitVersionJson.get("version") + ")", Utils.class, LogType.INFO);
+            JOptionPane.showMessageDialog(null, "Newer version of the installer was detected\nYour version is \"" + attr.getValue("Version") + "\" newest one is \"" + gitVersionJson.get("version") + "\"", "New version", JOptionPane.ERROR_MESSAGE);
             java.awt.Desktop.getDesktop().browse(new URI("https://github.com/koxx12-dev/Skyclient-installer-Java/releases/latest"));
             System.exit(0);
         }
 
-        sendLog("Version up to date",Utils.class,LogType.INFO);
+        sendLog("Version up to date", Utils.class, LogType.INFO);
 
     }
 }

@@ -1,4 +1,4 @@
-package io.github.koxx12_dev.skyclient_installer_java;
+package io.github.koxx12dev.skyclientinstaller;
 
 public enum LogType {
     INFO ("INFO"),
