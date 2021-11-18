@@ -1,25 +1,29 @@
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+configurations {
+    include
+    implementation.extendsFrom include
+    include.canBeResolved = true
+}
+
 dependencies {
-
-    compile fileTree(dir: 'lib', include: '*.jar')
-    compile fileTree(dir: 'additions', include: '*.jar')
-
+    include fileTree(dir: 'lib', include: '*.jar')
+    include fileTree(dir: 'additions', include: '*.jar')
 }
 
 archivesBaseName = 'Skyclien\'t-Universal-Installer'
 version = '1.0.3'
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
-        attributes 'Main-Class': 'io.github.koxx12_dev.skyclient_installer_java.MainGui'
+        attributes 'Main-Class': 'io.github.koxx12dev.skyclientinstaller.MainGui'
         attributes 'Version': project.version
     }
 
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.include.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'

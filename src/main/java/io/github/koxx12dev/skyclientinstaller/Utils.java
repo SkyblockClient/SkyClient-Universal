@@ -1,4 +1,4 @@
-package io.github.koxx12_dev.skyclient_installer_java;
+package io.github.koxx12dev.skyclientinstaller;
 
 import com.github.rjeschke.txtmark.Processor;
 import org.apache.commons.lang.SystemUtils;
@@ -24,24 +24,24 @@ import java.util.zip.GZIPOutputStream;
 
 public class Utils {
 
-    public static String request(String URL) throws IOException {
+    public static String getStringResponse(String URL) throws IOException {
 
-        sendLog("Requested: "+URL,Utils.class,LogType.INFO);
+        sendLog("Requested: " + URL, Utils.class, LogType.INFO);
 
         java.net.URL url = new URL(URL);
         URLConnection conn = url.openConnection();
         InputStream inputStream = conn.getInputStream();
         Scanner s = new Scanner(inputStream).useDelimiter("\\A");
         String data = s.hasNext() ? s.next() : "";
-        sendLog("Returned: "+data,Utils.class,LogType.INFO);
+        sendLog("Returned: " + data, Utils.class, LogType.INFO);
         return data;
 
     }
 
-    public static void Download(String URL, String Loc) {
+    public static void download(String URL, String Loc) {
         try {
 
-            sendLog("Trying to download: "+URL,Utils.class,LogType.INFO);
+            sendLog("Trying to download: " + URL, Utils.class, LogType.INFO);
 
             java.net.URL url = new URL(URL);
             URLConnection urlConnection = url.openConnection();
@@ -54,13 +54,13 @@ public class Utils {
                 fileOS.write(data, 0, byteContent);
             }
 
-            sendLog("Downloaded: " + URL,MainCode.class,LogType.INFO);
+            sendLog("Downloaded: " + URL, MainCode.class, LogType.INFO);
 
         } catch (Exception e) {
 
             StringWriter error = new StringWriter();
             e.printStackTrace(new PrintWriter(error));
-            sendLog("Failed to download: "+URL+"\nReason: "+error, Utils.class, LogType.ERROR);
+            sendLog("Failed to download: " + URL + "\nReason: " + error, Utils.class, LogType.ERROR);
 
         }
 
@@ -84,8 +84,7 @@ public class Utils {
         } else if (SystemUtils.IS_OS_MAC || SystemUtils.IS_OS_LINUX) {
             plc = "/";
         } else {
-
-            sendLog("HOW TF DID YOU GOT HERE WITH " + System.getProperty("os.name") + "\nIT SHOULDN'T BE POSSIBLE", Utils.class, LogType.FATAL);
+            sendLog("You are using an unsupported operating system (" + System.getProperty("os.name") + "). If you believe this is an error, go to https://inv.wtf/skyclient.", Utils.class, LogType.FATAL);
             System.exit(-1);
         }
 
@@ -247,58 +246,58 @@ public class Utils {
 
     }
 
-    public static void sendLog(String Message, Class<?> _class, LogType type) {
+    public static void sendLog(String message, Class<?> clazz, LogType type) {
 
-        System.out.println("[" + DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()) + "] [" + _class.getSimpleName() + " / " + type + "]: " + Message);
+        System.out.println("[" + DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now()) + "] [" + clazz.getSimpleName() + " / " + type + "]: " + message);
 
     }
 
     public static void createLogFile() throws IOException {
 
-        String _sc = null;
+        String folder = null;
 
         if (SystemUtils.IS_OS_WINDOWS) {
-            _sc = System.getenv("APPDATA") + "\\.skyclient";
+            folder = System.getenv("APPDATA") + "\\.skyclient";
         } else if (SystemUtils.IS_OS_MAC) {
-            _sc = System.getenv("HOME") + "/Library/Application Support/skyclient";
+            folder = System.getenv("HOME") + "/Library/Application Support/skyclient";
         } else if (SystemUtils.IS_OS_LINUX) {
-            _sc = System.getenv("HOME") + "/.skyclient";
+            folder = System.getenv("HOME") + "/.skyclient";
         }
 
-        if (_sc != null) {
+        if (folder != null) {
 
-            if (!new File(_sc).exists()) {
+            if (!new File(folder).exists()) {
 
                 sendLog("created .skyclient", Utils.class, LogType.INFO);
 
-                new File(_sc).mkdir();
+                new File(folder).mkdir();
 
             }
 
-            if (!new File(_sc + "/logs").exists()) {
+            if (!new File(folder + "/logs").exists()) {
 
                 sendLog("created .skyclient/logs", Utils.class, LogType.INFO);
 
-                new File(_sc + "/logs").mkdir();
+                new File(folder + "/logs").mkdir();
 
             }
 
-            if (new File(_sc + "/logs/latest.log").exists()) {
+            if (new File(folder + "/logs/latest.log").exists()) {
 
                 sendLog("gunziped log", Utils.class, LogType.INFO);
 
-                LocalDateTime logCreatonTime = Files.readAttributes(Paths.get(_sc + "/logs/latest.log"), BasicFileAttributes.class).lastModifiedTime()
+                LocalDateTime logCreatonTime = Files.readAttributes(Paths.get(folder + "/logs/latest.log"), BasicFileAttributes.class).lastModifiedTime()
                         .toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime();
 
-                gzipFile(_sc + "/logs/latest.log", _sc + "/logs/" + logCreatonTime.format(DateTimeFormatter.ofPattern("MM-dd-yyyy_HH-mm-ss")) + ".log.gz");
+                gzipFile(folder + "/logs/latest.log", folder + "/logs/" + logCreatonTime.format(DateTimeFormatter.ofPattern("MM-dd-yyyy_HH-mm-ss")) + ".log.gz");
 
-                new File(_sc + "/logs/latest.log").delete();
+                new File(folder + "/logs/latest.log").delete();
 
             }
 
-            PrintStream out = new PrintStream(new FileOutputStream(_sc + "/logs/latest.log"));
+            PrintStream out = new PrintStream(new FileOutputStream(folder + "/logs/latest.log"));
             System.setOut(out);
 
         } else {
