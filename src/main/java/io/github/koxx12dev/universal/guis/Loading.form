@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="io.github.koxx12dev.universal.guis.Loading">
+  <grid id="27dc6" binding="pane" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="315" width="388" height="106"/>
+    </constraints>
+    <properties>
+      <minimumSize width="314" height="56"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <hspacer id="5909d">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <component id="e29af" class="javax.swing.JLabel" binding="Text">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="0"/>
+          <preferredSize width="280" height="16"/>
+          <text value="Label"/>
+          <verticalTextPosition value="0"/>
+        </properties>
+      </component>
+      <component id="77518" class="javax.swing.JProgressBar" binding="progressBar1" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="10" left="0" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <borderPainted value="true"/>
+          <indeterminate value="false"/>
+          <name value=""/>
+          <preferredSize width="300" height="20"/>
+          <stringPainted value="true"/>
+          <toolTipText value=""/>
+          <value value="0"/>
+        </properties>
+      </component>
+      <hspacer id="53369">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="4d855">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

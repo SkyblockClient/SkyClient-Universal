@@ -1,19 +1,21 @@
 #!/usr/bin/env sh
 
 #
-# Copyright 2015 the original author or authors.
+# Skyclient Universal Installer - Skyclient installer but written in java!
+# Copyright (C) koxx12-dev [2021 - 2021]
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# This program comes with ABSOLUTELY NO WARRANTY
+# This is free software, and you are welcome to redistribute it
+# under the certain conditions that can be found here
+# https://www.gnu.org/licenses/gpl-3.0.en.html
 #
-#      https://www.apache.org/licenses/LICENSE-2.0
+# If you have any questions or concerns, please create
+# an issue on the github page that can be found under this url
+# https://github.com/koxx12-dev/Skyclient-installer-Java
 #
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# If you have a private concern, please contact me on
+# Discord: Koxx12#8061
+#
 #
 
 ##############################################################################
