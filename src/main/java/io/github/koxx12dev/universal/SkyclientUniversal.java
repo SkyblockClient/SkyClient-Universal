@@ -45,7 +45,7 @@ public class SkyclientUniversal {
         }
     }
 
-    public static String version = "2.0.0";
+    public static String version = "2.0.1";
     public static Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
     public static String baseRepo = "https://raw.githubusercontent.com/nacrt/SkyblockClient-REPO/main";
     public static String baseCdn = "https://cdn.jsdelivr.net/gh/nacrt/SkyblockClient-REPO@main";
@@ -77,19 +77,21 @@ public class SkyclientUniversal {
 
         skyclient = new File(minecraft, "skyclient");
 
-        launcherProfiles = gson.fromJson(FileUtil.readFile(minecraft.getAbsolutePath()+"\\launcher_profiles.json"), LauncherProfiles.class);
-
+        launcherProfiles = gson.fromJson(FileUtil.readFile(minecraft.getAbsolutePath()+"/launcher_profiles.json"), LauncherProfiles.class);
 
         cache.mkdirs();
 
         Installer installer = new Installer();
+
+        installer.initCategories();
+
         for (int i = 0; i < mods.length-1; i++) {
             installer.addModPanel(i, i-1);
         }
         for (int i = 0; i < packs.length-1; i++) {
             installer.addPackPanel(i, i-1);
         }
-
+        //
         installer.init();
 
     }
