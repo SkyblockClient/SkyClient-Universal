@@ -1,13 +1,13 @@
 {
-  "total": 41,
+  "total": 32,
   "tools inspection": {
-    "Code Inspection": 41
+    "Code Inspection": 32
   },
   "attributes": {
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/SkyblockClient/Skyclient-installer-Java",
-        "revisionId": "eb00cb121c5fa3fea5930a630509a9b2c149156f",
+        "revisionId": "d243efd6a2d0717afe48830a8452d233fa7970d8",
         "branch": "main"
       }
     },

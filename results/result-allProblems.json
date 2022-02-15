@@ -94,6 +94,34 @@
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
+      "line": 530,
+      "offset": 48,
+      "length": 15,
+      "code": {
+        "startLine": 528,
+        "length": 15,
+        "offset": 215,
+        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "f736eaa45601f8f298067a7332f8cd6718b9c446705ac4d465cdc3b02d45f912"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
       "line": 383,
       "offset": 48,
       "length": 15,
@@ -428,34 +456,6 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 530,
-      "offset": 48,
-      "length": 15,
-      "code": {
-        "startLine": 528,
-        "length": 15,
-        "offset": 215,
-        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "f736eaa45601f8f298067a7332f8cd6718b9c446705ac4d465cdc3b02d45f912"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
       "language": "JAVA",
       "line": 41,
@@ -514,34 +514,6 @@
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
       "language": "JAVA",
-      "line": 50,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 48,
-        "length": 15,
-        "offset": 108,
-        "surroundingCode": "            Files.write(file.toPath(), content.getBytes());\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "2b4a8c6abd6e31fd192fa4e7211100856d4c6bbe133c0632116923e64b2ab10a"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
-      "language": "JAVA",
       "line": 38,
       "offset": 15,
       "length": 15,
@@ -568,16 +540,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
       "language": "JAVA",
-      "line": 64,
+      "line": 50,
       "offset": 15,
       "length": 15,
       "code": {
-        "startLine": 62,
+        "startLine": 48,
         "length": 15,
-        "offset": 103,
-        "surroundingCode": "            UIManager.setLookAndFeel(new FlatDarkLaf());\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n"
+        "offset": 108,
+        "surroundingCode": "            Files.write(file.toPath(), content.getBytes());\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n"
       }
     }
   ],
@@ -585,7 +557,7 @@
     "module": "project.main",
     "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "143c7548cd3b576d1f314649ecfa6f2772712dd9f945756d763632180369dfc8"
+  "hash": "2b4a8c6abd6e31fd192fa4e7211100856d4c6bbe133c0632116923e64b2ab10a"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -614,6 +586,34 @@
     "inspectionName": "ThrowablePrintStackTrace"
   },
   "hash": "d527545a133e9c8cb0422398c98558cf3f88e72b05fa08b4e7f050948df74b0e"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "language": "JAVA",
+      "line": 64,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 62,
+        "length": 15,
+        "offset": 103,
+        "surroundingCode": "            UIManager.setLookAndFeel(new FlatDarkLaf());\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "143c7548cd3b576d1f314649ecfa6f2772712dd9f945756d763632180369dfc8"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -894,256 +894,4 @@
     "inspectionName": "UnstableApiUsage"
   },
   "hash": "41167199b48671ec3610aee2691463f2740665f5192e771fc5f4b668540e21ee"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 63,
-      "offset": 64,
-      "length": 6,
-      "code": {
-        "startLine": 61,
-        "length": 6,
-        "offset": 113,
-        "surroundingCode": "                InstallButton.setEnabled(false);\n\n                new File(SkyclientUniversal.skyclient, \"mods\").mkdirs();\n                new File(SkyclientUniversal.skyclient, \"resourcepacks\").mkdirs();\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "5d2ebe351467ca292e733a9410c2eee8fbc64114b6c588b8327541495d951755"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 64,
-      "offset": 73,
-      "length": 6,
-      "code": {
-        "startLine": 62,
-        "length": 6,
-        "offset": 146,
-        "surroundingCode": "\n                new File(SkyclientUniversal.skyclient, \"mods\").mkdirs();\n                new File(SkyclientUniversal.skyclient, \"resourcepacks\").mkdirs();\n\n                int selectedPacks = Arrays.stream(SkyclientUniversal.packs).filter(pack -> pack.selected).mapToInt(pack -> 1).sum();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "128315614a4f66142b70248f9dedf704710dc2ec1262c6b1fb9f4543470081df"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.delete()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 102,
-      "offset": 102,
-      "length": 6,
-      "code": {
-        "startLine": 100,
-        "length": 6,
-        "offset": 308,
-        "surroundingCode": "                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                        new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file).delete();\n                                        if (mod.url != null) {\n                                            Http.download(mod.url, SkyclientUniversal.skyclient + \"/mods/\" + mod.file);"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "467c42c86c079f4072eff7fdaa5183ad2a011bf29d07fbd5d614102a5b93f07e"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 121,
-      "offset": 63,
-      "length": 6,
-      "code": {
-        "startLine": 119,
-        "length": 6,
-        "offset": 162,
-        "surroundingCode": "                                        File file1 = new File(SkyclientUniversal.skyclient, file);\n\n                                        file1.getParentFile().mkdirs();\n                                        Http.download(SkyclientUniversal.baseRepo + \"/files/mcdir/\" + file, file1.getAbsolutePath());\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "c6c528b8955ef35af2cbed8a46123efde9d917fd6c923bba477622c87e9f9e43"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.delete()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 146,
-      "offset": 115,
-      "length": 6,
-      "code": {
-        "startLine": 144,
-        "length": 6,
-        "offset": 347,
-        "surroundingCode": "                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                                    new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file).delete();\n                                                    if (mod2.url != null) {\n                                                        Http.download(mod2.url, SkyclientUniversal.skyclient + \"/mods/\" + mod2.file);"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "0c18a464fab9f1846c731ce2db29e4cd006ac1c09a5aefc1ce170b990c3f2dcd"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 165,
-      "offset": 75,
-      "length": 6,
-      "code": {
-        "startLine": 163,
-        "length": 6,
-        "offset": 186,
-        "surroundingCode": "                                                    File file1 = new File(SkyclientUniversal.skyclient, file);\n\n                                                    file1.getParentFile().mkdirs();\n                                                    Http.download(SkyclientUniversal.baseRepo + \"/files/mcdir/\" + file, file1.getAbsolutePath());\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "90c6ff76d826c2017ba32933e822990bf6f38854990fbc87403f14e97fa7f60f"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 233,
-      "offset": 46,
-      "length": 6,
-      "code": {
-        "startLine": 231,
-        "length": 6,
-        "offset": 213,
-        "surroundingCode": "                    File forgeJson = new File(SkyclientUniversal.minecraft, \"/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json\");\n\n                    forgeLib.getParentFile().mkdirs();\n                    Http.download(\"https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar\", forgeLib.getAbsolutePath());\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "756965844238e9e2373b1eb1dc1c4994be1d69f4ed691407b3194f314a8a4826"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 236,
-      "offset": 47,
-      "length": 6,
-      "code": {
-        "startLine": 234,
-        "length": 6,
-        "offset": 214,
-        "surroundingCode": "                    Http.download(\"https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar\", forgeLib.getAbsolutePath());\n\n                    forgeJson.getParentFile().mkdirs();\n                    Http.download(\"https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json\", forgeJson.getAbsolutePath());\n                }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "a906398b441388c772c1d7fa63b681f4d126b77999a62d206d18f2246d96b781"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Result of method call ignored",
-  "severity": "High",
-  "comment": "Result of `File.mkdirs()` is ignored",
-  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
-      "language": "JAVA",
-      "line": 82,
-      "offset": 15,
-      "length": 6,
-      "code": {
-        "startLine": 80,
-        "length": 6,
-        "offset": 155,
-        "surroundingCode": "        launcherProfiles = gson.fromJson(FileUtil.readFile(minecraft.getAbsolutePath()+\"/launcher_profiles.json\"), LauncherProfiles.class);\n\n        cache.mkdirs();\n\n        Installer installer = new Installer();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IgnoreResultOfCall"
-  },
-  "hash": "cfe03fdeb29fe172d897a8de87f96d196eb06201d52b86b0320ded5f335af9eb"
 }]}
