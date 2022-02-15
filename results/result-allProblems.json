@@ -1,0 +1,1149 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Resource management",
+  "type": "I/O resource opened but not safely closed",
+  "severity": "High",
+  "comment": "'ObjectOutputStream' should be opened in front of a 'try' block and closed in the corresponding 'finally' block",
+  "detailsInfo": "Reports I/O resources that are not safely closed. I/O resources checked by this inspection include `java.io.InputStream`, `java.io.OutputStream`, `java.io.Reader`, `java.io.Writer`, `java.util.zip.ZipFile`, `java.io.Closeable` and `java.io.RandomAccessFile`.\n\n\nI/O resources wrapped by other I/O resources are not reported, as the wrapped resource will be closed by the wrapping resource.\n\n\nBy default, the inspection assumes that the resources can be closed by any method with\n'close' or 'cleanup' in its name.\n\n**Example:**\n\n\n      void save() throws IOException {\n        FileWriter writer = new FileWriter(\"filename.txt\"); //warning\n        writer.write(\"sample\");\n      }\n\n\nUse the following options to configure the inspection:\n\n* List I/O resource classes that do not need to be closed and should be ignored by this inspection.\n* Whether an I/O resource is allowed to be opened inside a `try`block. This style is less desirable because it is more verbose than opening a resource in front of a `try` block.\n* Whether the resource can be closed by any method call with the resource passed as argument.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 642,
+      "offset": 42,
+      "length": 18,
+      "code": {
+        "startLine": 640,
+        "length": 18,
+        "offset": 125,
+        "surroundingCode": "        try {\n            ByteArrayOutputStream baos = new ByteArrayOutputStream();\n            ObjectOutputStream oos = new ObjectOutputStream(baos);\n            oos.writeObject(c);\n            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IOResource"
+  },
+  "hash": "6b8617a8bed6bcc1c8e32e8fcb6ad9a70bf1109426730711469b785368851c03"
+},{
+  "tool": "Code Inspection",
+  "category": "Resource management",
+  "type": "I/O resource opened but not safely closed",
+  "severity": "High",
+  "comment": "'ObjectInputStream' should be opened in front of a 'try' block and closed in the corresponding 'finally' block",
+  "detailsInfo": "Reports I/O resources that are not safely closed. I/O resources checked by this inspection include `java.io.InputStream`, `java.io.OutputStream`, `java.io.Reader`, `java.io.Writer`, `java.util.zip.ZipFile`, `java.io.Closeable` and `java.io.RandomAccessFile`.\n\n\nI/O resources wrapped by other I/O resources are not reported, as the wrapped resource will be closed by the wrapping resource.\n\n\nBy default, the inspection assumes that the resources can be closed by any method with\n'close' or 'cleanup' in its name.\n\n**Example:**\n\n\n      void save() throws IOException {\n        FileWriter writer = new FileWriter(\"filename.txt\"); //warning\n        writer.write(\"sample\");\n      }\n\n\nUse the following options to configure the inspection:\n\n* List I/O resource classes that do not need to be closed and should be ignored by this inspection.\n* Whether an I/O resource is allowed to be opened inside a `try`block. This style is less desirable because it is more verbose than opening a resource in front of a `try` block.\n* Whether the resource can be closed by any method call with the resource passed as argument.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 645,
+      "offset": 41,
+      "length": 17,
+      "code": {
+        "startLine": 643,
+        "length": 17,
+        "offset": 158,
+        "surroundingCode": "            oos.writeObject(c);\n            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());\n            ObjectInputStream ois = new ObjectInputStream(bais);\n            return (Component) ois.readObject();\n        } catch (IOException | ClassNotFoundException ex) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IOResource"
+  },
+  "hash": "851714ca295ea2454456730b2ad8faef630a9a9b3ae03e3bf8d42f94dc7624a1"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Loading.java",
+      "language": "JAVA",
+      "line": 69,
+      "offset": 27,
+      "length": 15,
+      "code": {
+        "startLine": 67,
+        "length": 15,
+        "offset": 123,
+        "surroundingCode": "                        Thread.sleep(30);\n                    } catch (InterruptedException e) {\n                        e.printStackTrace();\n                    }\n                }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "78551369571d0e72aadf4e37f2271cdbb1a832788b874561a0a0054fc7de2b92"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 383,
+      "offset": 48,
+      "length": 15,
+      "code": {
+        "startLine": 381,
+        "length": 15,
+        "offset": 215,
+        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "894083cfc288c24ef55de7a096fe3c974d61aa49eb35a8d5e6a8c2f10795115d"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 78,
+      "offset": 28,
+      "length": 15,
+      "code": {
+        "startLine": 76,
+        "length": 15,
+        "offset": 173,
+        "surroundingCode": "                        Thread.sleep(1000); //makes sure that loading bar works correctly\n                    } catch (InterruptedException ex) {\n                        ex.printStackTrace();\n                    }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "838a0b9ba634f554d03ce3f2cf1fbb827964e5fc31007fa7ddeb49e4ffbbf329"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 88,
+      "offset": 36,
+      "length": 15,
+      "code": {
+        "startLine": 86,
+        "length": 15,
+        "offset": 187,
+        "surroundingCode": "                                modLoading.nextStep(\"Downloading \" + mod.getDisplay());\n                            } catch (InterruptedException ex) {\n                                ex.printStackTrace();\n                            }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "f3b9b24a6ec011da35a45080b3dd92b28585bd0690551bef5c066bb24e96ba6a"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 112,
+      "offset": 40,
+      "length": 15,
+      "code": {
+        "startLine": 110,
+        "length": 15,
+        "offset": 134,
+        "surroundingCode": "                                    }\n                                } catch (Exception e1) {\n                                    e1.printStackTrace();\n                                }\n                            }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "e1867749a7df5079eb7d1f5854d65f9e651ad204990dda690ffc859e1aaa1583"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 125,
+      "offset": 44,
+      "length": 15,
+      "code": {
+        "startLine": 123,
+        "length": 15,
+        "offset": 105,
+        "surroundingCode": "\n                                    } catch (Exception e1) {\n                                        e1.printStackTrace();\n                                    }\n                                }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "0684df489168be64b125097958176f3e07c7a4b04fac661b09ec2ef6d5829330"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 156,
+      "offset": 52,
+      "length": 15,
+      "code": {
+        "startLine": 154,
+        "length": 15,
+        "offset": 170,
+        "surroundingCode": "                                                }\n                                            } catch (Exception e1) {\n                                                e1.printStackTrace();\n                                            }\n                                        }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "6d278184689fb21d5b6db620af96d98e6e4c6103d43508b6c87154c71feba31d"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 169,
+      "offset": 56,
+      "length": 15,
+      "code": {
+        "startLine": 167,
+        "length": 15,
+        "offset": 129,
+        "surroundingCode": "\n                                                } catch (Exception e1) {\n                                                    e1.printStackTrace();\n                                                }\n                                            }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "b12826a6f1b9fa32affd25326098a165dff2b42b2938c26fefdd7fab1f6e32c0"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 191,
+      "offset": 36,
+      "length": 15,
+      "code": {
+        "startLine": 189,
+        "length": 15,
+        "offset": 189,
+        "surroundingCode": "                                packLoading.nextStep(\"Downloading \" + pack.getDisplay());\n                            } catch (InterruptedException ex) {\n                                ex.printStackTrace();\n                            }\n                            System.out.println(\"Downloading \" + pack.getDisplay());"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "05d2f65caf4df365003375b18b211aac66934418fcbfbd953fc60839b3e81e99"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 210,
+      "offset": 32,
+      "length": 15,
+      "code": {
+        "startLine": 208,
+        "length": 15,
+        "offset": 177,
+        "surroundingCode": "                            profile.gameDir = SkyclientUniversal.skyclient.getCanonicalPath();\n                        } catch (IOException ex) {\n                            ex.printStackTrace();\n                        }\n                        profile.icon = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAACGFjVEwAAAAEAAAAAHzNZtAAAAAzUExURf//ACOQY5HbaR68c////11dXXR0dIWFhc3fbNDq6T09PWG/5j+Y2KjQ2Sdyxtrq+k2b5npKrGcAAAABdFJOUwBA5thmAAAAGmZjVEwAAAAAAAAAgAAAAIAAAAAAAAAAAAAIAGQAAK+px9AAAAKZSURBVHja7ZvpbgIxDISBQrcFerz/0zYjZarp4F0OocYgz5898PEhWXESwmp1Rpuu1SgVQAqAl6Z7QNwUowCGAjA5tO6as/1o2nbN2cD/KogCSAHw1kSAyBkJ37u2IrdjISNeATwGAI0pFqFCeFJ9xr0mp28BPAaAFgyTR4ORJ8RgxIL0ePBjvALID8CEdGBTigqRTQjXpYZGv4uaUQEMBWASB4Cu+hZN9Hf4Rf8CGArAAUgHjY2In9Pm0ma2NhVAXgBNxORaOFpMDqBBdSLDGK4CyAegAw+LzZuIBtOEXMDqQiYqQC3yE4gCGA5AZx94IgB/1k0MHbAiAIUogDwAPvlgIUUTCW9IGlQ3tebswkIsgKEAvhDVhYgaewKfYCxBRfEKIDdAFMATfDYduw5NHlhjaAG6TQGMB9Aiigowak6HrqMIQOcAfGJaADkA9Mckbxo6yXBnbEyxALExOTW9NvkEdG5h8pu8AFIAvHbtm2iw69JnJCEUN6gBgPupC3G0APmecXgPuwLIB4AkgNBgfO8AKED+YIFBaBLBZjIhDu8RqwByAfAFr2qsACww3HMQggBAnyiGxqHNn5VxAQwHIAQKUAtPA3hgAqAIcaWv20UxCyA3AAPwfglAC3HfpXb6pXaicKe8AIYDQAxARzpPgTQ5RH9PHsUsgLwACqEAPpnAFQ2IC1QCeGNjMj/oUgC5AQhBZwb0SaoCQJE/Dzb5gTc/6FQAuQD8gJo2kQiAEEsHnVVnD0AXwFCAr6bogOrOhALTRhQBePF5zALIB6AfRgOIN6nvprmByAuRg4/GPWlKBTAcwJPqM5uHTjKRlBtUOiG5WQUwHEAhzk0cdZOqAJ4L4BqxOAGw9Ae3AnhOgGiy8a8QBXBPgB9G8drRaA0Z2QAAABpmY1RMAAAAAQAAABQAAAA8AAAANAAAADwACABkAAETQ/wcAAAAWmZkQVQAAAACeNq1kzEOACAIAx1cjMT/P9eSSCLqJOU2joVAKQOUk6BUOmBLRUAFLLkX2mTIbNg3u7ZEkExssS4UQZmZ1WcQPmXGf9rAbvCgNCELlrRwNRCUEzPhDNF8OvhOAAAAGmZjVEwAAAADAAAAFAAAAEgAAAA4AAAAOAAIAGQCAb6WRGwAAABrZmRBVAAAAAR42s2TQQ6AIAwEOXgxEv//XEvCmmK97Zg4F8L0AC1L60F78kN5BtuEkkewCEB+0f8elKIpx+W1klKFMXBCitdBm5JEQ1ADhMxBKwVTkpTHAmQOGCVzYJdDAamA3Z/NlGXjyQth3xPxg"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "7ec05a44f29d3f76de8c777571f701aff781f14621c85a9b8134bf5507247921"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 648,
+      "offset": 16,
+      "length": 15,
+      "code": {
+        "startLine": 646,
+        "length": 15,
+        "offset": 124,
+        "surroundingCode": "            return (Component) ois.readObject();\n        } catch (IOException | ClassNotFoundException ex) {\n            ex.printStackTrace();\n            return null;\n        }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "bc2093faaaf9433cccbe8e9e8f7b68b3bb9dae439595a7a042327ed3256b5b5a"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 313,
+      "offset": 31,
+      "length": 15,
+      "code": {
+        "startLine": 311,
+        "length": 15,
+        "offset": 143,
+        "surroundingCode": "                            Image.setIcon(new ImageIcon(icon2));\n                        } catch (Exception e) {\n                            e.printStackTrace();\n                        }\n                    });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "eebbf947ad6781799054463472582bcb850eb37d5ce6b9851028e82551f0e36c"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 478,
+      "offset": 27,
+      "length": 15,
+      "code": {
+        "startLine": 476,
+        "length": 15,
+        "offset": 131,
+        "surroundingCode": "                        Image.setIcon(new ImageIcon(icon2));\n                    } catch (Exception e) {\n                        e.printStackTrace();\n                    }\n                });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "cfad9a4492a7b26bb5bdde2d90f36dcdcacbe1d8208d9a28296176967152144d"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 530,
+      "offset": 48,
+      "length": 15,
+      "code": {
+        "startLine": 528,
+        "length": 15,
+        "offset": 215,
+        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "f736eaa45601f8f298067a7332f8cd6718b9c446705ac4d465cdc3b02d45f912"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "language": "JAVA",
+      "line": 41,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 39,
+        "length": 15,
+        "offset": 60,
+        "surroundingCode": "            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n        return null;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "776b823a86bc9ef3f1918e4c8f291fff4562473e1d72367e522826b22335d100"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "language": "JAVA",
+      "line": 71,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 69,
+        "length": 15,
+        "offset": 60,
+        "surroundingCode": "            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "bda3d7083049fcbdac220a8ba544da82cc17e5ea7c1f017ccdffbda5f35863c3"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
+      "language": "JAVA",
+      "line": 50,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 48,
+        "length": 15,
+        "offset": 108,
+        "surroundingCode": "            Files.write(file.toPath(), content.getBytes());\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "2b4a8c6abd6e31fd192fa4e7211100856d4c6bbe133c0632116923e64b2ab10a"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
+      "language": "JAVA",
+      "line": 38,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 36,
+        "length": 15,
+        "offset": 54,
+        "surroundingCode": "        catch (IOException e)\n        {\n            e.printStackTrace();\n        }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "9c494af817c91412f300070776b3662011504cee518c69b4214f52d2c2a381d5"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "language": "JAVA",
+      "line": 64,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 62,
+        "length": 15,
+        "offset": 103,
+        "surroundingCode": "            UIManager.setLookAndFeel(new FlatDarkLaf());\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "143c7548cd3b576d1f314649ecfa6f2772712dd9f945756d763632180369dfc8"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "language": "JAVA",
+      "line": 44,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 42,
+        "length": 15,
+        "offset": 164,
+        "surroundingCode": "            skyclientIcon = ImageIO.read(SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\"));\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "d527545a133e9c8cb0422398c98558cf3f88e72b05fa08b4e7f050948df74b0e"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant conditions & exceptions",
+  "severity": "High",
+  "comment": "Argument `SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\")` might be null",
+  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "language": "JAVA",
+      "line": 42,
+      "offset": 42,
+      "length": 72,
+      "code": {
+        "startLine": 40,
+        "length": 72,
+        "offset": 68,
+        "surroundingCode": "    static {\n        try {\n            skyclientIcon = ImageIO.read(SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\"));\n        } catch (IOException e) {\n            e.printStackTrace();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ConstantConditions"
+  },
+  "hash": "5c07631c5cfe3fbe313193eae651e0745e2482cc273f84fa341eb0fc6a583482"
+},{
+  "tool": "Code Inspection",
+  "category": "Memory",
+  "type": "Inner class may be 'static'",
+  "severity": "High",
+  "comment": "Inner class `Warning` may be 'static'",
+  "detailsInfo": "Reports inner classes that can be made `static`.\n\nA `static` inner class does not keep an implicit reference to its enclosing instance.\nThis prevents a common cause of memory leaks and uses less memory per instance of the class.\n\n**Example:**\n\n\n      public class Outer {\n        class Inner { // not static\n          public void foo() {\n            bar(\"x\");\n          }\n\n          private void bar(String string) {}\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      public class Outer {\n        static class Inner {\n          public void foo() {\n            bar(\"x\");\n          }\n\n          private void bar(String string) {}\n        }\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/gson/ModData.java",
+      "language": "JAVA",
+      "line": 191,
+      "offset": 18,
+      "length": 7,
+      "code": {
+        "startLine": 189,
+        "length": 7,
+        "offset": 24,
+        "surroundingCode": "    }\n\n    public class Warning {\n\n        public String[] lines;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "InnerClassMayBeStatic"
+  },
+  "hash": "b581b6bdaa1b9430f3ade33fbad54205e74129b9c218c8faf848874ea79b7f56"
+},{
+  "tool": "Code Inspection",
+  "category": "Threading issues",
+  "type": "Call to 'Thread.start()' during object construction",
+  "severity": "High",
+  "comment": "Call to `start()` during object construction",
+  "detailsInfo": "Reports calls to `start()` on `java.lang.Thread` or any of its subclasses during object construction.\n\n\nWhile occasionally useful, such constructs should be avoided due to inheritance issues.\nSubclasses of a class that launches a thread during the object construction will not have finished\nany initialization logic of their own before the thread has launched.\n\nThis inspection does not report if the class that starts a thread is declared `final`.\n\n**Example:**\n\n\n      class MyThread extends Thread {\n        MyThread() {\n          start();\n        }\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Loading.java",
+      "language": "JAVA",
+      "line": 47,
+      "offset": 12,
+      "length": 5,
+      "code": {
+        "startLine": 45,
+        "length": 5,
+        "offset": 73,
+        "surroundingCode": "            frame.pack();\n            frame.setVisible(true);\n        }).start();\n    }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThreadStartInConstruction"
+  },
+  "hash": "ef336d29d410234b09a0cf62859775ea6340cf121d72efb8d85f8abb94cc6b36"
+},{
+  "tool": "Code Inspection",
+  "category": "Threading issues",
+  "type": "Call to 'Thread.start()' during object construction",
+  "severity": "High",
+  "comment": "Call to `start()` during object construction",
+  "detailsInfo": "Reports calls to `start()` on `java.lang.Thread` or any of its subclasses during object construction.\n\n\nWhile occasionally useful, such constructs should be avoided due to inheritance issues.\nSubclasses of a class that launches a thread during the object construction will not have finished\nany initialization logic of their own before the thread has launched.\n\nThis inspection does not report if the class that starts a thread is declared `final`.\n\n**Example:**\n\n\n      class MyThread extends Thread {\n        MyThread() {\n          start();\n        }\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 244,
+      "offset": 16,
+      "length": 5,
+      "code": {
+        "startLine": 242,
+        "length": 5,
+        "offset": 48,
+        "surroundingCode": "                System.exit(0);\n\n            }).start();\n        });\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThreadStartInConstruction"
+  },
+  "hash": "7451eaf64a255dd7a07db7165933a902c9c9448adca453d07a79cae9d4f05bae"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "severity": "High",
+  "comment": "'com.google.common.hash.Hashing' is marked unstable with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 51,
+      "length": 7,
+      "code": {
+        "startLine": 97,
+        "length": 7,
+        "offset": 140,
+        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "2fef323d1b7d21be04e79599a464927404e809d7b42442de086d70a0ae576a3a"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "severity": "High",
+  "comment": "'sha256()' is declared in unstable class 'com.google.common.hash.Hashing' marked with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 59,
+      "length": 6,
+      "code": {
+        "startLine": 97,
+        "length": 6,
+        "offset": 148,
+        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "b92216b5013dc241ae52cc868021512f0bfcc30df4f813a35f99b8f54b067102"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "severity": "High",
+  "comment": "'toByteArray(java.io.File)' is marked unstable with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 84,
+      "length": 11,
+      "code": {
+        "startLine": 97,
+        "length": 11,
+        "offset": 173,
+        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "063be413de1d60cc2ae38bc9a15a78116c6e7d13c82a791cea07aa84966a1830"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "severity": "High",
+  "comment": "'com.google.common.hash.Hashing' is marked unstable with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 143,
+      "offset": 63,
+      "length": 7,
+      "code": {
+        "startLine": 141,
+        "length": 7,
+        "offset": 177,
+        "surroundingCode": "                                        if (mod2.hash != null) {\n                                            try {\n                                                String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file))).toString();\n                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "af634651dee89e85f73368b08f0080075ed4539e7d8b78d6fcae23de736347d2"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "severity": "High",
+  "comment": "'sha256()' is declared in unstable class 'com.google.common.hash.Hashing' marked with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 143,
+      "offset": 71,
+      "length": 6,
+      "code": {
+        "startLine": 141,
+        "length": 6,
+        "offset": 185,
+        "surroundingCode": "                                        if (mod2.hash != null) {\n                                            try {\n                                                String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file))).toString();\n                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "6b6d824b5e629e1d072ac406cde693f91503a0edd26d76fa13375444424d247d"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "severity": "High",
+  "comment": "'toByteArray(java.io.File)' is marked unstable with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 143,
+      "offset": 96,
+      "length": 11,
+      "code": {
+        "startLine": 141,
+        "length": 11,
+        "offset": 210,
+        "surroundingCode": "                                        if (mod2.hash != null) {\n                                            try {\n                                                String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file))).toString();\n                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "41167199b48671ec3610aee2691463f2740665f5192e771fc5f4b668540e21ee"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 63,
+      "offset": 64,
+      "length": 6,
+      "code": {
+        "startLine": 61,
+        "length": 6,
+        "offset": 113,
+        "surroundingCode": "                InstallButton.setEnabled(false);\n\n                new File(SkyclientUniversal.skyclient, \"mods\").mkdirs();\n                new File(SkyclientUniversal.skyclient, \"resourcepacks\").mkdirs();\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "5d2ebe351467ca292e733a9410c2eee8fbc64114b6c588b8327541495d951755"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 64,
+      "offset": 73,
+      "length": 6,
+      "code": {
+        "startLine": 62,
+        "length": 6,
+        "offset": 146,
+        "surroundingCode": "\n                new File(SkyclientUniversal.skyclient, \"mods\").mkdirs();\n                new File(SkyclientUniversal.skyclient, \"resourcepacks\").mkdirs();\n\n                int selectedPacks = Arrays.stream(SkyclientUniversal.packs).filter(pack -> pack.selected).mapToInt(pack -> 1).sum();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "128315614a4f66142b70248f9dedf704710dc2ec1262c6b1fb9f4543470081df"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.delete()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 102,
+      "offset": 102,
+      "length": 6,
+      "code": {
+        "startLine": 100,
+        "length": 6,
+        "offset": 308,
+        "surroundingCode": "                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                        new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file).delete();\n                                        if (mod.url != null) {\n                                            Http.download(mod.url, SkyclientUniversal.skyclient + \"/mods/\" + mod.file);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "467c42c86c079f4072eff7fdaa5183ad2a011bf29d07fbd5d614102a5b93f07e"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 121,
+      "offset": 63,
+      "length": 6,
+      "code": {
+        "startLine": 119,
+        "length": 6,
+        "offset": 162,
+        "surroundingCode": "                                        File file1 = new File(SkyclientUniversal.skyclient, file);\n\n                                        file1.getParentFile().mkdirs();\n                                        Http.download(SkyclientUniversal.baseRepo + \"/files/mcdir/\" + file, file1.getAbsolutePath());\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "c6c528b8955ef35af2cbed8a46123efde9d917fd6c923bba477622c87e9f9e43"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.delete()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 146,
+      "offset": 115,
+      "length": 6,
+      "code": {
+        "startLine": 144,
+        "length": 6,
+        "offset": 347,
+        "surroundingCode": "                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                                    new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file).delete();\n                                                    if (mod2.url != null) {\n                                                        Http.download(mod2.url, SkyclientUniversal.skyclient + \"/mods/\" + mod2.file);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "0c18a464fab9f1846c731ce2db29e4cd006ac1c09a5aefc1ce170b990c3f2dcd"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 165,
+      "offset": 75,
+      "length": 6,
+      "code": {
+        "startLine": 163,
+        "length": 6,
+        "offset": 186,
+        "surroundingCode": "                                                    File file1 = new File(SkyclientUniversal.skyclient, file);\n\n                                                    file1.getParentFile().mkdirs();\n                                                    Http.download(SkyclientUniversal.baseRepo + \"/files/mcdir/\" + file, file1.getAbsolutePath());\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "90c6ff76d826c2017ba32933e822990bf6f38854990fbc87403f14e97fa7f60f"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 233,
+      "offset": 46,
+      "length": 6,
+      "code": {
+        "startLine": 231,
+        "length": 6,
+        "offset": 213,
+        "surroundingCode": "                    File forgeJson = new File(SkyclientUniversal.minecraft, \"/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json\");\n\n                    forgeLib.getParentFile().mkdirs();\n                    Http.download(\"https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar\", forgeLib.getAbsolutePath());\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "756965844238e9e2373b1eb1dc1c4994be1d69f4ed691407b3194f314a8a4826"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 236,
+      "offset": 47,
+      "length": 6,
+      "code": {
+        "startLine": 234,
+        "length": 6,
+        "offset": 214,
+        "surroundingCode": "                    Http.download(\"https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar\", forgeLib.getAbsolutePath());\n\n                    forgeJson.getParentFile().mkdirs();\n                    Http.download(\"https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json\", forgeJson.getAbsolutePath());\n                }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "a906398b441388c772c1d7fa63b681f4d126b77999a62d206d18f2246d96b781"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Result of method call ignored",
+  "severity": "High",
+  "comment": "Result of `File.mkdirs()` is ignored",
+  "detailsInfo": "Reports method calls whose result is ignored.\n\nFor many methods, ignoring the result is perfectly\nlegitimate, but for some it is almost certainly an error. Examples of methods where ignoring\nthe result is likely an error include `java.io.inputStream.read()`,\nwhich returns the number of bytes actually read, and any method on\n`java.lang.String` or `java.math.BigInteger`. These methods do not produce side-effects and thus pointless\nif their result is ignored.\n\nThe calls to the following methods are inspected:\n\n* Simple getters (which do nothing except return a field)\n* Methods specified in the settings of this inspection\n* Methods annotated with `org.jetbrains.annotations.Contract(pure=true)`\n* Methods annotated with .\\*.`CheckReturnValue`\n* Methods in a class or package annotated with `javax.annotation.CheckReturnValue`\n* Optionally, all non-library methods\n\nCalls to methods annotated with Error Prone's or AssertJ's `@CanIgnoreReturnValue` annotation are not reported.\n\n\nUse the inspection settings to specify the classes to check.\nMethods are matched by name or name pattern using Java regular expression syntax.\nFor classes, use fully-qualified names. Each entry applies to both the class and all its inheritors.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "language": "JAVA",
+      "line": 82,
+      "offset": 15,
+      "length": 6,
+      "code": {
+        "startLine": 80,
+        "length": 6,
+        "offset": 155,
+        "surroundingCode": "        launcherProfiles = gson.fromJson(FileUtil.readFile(minecraft.getAbsolutePath()+\"/launcher_profiles.json\"), LauncherProfiles.class);\n\n        cache.mkdirs();\n\n        Installer installer = new Installer();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "IgnoreResultOfCall"
+  },
+  "hash": "cfe03fdeb29fe172d897a8de87f96d196eb06201d52b86b0320ded5f335af9eb"
+}]}
