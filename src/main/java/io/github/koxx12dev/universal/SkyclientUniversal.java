@@ -51,7 +51,11 @@ public class SkyclientUniversal {
     public static String baseCdn = "https://cdn.jsdelivr.net/gh/nacrt/SkyblockClient-REPO@main";
     public static ModData[] mods = gson.fromJson(Http.get(baseRepo+"/files/mods.json"), ModData[].class);
     public static PackData[] packs = gson.fromJson(Http.get(baseRepo+"/files/packs.json"), PackData[].class);
-    public static File cache = new File(System.getProperty("java.io.tmpdir")+"skyclient-universal-cache");
+    public static File cache = new File(
+        System.getProperty("java.io.tmpdir")+
+        File.separator+
+        "skyclient-universal-cache"
+    );
     public static LauncherProfiles launcherProfiles;
     public static File minecraft;
     public static File skyclient;
