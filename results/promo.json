@@ -1,0 +1,32 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Java 5",
+  "type": "'StringBuffer' may be 'StringBuilder'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "<code>StringBuffer response</code> may be declared as 'StringBuilder'",
+  "detailsInfo": "Reports variables declared as `StringBuffer` and suggests replacing them with `StringBuilder`. `StringBuilder` is a non-thread-safe replacement for `StringBuffer`.\n\nThis inspection only reports if the language level of the project or module is 5 or higher.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "language": "JAVA",
+      "line": 34,
+      "offset": 29,
+      "length": 8,
+      "code": {
+        "startLine": 32,
+        "length": 8,
+        "offset": 188,
+        "surroundingCode": "                java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(con.getInputStream()));\n                String inputLine;\n                StringBuffer response = new StringBuffer();\n                while ((inputLine = in.readLine()) != null) {\n                    response.append(inputLine);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "StringBufferReplaceableByStringBuilder"
+  },
+  "hash": "4507534035275083985"
+}]}
