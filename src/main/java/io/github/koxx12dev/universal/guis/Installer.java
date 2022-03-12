@@ -306,7 +306,7 @@ public class Installer {
                         BufferedImage icon2;
                         try {
                             System.out.println("Downloading Icon for " + mod.getDisplay());
-                            Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + mod.getIcon(), SkyclientUniversal.cache + "/" + mod.getIcon());
+                            Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + mod.getIcon(), SkyclientUniversal.cache + File.separator + mod.getIcon());
                             icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 64, 64, Objects.equals(mod.icon_scaling, "pixel"));
                             Image.setIcon(new ImageIcon(icon2));
                         } catch (Exception e) {
@@ -471,7 +471,7 @@ public class Installer {
                     BufferedImage icon2;
                     try {
                         System.out.println("Downloading Icon for " + pack.getDisplay());
-                        Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + pack.getIcon(), SkyclientUniversal.cache + "/" + pack.getIcon());
+                        Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + pack.getIcon(), SkyclientUniversal.cache + File.separator + pack.getIcon());
                         icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 64, 64, Objects.equals(pack.icon_scaling, "pixel"));
                         Image.setIcon(new ImageIcon(icon2));
                     } catch (Exception e) {
