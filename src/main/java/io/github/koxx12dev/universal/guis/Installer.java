@@ -96,7 +96,7 @@ public class Installer {
                             }
                             if (mod.hash != null) {
                                 try {
-                                    String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + "/mods/" + mod.file))).toString();
+                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + "/mods/" + mod.file))).toString();
                                     if (!hash.equals(mod.hash)) {
                                         System.out.println("Hash of " + mod.getDisplay() + " is incorrect, deleting and downloading again");
                                         new File(SkyclientUniversal.skyclient + "/mods/" + mod.file).delete();
@@ -140,7 +140,7 @@ public class Installer {
                                         }
                                         if (mod2.hash != null) {
                                             try {
-                                                String hash = Hashing.sha256().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + "/mods/" + mod2.file))).toString();
+                                                String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + "/mods/" + mod2.file))).toString();
                                                 if (!hash.equals(mod2.hash)) {
                                                     System.out.println("Hash of " + mod2.getDisplay() + " is incorrect, deleting and downloading again");
                                                     new File(SkyclientUniversal.skyclient + "/mods/" + mod2.file).delete();
