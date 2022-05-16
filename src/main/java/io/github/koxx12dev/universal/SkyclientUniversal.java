@@ -32,6 +32,7 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 
 public class SkyclientUniversal {
 
@@ -53,7 +54,7 @@ public class SkyclientUniversal {
     public static PackData[] packs = gson.fromJson(Http.get(baseRepo+"/files/packs.json"), PackData[].class);
     public static File cache = new File(
         System.getProperty("java.io.tmpdir")+
-        File.separator+
+        FileSystems.getDefault().getSeparator()+
         "skyclient-universal-cache"
     );
     public static LauncherProfiles launcherProfiles;
