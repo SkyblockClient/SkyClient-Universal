@@ -222,7 +222,7 @@ public class Installer {
                     }
                 } else {
                     //create a warning message that wars user about not being able to create a mc profile and that they can find on our discord how to do it manually
-                    JOptionPane.showMessageDialog(frame, "Warning\nFailed to create a Skyclient Profile\nYou will need to create the profile manually after the instalation completes\nYou can find instructions how to create that profile by asking any staff memeber online in our discord https://inv.wtf/skyclient ", "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Warning\nFailed to create a Skyclient Profile\nYou will need to create the profile manually after the instalation completes\nYou can find instructions how to create that profile by asking any staff member online in our discord https://inv.wtf/skyclient ", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 File forgeLib = new File(SkyclientUniversal.minecraft, "/libraries/net/minecraftforge/forge/1.8.9-11.15.1.2318-1.8.9/forge-1.8.9-11.15.1.2318-1.8.9.jar");
