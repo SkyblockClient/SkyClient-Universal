@@ -7,10 +7,12 @@
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/SkyblockClient/Skyclient-installer-Java",
-        "revisionId": "c60da95d38441de2da44dcb68edfa0b8ef0befe6",
+        "revisionId": "3fd4d5d56f20781089875ac16a9c9106d7256ccc",
         "branch": "main"
       }
     },
-    "deviceId": "200820300000000-4ed3-abb6-33c3-e9d0c1afb049"
+    "deviceId": "200820300000000-4ed3-abb6-33c3-e9d0c1afb049",
+    "jobUrl": "",
+    "repoUrl": "https://github.com/SkyblockClient/Skyclient-installer-Java"
   }
 }
