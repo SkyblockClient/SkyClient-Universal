@@ -6,13 +6,13 @@
   "attributes": {
     "vcs": {
       "sarifIdea": {
-        "repositoryUri": "https://github.com/SkyblockClient/Skyclient-installer-Java",
-        "revisionId": "3fd4d5d56f20781089875ac16a9c9106d7256ccc",
+        "repositoryUri": "https://github.com/SkyblockClient/SkyClient-Installer-Java",
+        "revisionId": "83ee15c9e0eaef662a5c3b1bb76f7d8f830a5be0",
         "branch": "main"
       }
     },
-    "deviceId": "200820300000000-4ed3-abb6-33c3-e9d0c1afb049",
+    "deviceId": "200820300000000-c1b9-bf60-4da2-dab59e6bd9e7",
     "jobUrl": "",
-    "repoUrl": "https://github.com/SkyblockClient/Skyclient-installer-Java"
+    "repoUrl": "https://github.com/SkyblockClient/SkyClient-Installer-Java"
   }
 }
