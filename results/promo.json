@@ -1,1 +1,29 @@
-{"version":"3","listProblem":[]}
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Loading.java",
+      "language": "JAVA",
+      "line": 54,
+      "offset": 13,
+      "length": 10,
+      "code": {
+        "startLine": 52,
+        "length": 10,
+        "offset": 56,
+        "surroundingCode": "        SwingUtilities.invokeLater(() -> {\n\n            System.out.println(\"Loading: \" + name + \" | \" + step + \" / \" + maxSteps);\n\n            if (!(step > maxSteps)) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "76609922a90a9d3be1eb4d7742892ee8857c13c460064a7e6ee3a266e6a77737"
+}]}
