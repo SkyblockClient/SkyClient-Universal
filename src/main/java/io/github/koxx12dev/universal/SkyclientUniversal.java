@@ -79,7 +79,7 @@ public class SkyclientUniversal {
             System.exit(0);
         }
 
-        skyclient = new File(minecraft, "skyclient");
+        skyclient = minecraft;
 
         launcherProfiles = gson.fromJson(FileUtil.readFile(minecraft.getAbsolutePath()+"/launcher_profiles.json"), LauncherProfiles.class);
 
