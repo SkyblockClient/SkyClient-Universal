@@ -231,10 +231,10 @@ public class Installer {
                     File forgeJson = new File(SkyclientUniversal.minecraft, "/versions/1.8.9-forge1.8.9-11.15.1.2318-1.8.9/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json");
 
                     forgeLib.getParentFile().mkdirs();
-                    Http.download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar", forgeLib.getAbsolutePath());
+                    Http.download("https://github.com/SkyblockClient/SkyblockClient-REPO/raw/main/files/forge/forge-1.8.9-11.15.1.2318-1.8.9.jar", forgeLib.getAbsolutePath());
 
                     forgeJson.getParentFile().mkdirs();
-                    Http.download("https://github.com/nacrt/SkyblockClient-REPO/raw/main/files/forge/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json", forgeJson.getAbsolutePath());
+                    Http.download("https://github.com/SkyblockClient/SkyblockClient-REPO/raw/main/files/forge/1.8.9-forge1.8.9-11.15.1.2318-1.8.9.json", forgeJson.getAbsolutePath());
                 }
 
                 //show a installation complete popup with installation details
