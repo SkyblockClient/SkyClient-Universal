@@ -26,7 +26,7 @@ public class Http {
             java.net.URL obj = new java.net.URL(url);
             java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            con.setRequestProperty("User-Agent", "github.com/SkyblockClient (java)");
             int responseCode = con.getResponseCode();
             if (responseCode == 200) {
                 java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(con.getInputStream()));
@@ -51,7 +51,7 @@ public class Http {
             java.net.URL obj = new java.net.URL(url);
             java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            con.setRequestProperty("User-Agent", "github.com/SkyblockClient (java)");
             con.setConnectTimeout(5000);
             int responseCode = con.getResponseCode();
             if (responseCode == 200) {
