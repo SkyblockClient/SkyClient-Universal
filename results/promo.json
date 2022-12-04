@@ -8,16 +8,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 50,
-      "offset": 13,
+      "line": 473,
+      "offset": 25,
       "length": 10,
       "code": {
-        "startLine": 48,
+        "startLine": 471,
         "length": 10,
-        "offset": 27,
-        "surroundingCode": "\n        try {\n            System.out.println(\"Downloading \" + url + \" to \" + path);\n            java.net.URL obj = new java.net.URL(url);\n            java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj.openConnection();"
+        "offset": 91,
+        "surroundingCode": "                    BufferedImage icon2;\n                    try {\n                        System.out.println(\"Downloading Icon for \" + pack.getDisplay());\n                        Http.download(SkyclientUniversal.baseCdn + \"/files/icons/\" + pack.getIcon(), SkyclientUniversal.cache + File.separator + pack.getIcon());\n                        icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 64, 64, Objects.equals(pack.icon_scaling, \"pixel\"));"
       }
     }
   ],
@@ -25,7 +25,7 @@
     "module": "project.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "600406a6af68b4c4a09c85bf3858dd7d54643c106f9b7b5c94193cf7ea92cbab"
+  "hash": "0d31ce0643c66081deb7b303aba82f9c0edf1d235cc0f0d56547827d92444aa7"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -36,16 +36,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 68,
+      "line": 495,
       "offset": 17,
       "length": 10,
       "code": {
-        "startLine": 66,
+        "startLine": 493,
         "length": 10,
-        "offset": 65,
-        "surroundingCode": "                in.close();\n            } else {\n                System.out.println(responseCode + \" | \" + url);\n            }\n        } catch (Exception e) {"
+        "offset": 144,
+        "surroundingCode": "            Enabled.addActionListener(e -> {\n                SkyclientUniversal.packs[packPos].selected = Enabled.isSelected();\n                System.out.println(pack.getId() + \" is now \" + Enabled.isSelected());\n                for (JCheckBox c : packCheckBoxes.get(pack.id)) {\n                    c.setSelected(Enabled.isSelected());"
       }
     }
   ],
@@ -53,5 +53,425 @@
     "module": "project.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "aac3a70ce621c31652d070a0f95be7bffecc62ff1b464efd2ca11bbcf8bd6268"
+  "hash": "d64d5c5159dd5937080cb1bdcf7cf1d96f186eda72e0108855484c9a42b5e3f3"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 560,
+      "offset": 33,
+      "length": 10,
+      "code": {
+        "startLine": 558,
+        "length": 10,
+        "offset": 208,
+        "surroundingCode": "                            ((JCheckBox) c).addActionListener(e -> {\n                                SkyclientUniversal.packs[packPos].selected = ((JCheckBox) c).isSelected();\n                                System.out.println(pack.getId() + \" is now \" + ((JCheckBox) c).isSelected());\n                                for (JCheckBox c2 : packCheckBoxes.get(pack.id)) {\n                                    c2.setSelected(((JCheckBox) c).isSelected());"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "d856deba9aa09d88d8e704b238cf2cdda77d3e89a1611d4ac35ecad525c7db34"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 308,
+      "offset": 29,
+      "length": 10,
+      "code": {
+        "startLine": 306,
+        "length": 10,
+        "offset": 103,
+        "surroundingCode": "                        BufferedImage icon2;\n                        try {\n                            System.out.println(\"Downloading Icon for \" + mod.getDisplay());\n                            Http.download(SkyclientUniversal.baseCdn + \"/files/icons/\" + mod.getIcon(), SkyclientUniversal.cache + File.separator + mod.getIcon());\n                            icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 64, 64, Objects.equals(mod.icon_scaling, \"pixel\"));"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "7e798da743fc28ba572727302717f5eef12dca2729f62e39965740ec9df84f78"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 347,
+      "offset": 17,
+      "length": 10,
+      "code": {
+        "startLine": 345,
+        "length": 10,
+        "offset": 98,
+        "surroundingCode": "\n                SkyclientUniversal.mods[modPos].selected = Enabled.isSelected();\n                System.out.println(mod.getId() + \" is now \" + Enabled.isSelected());\n\n                for (JCheckBox c2 : modCheckBoxes.get(mod.id)) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "69349ede16fde062d2001467f3154295e98b7dece47871e8e0b983a6be3152c3"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 413,
+      "offset": 33,
+      "length": 10,
+      "code": {
+        "startLine": 411,
+        "length": 10,
+        "offset": 206,
+        "surroundingCode": "                            ((JCheckBox) c).addActionListener(e -> {\n                                SkyclientUniversal.mods[modPos].selected = ((JCheckBox) c).isSelected();\n                                System.out.println(mod.getId() + \" is now \" + ((JCheckBox) c).isSelected());\n                                for (JCheckBox c2 : modCheckBoxes.get(mod.id)) {\n                                    c2.setSelected(((JCheckBox) c).isSelected());"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "c012726890a64f9eb07107d66da692fe7a6ab0cea2707885b28dd0d4f0aecedd"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 69,
+      "offset": 17,
+      "length": 10,
+      "code": {
+        "startLine": 67,
+        "length": 10,
+        "offset": 145,
+        "surroundingCode": "                int selectedMods = Arrays.stream(SkyclientUniversal.mods).filter(mod -> mod.selected).mapToInt(mod -> 1).sum();\n\n                System.out.println(\"Selected Packs: \" + selectedPacks);\n                System.out.println(\"Selected Mods: \" + selectedMods);\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "0a3f8a9cdd1e8a8f30d5fa31f8daa3b3ffee40884ce549fa616b4d91205453ed"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 70,
+      "offset": 17,
+      "length": 10,
+      "code": {
+        "startLine": 68,
+        "length": 10,
+        "offset": 89,
+        "surroundingCode": "\n                System.out.println(\"Selected Packs: \" + selectedPacks);\n                System.out.println(\"Selected Mods: \" + selectedMods);\n\n                if (selectedMods > 0) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "a6ce007c3f84efba6deb38722df67b93572e9e7e6cdea1730ea0501dd2e0b470"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 91,
+      "offset": 29,
+      "length": 10,
+      "code": {
+        "startLine": 89,
+        "length": 10,
+        "offset": 59,
+        "surroundingCode": "                            }\n\n                            System.out.println(\"Downloading \" + mod.getDisplay());\n                            if (mod.url != null) {\n                                Http.download(mod.url, SkyclientUniversal.skyclient + \"/mods/\" + mod.file);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "b27250508a84b62ee704f0f7b49ff335fce576ca3636d2467119ee6aefc4dbf3"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 101,
+      "offset": 41,
+      "length": 10,
+      "code": {
+        "startLine": 99,
+        "length": 10,
+        "offset": 273,
+        "surroundingCode": "                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                        new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file).delete();\n                                        if (mod.url != null) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "db781e5f29e238288676270cca525bc82beaf39244993b966cd1e5437e2be650"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 109,
+      "offset": 41,
+      "length": 10,
+      "code": {
+        "startLine": 107,
+        "length": 10,
+        "offset": 127,
+        "surroundingCode": "                                        }\n                                    } else {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is correct\");\n                                    }\n                                } catch (Exception e1) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "efe14a34055c5e58d2792d16fbd6a4f7b3558eda10cd2134890b87ab1a7f01c0"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 118,
+      "offset": 41,
+      "length": 10,
+      "code": {
+        "startLine": 116,
+        "length": 10,
+        "offset": 146,
+        "surroundingCode": "                                for (String file : mod.files) {\n                                    try {\n                                        System.out.println(\"Downloading \" + mod.getDisplay() + \" \" + file);\n                                        File file1 = new File(SkyclientUniversal.skyclient, file);\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "3fa0a6f09c0fe4163ac1a5019d880e58fa97528128fd55a0d9489b997226a685"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 135,
+      "offset": 41,
+      "length": 10,
+      "code": {
+        "startLine": 133,
+        "length": 10,
+        "offset": 243,
+        "surroundingCode": "                                    ModData mod2 = Arrays.stream(SkyclientUniversal.mods).filter(m -> m.id.equals(mod1)).findFirst().orElse(null);\n                                    if (mod2 != null) {\n                                        System.out.println(\"Downloading \" + mod2.getDisplay());\n                                        if (mod2.url != null) {\n                                            Http.download(mod2.url, SkyclientUniversal.skyclient + \"/mods/\" + mod2.file);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "87adfad8ac4de3f54c7672af0e50759137108fa9af44dea67ceafcd490d240c7"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 145,
+      "offset": 53,
+      "length": 10,
+      "code": {
+        "startLine": 143,
+        "length": 10,
+        "offset": 311,
+        "surroundingCode": "                                                String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file))).toString();\n                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                                    new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file).delete();\n                                                    if (mod2.url != null) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "5dee5c2d5e7a5bce2ed25cb85c9308daa1def18b490da941017998e1a98d70c7"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 153,
+      "offset": 53,
+      "length": 10,
+      "code": {
+        "startLine": 151,
+        "length": 10,
+        "offset": 163,
+        "surroundingCode": "                                                    }\n                                                } else {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is correct\");\n                                                }\n                                            } catch (Exception e1) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "83256884b12fcae1430c740f8bdbf688a738c82e027c802312f2a4da5e3392f0"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 162,
+      "offset": 53,
+      "length": 10,
+      "code": {
+        "startLine": 160,
+        "length": 10,
+        "offset": 183,
+        "surroundingCode": "                                            for (String file : mod2.files) {\n                                                try {\n                                                    System.out.println(\"Downloading \" + mod2.getDisplay() + \" \" + file);\n                                                    File file1 = new File(SkyclientUniversal.skyclient, file);\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "2267dbea84535deccce0601c07e3963db348035750b88f3427c0cd4de3f63aff"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "severity": "High",
+  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 193,
+      "offset": 29,
+      "length": 10,
+      "code": {
+        "startLine": 191,
+        "length": 10,
+        "offset": 112,
+        "surroundingCode": "                                ex.printStackTrace();\n                            }\n                            System.out.println(\"Downloading \" + pack.getDisplay());\n                            if (pack.url != null) {\n                                Http.download(pack.url, SkyclientUniversal.skyclient + \"/resourcepacks/\" + pack.file);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "a8d193b78aa72c0aad30c8a40bfa9aab0d7cb485232980bef1e75f28613fa3a6"
 }]}
