@@ -109,7 +109,7 @@
     "module": "project.main",
     "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "bda3d7083049fcbdac220a8ba544da82cc17e5ea7c1f017ccdffbda5f35863c3"
+  "hash": "7331e520efcf72ac24cb2d4ac9604d36387530558fdb9793c588de40061d7726"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -137,35 +137,7 @@
     "module": "project.main",
     "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "776b823a86bc9ef3f1918e4c8f291fff4562473e1d72367e522826b22335d100"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
-      "language": "JAVA",
-      "line": 38,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 36,
-        "length": 15,
-        "offset": 54,
-        "surroundingCode": "        catch (IOException e)\n        {\n            e.printStackTrace();\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "9c494af817c91412f300070776b3662011504cee518c69b4214f52d2c2a381d5"
+  "hash": "a5611757ce0100971f245b71c3baa82f93e7e652412ff8cc24fb9e99d8c447a9"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -204,16 +176,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
       "language": "JAVA",
-      "line": 313,
-      "offset": 31,
+      "line": 38,
+      "offset": 15,
       "length": 15,
       "code": {
-        "startLine": 311,
+        "startLine": 36,
         "length": 15,
-        "offset": 143,
-        "surroundingCode": "                            Image.setIcon(new ImageIcon(icon2));\n                        } catch (Exception e) {\n                            e.printStackTrace();\n                        }\n                    });"
+        "offset": 54,
+        "surroundingCode": "        catch (IOException e)\n        {\n            e.printStackTrace();\n        }\n"
       }
     }
   ],
@@ -221,35 +193,7 @@
     "module": "project.main",
     "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "0caff9eb546502ada726dc209fee0b1077a2522216deddf904ff4784b0312d17"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 383,
-      "offset": 48,
-      "length": 15,
-      "code": {
-        "startLine": 381,
-        "length": 15,
-        "offset": 215,
-        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "353ae1061377889254b2dc8e6d569863b2a9278857225d060fea2718185f1f81"
+  "hash": "9c494af817c91412f300070776b3662011504cee518c69b4214f52d2c2a381d5"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -278,34 +222,6 @@
     "inspectionName": "ThrowablePrintStackTrace"
   },
   "hash": "75c162b52a49728c5de1a72f108962e7658b1c5c92e73cfb92ce4de05dcedcb3"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 478,
-      "offset": 27,
-      "length": 15,
-      "code": {
-        "startLine": 476,
-        "length": 15,
-        "offset": 131,
-        "surroundingCode": "                        Image.setIcon(new ImageIcon(icon2));\n                    } catch (Exception e) {\n                        e.printStackTrace();\n                    }\n                });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "d03e33527dfd76cc1586dce9901bdd7d5df7e25f3b67965130f293b859c37d2f"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -568,16 +484,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 44,
-      "offset": 15,
+      "line": 383,
+      "offset": 48,
       "length": 15,
       "code": {
-        "startLine": 42,
+        "startLine": 381,
         "length": 15,
-        "offset": 164,
-        "surroundingCode": "            skyclientIcon = ImageIO.read(SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\"));\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }"
+        "offset": 215,
+        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
       }
     }
   ],
@@ -585,7 +501,63 @@
     "module": "project.main",
     "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "d527545a133e9c8cb0422398c98558cf3f88e72b05fa08b4e7f050948df74b0e"
+  "hash": "353ae1061377889254b2dc8e6d569863b2a9278857225d060fea2718185f1f81"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 313,
+      "offset": 31,
+      "length": 15,
+      "code": {
+        "startLine": 311,
+        "length": 15,
+        "offset": 143,
+        "surroundingCode": "                            Image.setIcon(new ImageIcon(icon2));\n                        } catch (Exception e) {\n                            e.printStackTrace();\n                        }\n                    });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "0caff9eb546502ada726dc209fee0b1077a2522216deddf904ff4784b0312d17"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 478,
+      "offset": 27,
+      "length": 15,
+      "code": {
+        "startLine": 476,
+        "length": 15,
+        "offset": 131,
+        "surroundingCode": "                        Image.setIcon(new ImageIcon(icon2));\n                    } catch (Exception e) {\n                        e.printStackTrace();\n                    }\n                });"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "d03e33527dfd76cc1586dce9901bdd7d5df7e25f3b67965130f293b859c37d2f"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -614,6 +586,34 @@
     "inspectionName": "ThrowablePrintStackTrace"
   },
   "hash": "5ec59c632184be08b310db84c9f8e8f43f47d6558810c174c1d777656eea1e24"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
+      "language": "JAVA",
+      "line": 44,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 42,
+        "length": 15,
+        "offset": 164,
+        "surroundingCode": "            skyclientIcon = ImageIO.read(SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\"));\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "d527545a133e9c8cb0422398c98558cf3f88e72b05fa08b4e7f050948df74b0e"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
