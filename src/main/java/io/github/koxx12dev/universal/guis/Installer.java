@@ -675,7 +675,7 @@ public class Installer {
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         pane.add(InstallButton, gbc);
@@ -684,7 +684,7 @@ public class Installer {
         ModTabPane.setPreferredSize(new Dimension(270, 460));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         gbc.fill = GridBagConstraints.BOTH;
         pane.add(ModTabPane, gbc);
         ModScrollPane = new JScrollPane();
@@ -700,7 +700,7 @@ public class Installer {
         PackTabPane.setPreferredSize(new Dimension(270, 460));
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         gbc.fill = GridBagConstraints.BOTH;
         pane.add(PackTabPane, gbc);
         PackScrollPane = new JScrollPane();
@@ -711,6 +711,18 @@ public class Installer {
         PackPane = new JPanel();
         PackPane.setLayout(new GridBagLayout());
         PackScrollPane.setViewportView(PackPane);
+        final JLabel label1 = new JLabel();
+        label1.setText("Resource Packs");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        pane.add(label1, gbc);
+        final JLabel label2 = new JLabel();
+        label2.setText("Mods");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        pane.add(label2, gbc);
     }
 
     /**
