@@ -72,11 +72,19 @@ public class SkyclientUniversal {
             minecraft = new File(System.getProperty("user.home")+"/Library/Application Support/minecraft");
         } else if(System.getProperty("os.name").toLowerCase().contains("linux")){
             minecraft = new File(System.getProperty("user.home")+"/.minecraft");
-        } else if(System.getProperty("os.name").toLowerCase().contains("windows")){
+        }
+        else if(System.getProperty("os.name").toLowerCase().contains("windows")){
             minecraft = new File(System.getProperty("user.home")+"/AppData/Roaming/.minecraft");
-        } else {
-            JOptionPane.showMessageDialog(null, "Unsupported OS!\nPlease use a supported OS to run this program!\n\nSupported OS: Windows, MacOS, Linux", "Unsupported OS", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Could not automatically determine the location of your .minecraft directory.\nClick ok to select it yourself.", "Could not find .minecraft directory", JOptionPane.WARNING_MESSAGE);
+            minecraft = Installer.selectMinecraftDirectory();
+        }
+
+        // Keep trying until we have a valid file path
+        while (!minecraft.exists() || !(new File(minecraft, "launcher_profiles.json").exists())) {
+            JOptionPane.showMessageDialog(null, "The .minecraft directory does not exist or does not have a launcher_profiles.json inside of it.\nClick ok to select a .minecraft yourself.", "Invalid .minecraft directory", JOptionPane.WARNING_MESSAGE);
+           minecraft = Installer.selectMinecraftDirectory();
         }
 
         skyclient = new File(minecraft, "skyclient");
