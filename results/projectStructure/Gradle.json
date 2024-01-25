@@ -1,5 +1,5 @@
 {
-  "gradleJvm": "#JAVA_HOME",
+  "gradleJvm": "corretto-16",
   "libraries": [
     {
       "ideaName": "Gradle: com.formdev:flatlaf:2.0.1",

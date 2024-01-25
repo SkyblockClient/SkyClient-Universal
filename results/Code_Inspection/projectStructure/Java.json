@@ -2,15 +2,15 @@
   "modules": [
     {
       "name": "project",
-      "languageLevel": 11
-    },
-    {
-      "name": "project.test",
-      "languageLevel": 11
+      "languageLevel": 16
     },
     {
       "name": "project.main",
       "languageLevel": 8
+    },
+    {
+      "name": "project.test",
+      "languageLevel": 16
     }
   ]
 }

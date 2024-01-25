@@ -1,13 +1,14 @@
 {
-  "total": 32,
+  "total": 9,
   "tools inspection": {
-    "Code Inspection": 32
+    "Code Inspection": 9
   },
+  "linter": "QDJVMC",
   "attributes": {
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/SkyblockClient/SkyClient-Installer-Java",
-        "revisionId": "10307ec1d516ea95770361d6636cb35c81331b2c",
+        "revisionId": "c2c8406f63644ebaa30c96451062fd2c9f5810f6",
         "branch": "main"
       }
     },

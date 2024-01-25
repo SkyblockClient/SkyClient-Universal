@@ -1,477 +1,365 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 473,
-      "offset": 25,
-      "length": 10,
+      "line": 530,
+      "offset": 48,
+      "length": 15,
       "code": {
-        "startLine": 471,
-        "length": 10,
-        "offset": 91,
-        "surroundingCode": "                    BufferedImage icon2;\n                    try {\n                        System.out.println(\"Downloading Icon for \" + pack.getDisplay());\n                        Http.download(SkyclientUniversal.baseCdn + \"/files/icons/\" + pack.getIcon(), SkyclientUniversal.cache + File.separator + pack.getIcon());\n                        icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 64, 64, Objects.equals(pack.icon_scaling, \"pixel\"));"
+        "startLine": 528,
+        "length": 15,
+        "offset": 215,
+        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "0d31ce0643c66081deb7b303aba82f9c0edf1d235cc0f0d56547827d92444aa7"
+  "hash": "0b9392f971ae5717dfddb896cf7d10c65e001901e60d7286b86a7d18959cdb0f"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 495,
-      "offset": 17,
-      "length": 10,
+      "line": 313,
+      "offset": 31,
+      "length": 15,
       "code": {
-        "startLine": 493,
-        "length": 10,
-        "offset": 144,
-        "surroundingCode": "            Enabled.addActionListener(e -> {\n                SkyclientUniversal.packs[packPos].selected = Enabled.isSelected();\n                System.out.println(pack.getId() + \" is now \" + Enabled.isSelected());\n                for (JCheckBox c : packCheckBoxes.get(pack.id)) {\n                    c.setSelected(Enabled.isSelected());"
+        "startLine": 311,
+        "length": 15,
+        "offset": 143,
+        "surroundingCode": "                            Image.setIcon(new ImageIcon(icon2));\n                        } catch (Exception e) {\n                            e.printStackTrace();\n                        }\n                    });"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "d64d5c5159dd5937080cb1bdcf7cf1d96f186eda72e0108855484c9a42b5e3f3"
+  "hash": "32e0ea01d312aea9ad1e0e3b523c82790f496b9d6f22681c060d00d78943693f"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 560,
-      "offset": 33,
-      "length": 10,
+      "line": 191,
+      "offset": 36,
+      "length": 15,
       "code": {
-        "startLine": 558,
-        "length": 10,
-        "offset": 208,
-        "surroundingCode": "                            ((JCheckBox) c).addActionListener(e -> {\n                                SkyclientUniversal.packs[packPos].selected = ((JCheckBox) c).isSelected();\n                                System.out.println(pack.getId() + \" is now \" + ((JCheckBox) c).isSelected());\n                                for (JCheckBox c2 : packCheckBoxes.get(pack.id)) {\n                                    c2.setSelected(((JCheckBox) c).isSelected());"
+        "startLine": 189,
+        "length": 15,
+        "offset": 189,
+        "surroundingCode": "                                packLoading.nextStep(\"Downloading \" + pack.getDisplay());\n                            } catch (InterruptedException ex) {\n                                ex.printStackTrace();\n                            }\n                            System.out.println(\"Downloading \" + pack.getDisplay());"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "d856deba9aa09d88d8e704b238cf2cdda77d3e89a1611d4ac35ecad525c7db34"
+  "hash": "3e2f650664efd8987a1355c46a2da7aa0e3451cac10773e22a55248c8cc006fb"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 308,
-      "offset": 29,
-      "length": 10,
+      "line": 383,
+      "offset": 48,
+      "length": 15,
       "code": {
-        "startLine": 306,
-        "length": 10,
-        "offset": 103,
-        "surroundingCode": "                        BufferedImage icon2;\n                        try {\n                            System.out.println(\"Downloading Icon for \" + mod.getDisplay());\n                            Http.download(SkyclientUniversal.baseCdn + \"/files/icons/\" + mod.getIcon(), SkyclientUniversal.cache + File.separator + mod.getIcon());\n                            icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 64, 64, Objects.equals(mod.icon_scaling, \"pixel\"));"
+        "startLine": 381,
+        "length": 15,
+        "offset": 215,
+        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "7e798da743fc28ba572727302717f5eef12dca2729f62e39965740ec9df84f78"
+  "hash": "56b758e1a3c21a0af5d845251da018d9a5df8620228df03f2f87ed291e02c58c"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 347,
-      "offset": 17,
-      "length": 10,
+      "line": 78,
+      "offset": 28,
+      "length": 15,
       "code": {
-        "startLine": 345,
-        "length": 10,
-        "offset": 98,
-        "surroundingCode": "\n                SkyclientUniversal.mods[modPos].selected = Enabled.isSelected();\n                System.out.println(mod.getId() + \" is now \" + Enabled.isSelected());\n\n                for (JCheckBox c2 : modCheckBoxes.get(mod.id)) {"
+        "startLine": 76,
+        "length": 15,
+        "offset": 173,
+        "surroundingCode": "                        Thread.sleep(1000); //makes sure that loading bar works correctly\n                    } catch (InterruptedException ex) {\n                        ex.printStackTrace();\n                    }\n"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "69349ede16fde062d2001467f3154295e98b7dece47871e8e0b983a6be3152c3"
+  "hash": "6580113d68cf05412119df5b2765a543d882364c25e4563e6c8993f9b07a9029"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 413,
-      "offset": 33,
-      "length": 10,
+      "line": 648,
+      "offset": 16,
+      "length": 15,
       "code": {
-        "startLine": 411,
-        "length": 10,
-        "offset": 206,
-        "surroundingCode": "                            ((JCheckBox) c).addActionListener(e -> {\n                                SkyclientUniversal.mods[modPos].selected = ((JCheckBox) c).isSelected();\n                                System.out.println(mod.getId() + \" is now \" + ((JCheckBox) c).isSelected());\n                                for (JCheckBox c2 : modCheckBoxes.get(mod.id)) {\n                                    c2.setSelected(((JCheckBox) c).isSelected());"
+        "startLine": 646,
+        "length": 15,
+        "offset": 124,
+        "surroundingCode": "            return (Component) ois.readObject();\n        } catch (IOException | ClassNotFoundException ex) {\n            ex.printStackTrace();\n            return null;\n        }"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "c012726890a64f9eb07107d66da692fe7a6ab0cea2707885b28dd0d4f0aecedd"
+  "hash": "74fe33f5c6dd9da1afcc8a001ab756393826936bbe017fbed49e13def2a567b1"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 69,
-      "offset": 17,
-      "length": 10,
+      "line": 156,
+      "offset": 52,
+      "length": 15,
       "code": {
-        "startLine": 67,
-        "length": 10,
-        "offset": 145,
-        "surroundingCode": "                int selectedMods = Arrays.stream(SkyclientUniversal.mods).filter(mod -> mod.selected).mapToInt(mod -> 1).sum();\n\n                System.out.println(\"Selected Packs: \" + selectedPacks);\n                System.out.println(\"Selected Mods: \" + selectedMods);\n"
+        "startLine": 154,
+        "length": 15,
+        "offset": 170,
+        "surroundingCode": "                                                }\n                                            } catch (Exception e1) {\n                                                e1.printStackTrace();\n                                            }\n                                        }"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "0a3f8a9cdd1e8a8f30d5fa31f8daa3b3ffee40884ce549fa616b4d91205453ed"
+  "hash": "8fb251b53312580c99918c9bbf0673334f5fc675e9bd899c465e0f603133e6ca"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 70,
-      "offset": 17,
-      "length": 10,
+      "line": 88,
+      "offset": 36,
+      "length": 15,
       "code": {
-        "startLine": 68,
-        "length": 10,
-        "offset": 89,
-        "surroundingCode": "\n                System.out.println(\"Selected Packs: \" + selectedPacks);\n                System.out.println(\"Selected Mods: \" + selectedMods);\n\n                if (selectedMods > 0) {"
+        "startLine": 86,
+        "length": 15,
+        "offset": 187,
+        "surroundingCode": "                                modLoading.nextStep(\"Downloading \" + mod.getDisplay());\n                            } catch (InterruptedException ex) {\n                                ex.printStackTrace();\n                            }\n"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "a6ce007c3f84efba6deb38722df67b93572e9e7e6cdea1730ea0501dd2e0b470"
+  "hash": "942974a440dbf7ffec702a53d2d9a76dcc6b6eadb45c527dabe29e41e89fffd0"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 91,
-      "offset": 29,
-      "length": 10,
+      "line": 169,
+      "offset": 56,
+      "length": 15,
       "code": {
-        "startLine": 89,
-        "length": 10,
-        "offset": 59,
-        "surroundingCode": "                            }\n\n                            System.out.println(\"Downloading \" + mod.getDisplay());\n                            if (mod.url != null) {\n                                Http.download(mod.url, SkyclientUniversal.skyclient + \"/mods/\" + mod.file);"
+        "startLine": 167,
+        "length": 15,
+        "offset": 129,
+        "surroundingCode": "\n                                                } catch (Exception e1) {\n                                                    e1.printStackTrace();\n                                                }\n                                            }"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "b27250508a84b62ee704f0f7b49ff335fce576ca3636d2467119ee6aefc4dbf3"
+  "hash": "95f17504e99a15b0e46f74b886548c6e444c44854a8ce7c99a29b26a04d85071"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 101,
-      "offset": 41,
-      "length": 10,
+      "line": 125,
+      "offset": 44,
+      "length": 15,
       "code": {
-        "startLine": 99,
-        "length": 10,
-        "offset": 273,
-        "surroundingCode": "                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                        new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file).delete();\n                                        if (mod.url != null) {"
+        "startLine": 123,
+        "length": 15,
+        "offset": 105,
+        "surroundingCode": "\n                                    } catch (Exception e1) {\n                                        e1.printStackTrace();\n                                    }\n                                }"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "db781e5f29e238288676270cca525bc82beaf39244993b966cd1e5437e2be650"
+  "hash": "ac2cc1da138e2cd258c0d655d48d725295e50a9f5595870a948aff8adc4c0e2c"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 109,
-      "offset": 41,
-      "length": 10,
+      "line": 112,
+      "offset": 40,
+      "length": 15,
       "code": {
-        "startLine": 107,
-        "length": 10,
-        "offset": 127,
-        "surroundingCode": "                                        }\n                                    } else {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is correct\");\n                                    }\n                                } catch (Exception e1) {"
+        "startLine": 110,
+        "length": 15,
+        "offset": 134,
+        "surroundingCode": "                                    }\n                                } catch (Exception e1) {\n                                    e1.printStackTrace();\n                                }\n                            }"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "efe14a34055c5e58d2792d16fbd6a4f7b3558eda10cd2134890b87ab1a7f01c0"
+  "hash": "adf76c894196e171112a6adc0de2702c84b4b1e7ccc62fadaf96a66e8b4978b9"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 118,
-      "offset": 41,
-      "length": 10,
+      "line": 210,
+      "offset": 32,
+      "length": 15,
       "code": {
-        "startLine": 116,
-        "length": 10,
-        "offset": 146,
-        "surroundingCode": "                                for (String file : mod.files) {\n                                    try {\n                                        System.out.println(\"Downloading \" + mod.getDisplay() + \" \" + file);\n                                        File file1 = new File(SkyclientUniversal.skyclient, file);\n"
+        "startLine": 208,
+        "length": 15,
+        "offset": 177,
+        "surroundingCode": "                            profile.gameDir = SkyclientUniversal.skyclient.getCanonicalPath();\n                        } catch (IOException ex) {\n                            ex.printStackTrace();\n                        }\n                        profile.icon = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAACGFjVEwAAAAEAAAAAHzNZtAAAAAzUExURf//ACOQY5HbaR68c////11dXXR0dIWFhc3fbNDq6T09PWG/5j+Y2KjQ2Sdyxtrq+k2b5npKrGcAAAABdFJOUwBA5thmAAAAGmZjVEwAAAAAAAAAgAAAAIAAAAAAAAAAAAAIAGQAAK+px9AAAAKZSURBVHja7ZvpbgIxDISBQrcFerz/0zYjZarp4F0OocYgz5898PEhWXESwmp1Rpuu1SgVQAqAl6Z7QNwUowCGAjA5tO6as/1o2nbN2cD/KogCSAHw1kSAyBkJ37u2IrdjISNeATwGAI0pFqFCeFJ9xr0mp28BPAaAFgyTR4ORJ8RgxIL0ePBjvALID8CEdGBTigqRTQjXpYZGv4uaUQEMBWASB4Cu+hZN9Hf4Rf8CGArAAUgHjY2In9Pm0ma2NhVAXgBNxORaOFpMDqBBdSLDGK4CyAegAw+LzZuIBtOEXMDqQiYqQC3yE4gCGA5AZx94IgB/1k0MHbAiAIUogDwAPvlgIUUTCW9IGlQ3tebswkIsgKEAvhDVhYgaewKfYCxBRfEKIDdAFMATfDYduw5NHlhjaAG6TQGMB9Aiigowak6HrqMIQOcAfGJaADkA9Mckbxo6yXBnbEyxALExOTW9NvkEdG5h8pu8AFIAvHbtm2iw69JnJCEUN6gBgPupC3G0APmecXgPuwLIB4AkgNBgfO8AKED+YIFBaBLBZjIhDu8RqwByAfAFr2qsACww3HMQggBAnyiGxqHNn5VxAQwHIAQKUAtPA3hgAqAIcaWv20UxCyA3AAPwfglAC3HfpXb6pXaicKe8AIYDQAxARzpPgTQ5RH9PHsUsgLwACqEAPpnAFQ2IC1QCeGNjMj/oUgC5AQhBZwb0SaoCQJE/Dzb5gTc/6FQAuQD8gJo2kQiAEEsHnVVnD0AXwFCAr6bogOrOhALTRhQBePF5zALIB6AfRgOIN6nvprmByAuRg4/GPWlKBTAcwJPqM5uHTjKRlBtUOiG5WQUwHEAhzk0cdZOqAJ4L4BqxOAGw9Ae3AnhOgGiy8a8QBXBPgB9G8drRaA0Z2QAAABpmY1RMAAAAAQAAABQAAAA8AAAANAAAADwACABkAAETQ/wcAAAAWmZkQVQAAAACeNq1kzEOACAIAx1cjMT/P9eSSCLqJOU2joVAKQOUk6BUOmBLRUAFLLkX2mTIbNg3u7ZEkExssS4UQZmZ1WcQPmXGf9rAbvCgNCELlrRwNRCUEzPhDNF8OvhOAAAAGmZjVEwAAAADAAAAFAAAAEgAAAA4AAAAOAAIAGQCAb6WRGwAAABrZmRBVAAAAAR42s2TQQ6AIAwEOXgxEv//XEvCmmK97Zg4F8L0AC1L60F78kN5BtuEkkewCEB+0f8elKIpx+W1klKFMXBCitdBm5JEQ1ADhMxBKwVTkpTHAmQOGCVzYJdDAamA3Z/NlGXjyQth3xPx"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "3fa0a6f09c0fe4163ac1a5019d880e58fa97528128fd55a0d9489b997226a685"
+  "hash": "d58f5cc8942014790ccb43cfcb49d57c8a243a0ab9735638539e373a5fae5ab8"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Call to 'printStackTrace()'",
   "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
-      "line": 135,
-      "offset": 41,
-      "length": 10,
+      "line": 478,
+      "offset": 27,
+      "length": 15,
       "code": {
-        "startLine": 133,
-        "length": 10,
-        "offset": 243,
-        "surroundingCode": "                                    ModData mod2 = Arrays.stream(SkyclientUniversal.mods).filter(m -> m.id.equals(mod1)).findFirst().orElse(null);\n                                    if (mod2 != null) {\n                                        System.out.println(\"Downloading \" + mod2.getDisplay());\n                                        if (mod2.url != null) {\n                                            Http.download(mod2.url, SkyclientUniversal.skyclient + \"/mods/\" + mod2.file);"
+        "startLine": 476,
+        "length": 15,
+        "offset": 131,
+        "surroundingCode": "                        Image.setIcon(new ImageIcon(icon2));\n                    } catch (Exception e) {\n                        e.printStackTrace();\n                    }\n                });"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "87adfad8ac4de3f54c7672af0e50759137108fa9af44dea67ceafcd490d240c7"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 145,
-      "offset": 53,
-      "length": 10,
-      "code": {
-        "startLine": 143,
-        "length": 10,
-        "offset": 311,
-        "surroundingCode": "                                                String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file))).toString();\n                                                if (!hash.equals(mod2.hash)) {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is incorrect, deleting and downloading again\");\n                                                    new File(SkyclientUniversal.skyclient + \"/mods/\" + mod2.file).delete();\n                                                    if (mod2.url != null) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "5dee5c2d5e7a5bce2ed25cb85c9308daa1def18b490da941017998e1a98d70c7"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 153,
-      "offset": 53,
-      "length": 10,
-      "code": {
-        "startLine": 151,
-        "length": 10,
-        "offset": 163,
-        "surroundingCode": "                                                    }\n                                                } else {\n                                                    System.out.println(\"Hash of \" + mod2.getDisplay() + \" is correct\");\n                                                }\n                                            } catch (Exception e1) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "83256884b12fcae1430c740f8bdbf688a738c82e027c802312f2a4da5e3392f0"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 162,
-      "offset": 53,
-      "length": 10,
-      "code": {
-        "startLine": 160,
-        "length": 10,
-        "offset": 183,
-        "surroundingCode": "                                            for (String file : mod2.files) {\n                                                try {\n                                                    System.out.println(\"Downloading \" + mod2.getDisplay() + \" \" + file);\n                                                    File file1 = new File(SkyclientUniversal.skyclient, file);\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "2267dbea84535deccce0601c07e3963db348035750b88f3427c0cd4de3f63aff"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "severity": "High",
-  "comment": "Uses of 'System.out' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 193,
-      "offset": 29,
-      "length": 10,
-      "code": {
-        "startLine": 191,
-        "length": 10,
-        "offset": 112,
-        "surroundingCode": "                                ex.printStackTrace();\n                            }\n                            System.out.println(\"Downloading \" + pack.getDisplay());\n                            if (pack.url != null) {\n                                Http.download(pack.url, SkyclientUniversal.skyclient + \"/resourcepacks/\" + pack.file);"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "a8d193b78aa72c0aad30c8a40bfa9aab0d7cb485232980bef1e75f28613fa3a6"
+  "hash": "fa1012f584cc216204c384a9da322f3e636a60b12c606f1cacb7b9b4de8955cc"
 }]}

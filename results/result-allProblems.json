@@ -1,626 +1,14 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
-  "category": "Resource management",
-  "type": "I/O resource opened but not safely closed",
-  "severity": "High",
-  "comment": "'ObjectOutputStream' should be opened in front of a 'try' block and closed in the corresponding 'finally' block",
-  "detailsInfo": "Reports I/O resources that are not safely closed. I/O resources checked by this inspection include `java.io.InputStream`, `java.io.OutputStream`, `java.io.Reader`, `java.io.Writer`, `java.util.zip.ZipFile`, `java.io.Closeable` and `java.io.RandomAccessFile`.\n\n\nI/O resources wrapped by other I/O resources are not reported, as the wrapped resource will be closed by the wrapping resource.\n\n\nBy default, the inspection assumes that the resources can be closed by any method with\n'close' or 'cleanup' in its name.\n\n**Example:**\n\n\n      void save() throws IOException {\n        FileWriter writer = new FileWriter(\"filename.txt\"); //warning\n        writer.write(\"sample\");\n      }\n\n\nUse the following options to configure the inspection:\n\n* List I/O resource classes that do not need to be closed and should be ignored by this inspection.\n* Whether an I/O resource is allowed to be opened inside a `try`block. This style is less desirable because it is more verbose than opening a resource in front of a `try` block.\n* Whether the resource can be closed by any method call with the resource passed as argument.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 642,
-      "offset": 42,
-      "length": 18,
-      "code": {
-        "startLine": 640,
-        "length": 18,
-        "offset": 125,
-        "surroundingCode": "        try {\n            ByteArrayOutputStream baos = new ByteArrayOutputStream();\n            ObjectOutputStream oos = new ObjectOutputStream(baos);\n            oos.writeObject(c);\n            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IOResource"
-  },
-  "hash": "45ee9cd7c2ea5e5bd6434e57d8cd98f8a24a0587ecab0a9ba6f2e600f0daf14b"
-},{
-  "tool": "Code Inspection",
-  "category": "Resource management",
-  "type": "I/O resource opened but not safely closed",
-  "severity": "High",
-  "comment": "'ObjectInputStream' should be opened in front of a 'try' block and closed in the corresponding 'finally' block",
-  "detailsInfo": "Reports I/O resources that are not safely closed. I/O resources checked by this inspection include `java.io.InputStream`, `java.io.OutputStream`, `java.io.Reader`, `java.io.Writer`, `java.util.zip.ZipFile`, `java.io.Closeable` and `java.io.RandomAccessFile`.\n\n\nI/O resources wrapped by other I/O resources are not reported, as the wrapped resource will be closed by the wrapping resource.\n\n\nBy default, the inspection assumes that the resources can be closed by any method with\n'close' or 'cleanup' in its name.\n\n**Example:**\n\n\n      void save() throws IOException {\n        FileWriter writer = new FileWriter(\"filename.txt\"); //warning\n        writer.write(\"sample\");\n      }\n\n\nUse the following options to configure the inspection:\n\n* List I/O resource classes that do not need to be closed and should be ignored by this inspection.\n* Whether an I/O resource is allowed to be opened inside a `try`block. This style is less desirable because it is more verbose than opening a resource in front of a `try` block.\n* Whether the resource can be closed by any method call with the resource passed as argument.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 645,
-      "offset": 41,
-      "length": 17,
-      "code": {
-        "startLine": 643,
-        "length": 17,
-        "offset": 158,
-        "surroundingCode": "            oos.writeObject(c);\n            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());\n            ObjectInputStream ois = new ObjectInputStream(bais);\n            return (Component) ois.readObject();\n        } catch (IOException | ClassNotFoundException ex) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "IOResource"
-  },
-  "hash": "559fbcb9c8cf5cdb8cfde8e2644cb4ebdd4337794ccf366515bd8e11c6f25996"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Loading.java",
-      "language": "JAVA",
-      "line": 69,
-      "offset": 27,
-      "length": 15,
-      "code": {
-        "startLine": 67,
-        "length": 15,
-        "offset": 123,
-        "surroundingCode": "                        Thread.sleep(30);\n                    } catch (InterruptedException e) {\n                        e.printStackTrace();\n                    }\n                }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "78551369571d0e72aadf4e37f2271cdbb1a832788b874561a0a0054fc7de2b92"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
-      "language": "JAVA",
-      "line": 41,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 39,
-        "length": 15,
-        "offset": 60,
-        "surroundingCode": "            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n        return null;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "a5611757ce0100971f245b71c3baa82f93e7e652412ff8cc24fb9e99d8c447a9"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
-      "language": "JAVA",
-      "line": 71,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 69,
-        "length": 15,
-        "offset": 60,
-        "surroundingCode": "            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n    }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "7331e520efcf72ac24cb2d4ac9604d36387530558fdb9793c588de40061d7726"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
-      "language": "JAVA",
-      "line": 38,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 36,
-        "length": 15,
-        "offset": 54,
-        "surroundingCode": "        catch (IOException e)\n        {\n            e.printStackTrace();\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "9c494af817c91412f300070776b3662011504cee518c69b4214f52d2c2a381d5"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
-      "language": "JAVA",
-      "line": 50,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 48,
-        "length": 15,
-        "offset": 108,
-        "surroundingCode": "            Files.write(file.toPath(), content.getBytes());\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "2b4a8c6abd6e31fd192fa4e7211100856d4c6bbe133c0632116923e64b2ab10a"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 478,
-      "offset": 27,
-      "length": 15,
-      "code": {
-        "startLine": 476,
-        "length": 15,
-        "offset": 131,
-        "surroundingCode": "                        Image.setIcon(new ImageIcon(icon2));\n                    } catch (Exception e) {\n                        e.printStackTrace();\n                    }\n                });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "c51cce0393a0298b95897f4e837cbe011dc7877374cd94e3dc675070b7ef522a"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 530,
-      "offset": 48,
-      "length": 15,
-      "code": {
-        "startLine": 528,
-        "length": 15,
-        "offset": 215,
-        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "2a2cd1c34a17199dcf94bb8bcf9aa44b0c62ea6edf1aa224732c8e9be0f676cf"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 648,
-      "offset": 16,
-      "length": 15,
-      "code": {
-        "startLine": 646,
-        "length": 15,
-        "offset": 124,
-        "surroundingCode": "            return (Component) ois.readObject();\n        } catch (IOException | ClassNotFoundException ex) {\n            ex.printStackTrace();\n            return null;\n        }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "b53c2a5b02dcba2cc479edda280c31b17b53f0cdbc11bb1687fae37082bb2bcd"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 383,
-      "offset": 48,
-      "length": 15,
-      "code": {
-        "startLine": 381,
-        "length": 15,
-        "offset": 215,
-        "surroundingCode": "                                            Desktop.getDesktop().browse(new URL(action.link).toURI());\n                                        } catch (Exception e2) {\n                                            e2.printStackTrace();\n                                        }\n                                    });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "8416f45b35e3c010960121c48f2d6608e0a1256a8ee2e0ea30b61b0c69d0d9db"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 313,
-      "offset": 31,
-      "length": 15,
-      "code": {
-        "startLine": 311,
-        "length": 15,
-        "offset": 143,
-        "surroundingCode": "                            Image.setIcon(new ImageIcon(icon2));\n                        } catch (Exception e) {\n                            e.printStackTrace();\n                        }\n                    });"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "0c88b7cc0552c529d9701d571f5b716cf6730a60b62e4723c9a28a0905cb8fb1"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 78,
-      "offset": 28,
-      "length": 15,
-      "code": {
-        "startLine": 76,
-        "length": 15,
-        "offset": 173,
-        "surroundingCode": "                        Thread.sleep(1000); //makes sure that loading bar works correctly\n                    } catch (InterruptedException ex) {\n                        ex.printStackTrace();\n                    }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "838a0b9ba634f554d03ce3f2cf1fbb827964e5fc31007fa7ddeb49e4ffbbf329"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 88,
-      "offset": 36,
-      "length": 15,
-      "code": {
-        "startLine": 86,
-        "length": 15,
-        "offset": 187,
-        "surroundingCode": "                                modLoading.nextStep(\"Downloading \" + mod.getDisplay());\n                            } catch (InterruptedException ex) {\n                                ex.printStackTrace();\n                            }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "f3b9b24a6ec011da35a45080b3dd92b28585bd0690551bef5c066bb24e96ba6a"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 112,
-      "offset": 40,
-      "length": 15,
-      "code": {
-        "startLine": 110,
-        "length": 15,
-        "offset": 134,
-        "surroundingCode": "                                    }\n                                } catch (Exception e1) {\n                                    e1.printStackTrace();\n                                }\n                            }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "3fa68d8ea1000a6e25fe06b73479d0063633dcb505cf3c99050e2c1326b6900a"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 125,
-      "offset": 44,
-      "length": 15,
-      "code": {
-        "startLine": 123,
-        "length": 15,
-        "offset": 105,
-        "surroundingCode": "\n                                    } catch (Exception e1) {\n                                        e1.printStackTrace();\n                                    }\n                                }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "8bd069f8e74795bfff0af3a9d9941dd89bfedd7a0b1773ba6efbecd669bf54e0"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 156,
-      "offset": 52,
-      "length": 15,
-      "code": {
-        "startLine": 154,
-        "length": 15,
-        "offset": 170,
-        "surroundingCode": "                                                }\n                                            } catch (Exception e1) {\n                                                e1.printStackTrace();\n                                            }\n                                        }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "d33057fb637a317143c91f163f7e85611d005ad3650dcb03ef08fc15eda887f1"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 169,
-      "offset": 56,
-      "length": 15,
-      "code": {
-        "startLine": 167,
-        "length": 15,
-        "offset": 129,
-        "surroundingCode": "\n                                                } catch (Exception e1) {\n                                                    e1.printStackTrace();\n                                                }\n                                            }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "b0e944976b28d788c89911260d72c77c1f617c824463da0e4e353af8afc9ad35"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 191,
-      "offset": 36,
-      "length": 15,
-      "code": {
-        "startLine": 189,
-        "length": 15,
-        "offset": 189,
-        "surroundingCode": "                                packLoading.nextStep(\"Downloading \" + pack.getDisplay());\n                            } catch (InterruptedException ex) {\n                                ex.printStackTrace();\n                            }\n                            System.out.println(\"Downloading \" + pack.getDisplay());"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "5aec944487fffde365ad8a4601bb9b5c75130d21828d0fcdf3bd5f71aeb1ab84"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 210,
-      "offset": 32,
-      "length": 15,
-      "code": {
-        "startLine": 208,
-        "length": 15,
-        "offset": 177,
-        "surroundingCode": "                            profile.gameDir = SkyclientUniversal.skyclient.getCanonicalPath();\n                        } catch (IOException ex) {\n                            ex.printStackTrace();\n                        }\n                        profile.icon = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAACGFjVEwAAAAEAAAAAHzNZtAAAAAzUExURf//ACOQY5HbaR68c////11dXXR0dIWFhc3fbNDq6T09PWG/5j+Y2KjQ2Sdyxtrq+k2b5npKrGcAAAABdFJOUwBA5thmAAAAGmZjVEwAAAAAAAAAgAAAAIAAAAAAAAAAAAAIAGQAAK+px9AAAAKZSURBVHja7ZvpbgIxDISBQrcFerz/0zYjZarp4F0OocYgz5898PEhWXESwmp1Rpuu1SgVQAqAl6Z7QNwUowCGAjA5tO6as/1o2nbN2cD/KogCSAHw1kSAyBkJ37u2IrdjISNeATwGAI0pFqFCeFJ9xr0mp28BPAaAFgyTR4ORJ8RgxIL0ePBjvALID8CEdGBTigqRTQjXpYZGv4uaUQEMBWASB4Cu+hZN9Hf4Rf8CGArAAUgHjY2In9Pm0ma2NhVAXgBNxORaOFpMDqBBdSLDGK4CyAegAw+LzZuIBtOEXMDqQiYqQC3yE4gCGA5AZx94IgB/1k0MHbAiAIUogDwAPvlgIUUTCW9IGlQ3tebswkIsgKEAvhDVhYgaewKfYCxBRfEKIDdAFMATfDYduw5NHlhjaAG6TQGMB9Aiigowak6HrqMIQOcAfGJaADkA9Mckbxo6yXBnbEyxALExOTW9NvkEdG5h8pu8AFIAvHbtm2iw69JnJCEUN6gBgPupC3G0APmecXgPuwLIB4AkgNBgfO8AKED+YIFBaBLBZjIhDu8RqwByAfAFr2qsACww3HMQggBAnyiGxqHNn5VxAQwHIAQKUAtPA3hgAqAIcaWv20UxCyA3AAPwfglAC3HfpXb6pXaicKe8AIYDQAxARzpPgTQ5RH9PHsUsgLwACqEAPpnAFQ2IC1QCeGNjMj/oUgC5AQhBZwb0SaoCQJE/Dzb5gTc/6FQAuQD8gJo2kQiAEEsHnVVnD0AXwFCAr6bogOrOhALTRhQBePF5zALIB6AfRgOIN6nvprmByAuRg4/GPWlKBTAcwJPqM5uHTjKRlBtUOiG5WQUwHEAhzk0cdZOqAJ4L4BqxOAGw9Ae3AnhOgGiy8a8QBXBPgB9G8drRaA0Z2QAAABpmY1RMAAAAAQAAABQAAAA8AAAANAAAADwACABkAAETQ/wcAAAAWmZkQVQAAAACeNq1kzEOACAIAx1cjMT/P9eSSCLqJOU2joVAKQOUk6BUOmBLRUAFLLkX2mTIbNg3u7ZEkExssS4UQZmZ1WcQPmXGf9rAbvCgNCELlrRwNRCUEzPhDNF8OvhOAAAAGmZjVEwAAAADAAAAFAAAAEgAAAA4AAAAOAAIAGQCAb6WRGwAAABrZmRBVAAAAAR42s2TQQ6AIAwEOXgxEv//XEvCmmK97Zg4F8L0AC1L60F78kN5BtuEkkewCEB+0f8elKIpx+W1klKFMXBCitdBm5JEQ1ADhMxBKwVTkpTHAmQOGCVzYJdDAamA3Z/NlGXjyQth3xPx"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "26551ce4eeeff70aa92a35c5f44084ff427c42ad07aae10b3a4856359e46a3ce"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
-      "language": "JAVA",
-      "line": 44,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 42,
-        "length": 15,
-        "offset": 164,
-        "surroundingCode": "            skyclientIcon = ImageIO.read(SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\"));\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "d527545a133e9c8cb0422398c98558cf3f88e72b05fa08b4e7f050948df74b0e"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Call to 'printStackTrace()'",
-  "severity": "High",
-  "comment": "Call to 'printStackTrace()' should probably be replaced with more robust logging",
-  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/SkyclientUniversal.java",
-      "language": "JAVA",
-      "line": 68,
-      "offset": 15,
-      "length": 15,
-      "code": {
-        "startLine": 66,
-        "length": 15,
-        "offset": 103,
-        "surroundingCode": "            UIManager.setLookAndFeel(new FlatDarkLaf());\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThrowablePrintStackTrace"
-  },
-  "hash": "39061aaf9b5037c8c4ec12db797c71d5e363c127a77eb32c346ae74ad7acbaa0"
-},{
-  "tool": "Code Inspection",
   "category": "Probable bugs",
-  "type": "Constant conditions & exceptions",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA",
+    "CWE Top 25"
+  ],
   "severity": "High",
-  "comment": "Argument 'SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\")' might be null",
-  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
+  "comment": "Argument `SkyclientUniversal.class.getResource(\"/universal/SkyblockClient128.png\")` might be null",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
   "sources": [
     {
       "type": "file",
@@ -639,15 +27,18 @@
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "ConstantConditions"
+    "inspectionName": "DataFlowIssue"
   },
-  "hash": "5c07631c5cfe3fbe313193eae651e0745e2482cc273f84fa341eb0fc6a583482"
+  "hash": "7aae0fdaba2bf1b0612d40b67f314b4836b0a6d95252b1876741bca7bb0e5165"
 },{
   "tool": "Code Inspection",
   "category": "Memory",
   "type": "Inner class may be 'static'",
+  "tags": [
+    "JAVA"
+  ],
   "severity": "High",
-  "comment": "Inner class 'Warning' may be 'static'",
+  "comment": "Inner class `Warning` may be 'static'",
   "detailsInfo": "Reports inner classes that can be made `static`.\n\nA `static` inner class does not keep an implicit reference to its enclosing instance.\nThis prevents a common cause of memory leaks and uses less memory per instance of the class.\n\n**Example:**\n\n\n      public class Outer {\n        class Inner { // not static\n          public void foo() {\n            bar(\"x\");\n          }\n\n          private void bar(String string) {}\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      public class Outer {\n        static class Inner {\n          public void foo() {\n            bar(\"x\");\n          }\n\n          private void bar(String string) {}\n        }\n      }\n",
   "sources": [
     {
@@ -669,151 +60,45 @@
     "module": "project.main",
     "inspectionName": "InnerClassMayBeStatic"
   },
-  "hash": "b581b6bdaa1b9430f3ade33fbad54205e74129b9c218c8faf848874ea79b7f56"
+  "hash": "ead6ab0c8ca03775afb2a0e24f5084897740f35822411a7f5d1404163aad2420"
 },{
   "tool": "Code Inspection",
-  "category": "Threading issues",
-  "type": "Call to 'Thread.start()' during object construction",
+  "category": "Probable bugs",
+  "type": "Suspicious indentation after control statement without braces",
+  "tags": [
+    "JAVA"
+  ],
   "severity": "High",
-  "comment": "Call to 'start()' during object construction",
-  "detailsInfo": "Reports calls to `start()` on `java.lang.Thread` or any of its subclasses during object construction.\n\n\nWhile occasionally useful, such constructs should be avoided due to inheritance issues.\nSubclasses of a class that launches a thread during the object construction will not have finished\nany initialization logic of their own before the thread has launched.\n\nThis inspection does not report if the class that starts a thread is declared `final`.\n\n**Example:**\n\n\n      class MyThread extends Thread {\n        MyThread() {\n          start();\n        }\n      }\n",
+  "comment": "Suspicious indentation after 'if' statement",
+  "detailsInfo": "Reports suspicious indentation of statements after a control statement without braces.\n\n\nSuch indentation can make it look like the statement is inside the control statement,\nwhen in fact it will be executed unconditionally after the control statement.\n\n**Example:**\n\n\n      class Bar {\n          void foo(int i) {\n              if (i == 0)\n                  System.out.println(\"foo\");\n                  System.out.println(\"bar\"); // warning\n              if (i == 1);\n                  System.out.println(\"great\"); // warning\n              if (i == 42)\n                  System.out.println(\"answer\");\n                      System.out.println(\"question\"); // warning\n          }\n      }\n",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Loading.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
       "language": "JAVA",
-      "line": 47,
-      "offset": 12,
-      "length": 5,
+      "line": 79,
+      "offset": 1,
+      "length": 8,
       "code": {
-        "startLine": 45,
-        "length": 5,
-        "offset": 73,
-        "surroundingCode": "            frame.pack();\n            frame.setVisible(true);\n        }).start();\n    }\n"
+        "startLine": 77,
+        "length": 8,
+        "offset": 65,
+        "surroundingCode": "        //noinspection deprecation\n        if (toEncode == null)\n        return null;\n\n        StringBuilder sb = new StringBuilder();"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "ThreadStartInConstruction"
+    "inspectionName": "SuspiciousIndentAfterControlStatement"
   },
-  "hash": "ef336d29d410234b09a0cf62859775ea6340cf121d72efb8d85f8abb94cc6b36"
-},{
-  "tool": "Code Inspection",
-  "category": "Threading issues",
-  "type": "Call to 'Thread.start()' during object construction",
-  "severity": "High",
-  "comment": "Call to 'start()' during object construction",
-  "detailsInfo": "Reports calls to `start()` on `java.lang.Thread` or any of its subclasses during object construction.\n\n\nWhile occasionally useful, such constructs should be avoided due to inheritance issues.\nSubclasses of a class that launches a thread during the object construction will not have finished\nany initialization logic of their own before the thread has launched.\n\nThis inspection does not report if the class that starts a thread is declared `final`.\n\n**Example:**\n\n\n      class MyThread extends Thread {\n        MyThread() {\n          start();\n        }\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 244,
-      "offset": 16,
-      "length": 5,
-      "code": {
-        "startLine": 242,
-        "length": 5,
-        "offset": 48,
-        "surroundingCode": "                System.exit(0);\n\n            }).start();\n        });\n    }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "ThreadStartInConstruction"
-  },
-  "hash": "d7412493ba139bb50926b5d3dfd5025fc3064ac5741fc631e0e300c455e6bc4e"
+  "hash": "f08a9964fa83094b72fbccd943fa43707240bc7f3c645ba67d6a2f848c61d2c2"
 },{
   "tool": "Code Inspection",
   "category": "JVM languages",
   "type": "Unstable API Usage",
-  "severity": "High",
-  "comment": "'com.google.common.hash.Hashing' is marked unstable with @Beta",
-  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 99,
-      "offset": 51,
-      "length": 7,
-      "code": {
-        "startLine": 97,
-        "length": 7,
-        "offset": 140,
-        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
-      }
-    }
+  "tags": [
+    "JAVA"
   ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "UnstableApiUsage"
-  },
-  "hash": "0937ca3fe67cd462cf0d001b41f619d68349296e74240f0322e9c28a0dde48d2"
-},{
-  "tool": "Code Inspection",
-  "category": "JVM languages",
-  "type": "Unstable API Usage",
-  "severity": "High",
-  "comment": "'md5()' is declared in unstable class 'com.google.common.hash.Hashing' marked with @Beta",
-  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 99,
-      "offset": 59,
-      "length": 3,
-      "code": {
-        "startLine": 97,
-        "length": 3,
-        "offset": 148,
-        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "UnstableApiUsage"
-  },
-  "hash": "60f0dffc4da3a907c0a533ca564cbbb87d237c7bc9717547d74e4997ca2e2bac"
-},{
-  "tool": "Code Inspection",
-  "category": "JVM languages",
-  "type": "Unstable API Usage",
-  "severity": "High",
-  "comment": "'toByteArray(java.io.File)' is marked unstable with @Beta",
-  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
-      "language": "JAVA",
-      "line": 99,
-      "offset": 81,
-      "length": 11,
-      "code": {
-        "startLine": 97,
-        "length": 11,
-        "offset": 170,
-        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "project.main",
-    "inspectionName": "UnstableApiUsage"
-  },
-  "hash": "d83f930aa4e23ac62e879ba53fb0e685ea35c182b0967a1559fda7a99c39f0a9"
-},{
-  "tool": "Code Inspection",
-  "category": "JVM languages",
-  "type": "Unstable API Usage",
   "severity": "High",
   "comment": "'com.google.common.hash.Hashing' is marked unstable with @Beta",
   "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
@@ -837,11 +122,76 @@
     "module": "project.main",
     "inspectionName": "UnstableApiUsage"
   },
-  "hash": "36dffa5643eafd6c2aa5c2993229210752fa6187f038f64624f4c5c46b3992d8"
+  "hash": "59bac2bdd0641f164f082007ec70342f2f98dc5364dd77d6bca8eed91a01c9c6"
 },{
   "tool": "Code Inspection",
   "category": "JVM languages",
   "type": "Unstable API Usage",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "'md5()' is declared in unstable class 'com.google.common.hash.Hashing' marked with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 59,
+      "length": 3,
+      "code": {
+        "startLine": 97,
+        "length": 3,
+        "offset": 148,
+        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "6b6744db277497a16e001b99dad6813fed004501247d4b9e0f301a5e4b5e9d3f"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "'toByteArray(java.io.File)' is marked unstable with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 81,
+      "length": 11,
+      "code": {
+        "startLine": 97,
+        "length": 11,
+        "offset": 170,
+        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "881403ce03baef93b853e7623996ab60b6dd6f8d2887234cbbd82fc39e7532eb"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "tags": [
+    "JAVA"
+  ],
   "severity": "High",
   "comment": "'md5()' is declared in unstable class 'com.google.common.hash.Hashing' marked with @Beta",
   "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
@@ -865,11 +215,14 @@
     "module": "project.main",
     "inspectionName": "UnstableApiUsage"
   },
-  "hash": "3a2417ffbda6c04b91c5bb32a2bef6ad73d6ded021b89bf2dcedaff79437ec83"
+  "hash": "b17229da4658f771f7b99e735a3ce6ee8aa84268b583e336d7085df15433e7e0"
 },{
   "tool": "Code Inspection",
   "category": "JVM languages",
   "type": "Unstable API Usage",
+  "tags": [
+    "JAVA"
+  ],
   "severity": "High",
   "comment": "'toByteArray(java.io.File)' is marked unstable with @Beta",
   "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
@@ -893,5 +246,36 @@
     "module": "project.main",
     "inspectionName": "UnstableApiUsage"
   },
-  "hash": "7dcdd6cea0bd252e2e2970b24265c784833f1122149cebf23566623e02b2d3bd"
+  "hash": "c61196c347d1c1be0c343d1083f6563e5a0b797064c49ff047b03fe9d2aec166"
+},{
+  "tool": "Code Inspection",
+  "category": "JVM languages",
+  "type": "Unstable API Usage",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "'com.google.common.hash.Hashing' is marked unstable with @Beta",
+  "detailsInfo": "Reports usages of an API marked with one of the annotations as unstable. Such an API may be changed or removed in future versions, breaking the code that uses it.\n\nThe annotations which are used to mark unstable APIs are shown in the list below.\n\nBy default, the inspection ignores usages of unstable APIs\nif their declarations are located in sources of the same project. In such cases it'll be possible to update the usages when you change APIs.\nHowever, it may be inconvenient if the project is big, so one can switch off the **Ignore API declared in this project** option to report\nthe usages of unstable APIs declared in both the project sources and libraries.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 51,
+      "length": 7,
+      "code": {
+        "startLine": 97,
+        "length": 7,
+        "offset": 140,
+        "surroundingCode": "                            if (mod.hash != null) {\n                                try {\n                                    String hash = Hashing.md5().hashBytes(Files.toByteArray(new File(SkyclientUniversal.skyclient + \"/mods/\" + mod.file))).toString();\n                                    if (!hash.equals(mod.hash)) {\n                                        System.out.println(\"Hash of \" + mod.getDisplay() + \" is incorrect, deleting and downloading again\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "UnstableApiUsage"
+  },
+  "hash": "e8914cc6d15408c3c31686bed40141e3009ae8ee05e151e4cee21cc7b1d4f85e"
 }]}

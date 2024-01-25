@@ -5,12 +5,25 @@
       "contentEntries": [
         {
           "path": "file://$PROJECT_DIR$",
+          "excludePatterns": [],
+          "excludeFolders": [
+            {
+              "path": "file://$PROJECT_DIR$/.gradle",
+              "type": "Exclude",
+              "packagePrefix": ""
+            },
+            {
+              "path": "file://$PROJECT_DIR$/build",
+              "type": "Exclude",
+              "packagePrefix": ""
+            }
+          ],
           "sourceFolders": []
         }
       ],
       "orderEntries": [
         {
-          "name": "jbr-11",
+          "name": "corretto-16",
           "type": "SDK"
         },
         {
@@ -20,25 +33,34 @@
       ]
     },
     {
-      "name": "project.test",
+      "name": "project.main",
       "contentEntries": [
         {
-          "path": "file://$PROJECT_DIR$/src/test",
-          "sourceFolders": []
+          "path": "file://$PROJECT_DIR$/src/main",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": [
+            {
+              "path": "file://$PROJECT_DIR$/src/main/java",
+              "type": "Source",
+              "packagePrefix": ""
+            },
+            {
+              "path": "file://$PROJECT_DIR$/src/main/resources",
+              "type": "Resource",
+              "packagePrefix": ""
+            }
+          ]
         }
       ],
       "orderEntries": [
         {
-          "name": "jbr-11",
+          "name": "corretto-16",
           "type": "SDK"
         },
         {
           "name": "<Module source>",
           "type": "Own sources"
-        },
-        {
-          "name": "project.main",
-          "type": "Module"
         },
         {
           "name": "Gradle: com.formdev:flatlaf:2.0.1",
@@ -79,32 +101,27 @@
       ]
     },
     {
-      "name": "project.main",
+      "name": "project.test",
       "contentEntries": [
         {
-          "path": "file://$PROJECT_DIR$/src/main",
-          "sourceFolders": [
-            {
-              "path": "file://$PROJECT_DIR$/src/main/java",
-              "type": "Source",
-              "packagePrefix": ""
-            },
-            {
-              "path": "file://$PROJECT_DIR$/src/main/resources",
-              "type": "Resource",
-              "packagePrefix": ""
-            }
-          ]
+          "path": "file://$PROJECT_DIR$/src/test",
+          "excludePatterns": [],
+          "excludeFolders": [],
+          "sourceFolders": []
         }
       ],
       "orderEntries": [
         {
-          "name": "jbr-11",
+          "name": "corretto-16",
           "type": "SDK"
         },
         {
           "name": "<Module source>",
           "type": "Own sources"
+        },
+        {
+          "name": "project.main",
+          "type": "Module"
         },
         {
           "name": "Gradle: com.formdev:flatlaf:2.0.1",
