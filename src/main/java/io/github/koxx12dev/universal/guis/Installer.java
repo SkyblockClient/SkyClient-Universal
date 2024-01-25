@@ -716,12 +716,14 @@ public class Installer {
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
+        gbc.ipady = 10;
         pane.add(label1, gbc);
         final JLabel label2 = new JLabel();
         label2.setText("Mods");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.ipady = 10;
         pane.add(label2, gbc);
     }
 
