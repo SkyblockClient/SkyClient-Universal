@@ -17,6 +17,7 @@
           <minimumSize width="100" height="30"/>
           <preferredSize width="100" height="30"/>
           <text value="Install"/>
+          <toolTipText value="Install the selected items"/>
         </properties>
       </component>
       <tabbedpane id="a7990" binding="ModTabPane">
@@ -28,7 +29,7 @@
         </constraints>
         <properties>
           <minimumSize width="250" height="400"/>
-          <preferredSize width="270" height="460"/>
+          <preferredSize width="400" height="460"/>
         </properties>
         <border type="none"/>
         <children>
@@ -39,7 +40,7 @@
             <properties>
               <doubleBuffered value="false"/>
               <minimumSize width="250" height="300"/>
-              <preferredSize width="270" height="360"/>
+              <preferredSize width="400" height="360"/>
             </properties>
             <border type="none"/>
             <children>
@@ -62,7 +63,7 @@
         </constraints>
         <properties>
           <minimumSize width="250" height="400"/>
-          <preferredSize width="270" height="460"/>
+          <preferredSize width="400" height="460"/>
         </properties>
         <border type="none"/>
         <children>
