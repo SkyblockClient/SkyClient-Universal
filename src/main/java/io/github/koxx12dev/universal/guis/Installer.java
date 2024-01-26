@@ -298,16 +298,16 @@ public class Installer {
                     icon = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                 } else {
                     try {
-                        icon = resize(ImageIO.read(Objects.requireNonNull(SkyclientUniversal.class.getResource("universal/SkyblockClient128.png"))), 64, 64, Objects.equals(mod.icon_scaling, "pixel"));
+                        icon = resize(ImageIO.read(Objects.requireNonNull(SkyclientUniversal.class.getResource("universal/SkyblockClient128.png"))), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                     } catch (Exception e) {
-                        icon = resize(ImageIO.read(new URL(SkyclientUniversal.baseCdn + "/files/icons/skyclient.png")), 64, 64, Objects.equals(mod.icon_scaling, "pixel"));
+                        icon = resize(ImageIO.read(new URL(SkyclientUniversal.baseCdn + "/files/icons/skyclient.png")), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                     }
                     Thread t = new Thread(() -> {
                         BufferedImage icon2;
                         try {
                             System.out.println("Downloading Icon for " + mod.getDisplay());
                             Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + mod.getIcon(), SkyclientUniversal.cache + File.separator + mod.getIcon());
-                            icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 64, 64, Objects.equals(mod.icon_scaling, "pixel"));
+                            icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                             Image.setIcon(new ImageIcon(icon2));
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -316,7 +316,7 @@ public class Installer {
                     t.start();
                 }
             } else {
-                icon = resize(SkyclientUniversal.skyclientIcon, 64, 64, false);
+                icon = resize(SkyclientUniversal.skyclientIcon, 50, 50, false);
             }
             Image.setIcon(new ImageIcon(icon));
             gbc = new GridBagConstraints();
@@ -463,16 +463,16 @@ public class Installer {
                 icon = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
             } else {
                 try {
-                    icon = resize(ImageIO.read(Objects.requireNonNull(SkyclientUniversal.class.getResource("universal/SkyblockClient128.png"))), 64, 64, Objects.equals(pack.icon_scaling, "pixel"));
+                    icon = resize(ImageIO.read(Objects.requireNonNull(SkyclientUniversal.class.getResource("universal/SkyblockClient128.png"))), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
                 } catch (Exception e) {
-                    icon = resize(ImageIO.read(new URL(SkyclientUniversal.baseCdn + "/files/icons/skyclient.png")), 64, 64, Objects.equals(pack.icon_scaling, "pixel"));
+                    icon = resize(ImageIO.read(new URL(SkyclientUniversal.baseCdn + "/files/icons/skyclient.png")), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
                 }
                 Thread t = new Thread(() -> {
                     BufferedImage icon2;
                     try {
                         System.out.println("Downloading Icon for " + pack.getDisplay());
                         Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + pack.getIcon(), SkyclientUniversal.cache + File.separator + pack.getIcon());
-                        icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 64, 64, Objects.equals(pack.icon_scaling, "pixel"));
+                        icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
                         Image.setIcon(new ImageIcon(icon2));
                     } catch (Exception e) {
                         e.printStackTrace();
