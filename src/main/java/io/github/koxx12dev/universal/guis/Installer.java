@@ -245,6 +245,17 @@ public class Installer {
         });
     }
 
+    public static File selectMinecraftDirectory() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Select .minecraft directory");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY | JFileChooser.OPEN_DIALOG);
+        chooser.setAcceptAllFileFilterUsed(false); // Disable All files option
+        chooser.setFileHidingEnabled(false);
+        chooser.setVisible(true);
+        chooser.showOpenDialog(null);
+        return chooser.getSelectedFile();
+    }
+
     //https://stackoverflow.com/questions/14548808/scale-the-imageicon-automatically-to-label-size
     public static BufferedImage resize(BufferedImage image, int width, int height, boolean pixelated) {
         BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
