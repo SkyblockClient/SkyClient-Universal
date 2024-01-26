@@ -681,7 +681,7 @@ public class Installer {
         pane.add(InstallButton, gbc);
         ModTabPane = new JTabbedPane();
         ModTabPane.setMinimumSize(new Dimension(250, 400));
-        ModTabPane.setPreferredSize(new Dimension(270, 460));
+        ModTabPane.setPreferredSize(new Dimension(400, 460));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -690,14 +690,14 @@ public class Installer {
         ModScrollPane = new JScrollPane();
         ModScrollPane.setDoubleBuffered(false);
         ModScrollPane.setMinimumSize(new Dimension(250, 300));
-        ModScrollPane.setPreferredSize(new Dimension(270, 360));
+        ModScrollPane.setPreferredSize(new Dimension(400, 360));
         ModTabPane.addTab("All", ModScrollPane);
         ModPane = new JPanel();
         ModPane.setLayout(new GridBagLayout());
         ModScrollPane.setViewportView(ModPane);
         PackTabPane = new JTabbedPane();
         PackTabPane.setMinimumSize(new Dimension(250, 400));
-        PackTabPane.setPreferredSize(new Dimension(270, 460));
+        PackTabPane.setPreferredSize(new Dimension(400, 460));
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
