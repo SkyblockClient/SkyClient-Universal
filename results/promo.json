@@ -64,6 +64,34 @@
   "sources": [
     {
       "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "language": "JAVA",
+      "line": 41,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 39,
+        "length": 15,
+        "offset": 60,
+        "surroundingCode": "            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n        return null;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "388f596b873ae5f8a22247150e8684e7bbc5df87ac7a591954e20165e729f897"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
       "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
       "language": "JAVA",
       "line": 191,
@@ -334,6 +362,34 @@
     "inspectionName": "ThrowablePrintStackTrace"
   },
   "hash": "d58f5cc8942014790ccb43cfcb49d57c8a243a0ab9735638539e373a5fae5ab8"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/Http.java",
+      "language": "JAVA",
+      "line": 71,
+      "offset": 15,
+      "length": 15,
+      "code": {
+        "startLine": 69,
+        "length": 15,
+        "offset": 60,
+        "surroundingCode": "            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "project.main",
+    "inspectionName": "ThrowablePrintStackTrace"
+  },
+  "hash": "e32119e17d629beee7da19dd2c08fa6d536e9c59465f67384539917fca2d0ae4"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
