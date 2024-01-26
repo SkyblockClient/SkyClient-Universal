@@ -284,6 +284,7 @@ public class Installer {
             Name.setPreferredSize(new Dimension(150, 67));
             Name.setMinimumSize(new Dimension(150, 67));
             Name.setText(mod.getDisplay());
+            Name.setToolTipText(mod.getDescription());
             gbc = new GridBagConstraints();
             gbc.gridx = 1;
             gbc.gridy = 0;
@@ -292,6 +293,7 @@ public class Installer {
             JLabel Image = new JLabel();
             Image.setHorizontalAlignment(SwingConstants.LEFT);
             Image.setHorizontalTextPosition(SwingConstants.TRAILING);
+            Image.setToolTipText(mod.getDescription());
             BufferedImage icon;
             if (mod.icon != null) {
                 if (new File(SkyclientUniversal.cache, mod.getIcon()).exists()) {
@@ -450,6 +452,7 @@ public class Installer {
             Name.setPreferredSize(new Dimension(150, 67));
             Name.setMinimumSize(new Dimension(150, 67));
             Name.setText(pack.getDisplay());
+            Name.setToolTipText(pack.getDescription());
             gbc = new GridBagConstraints();
             gbc.gridx = 1;
             gbc.gridy = 0;
@@ -458,6 +461,7 @@ public class Installer {
             JLabel Image = new JLabel();
             Image.setHorizontalAlignment(SwingConstants.LEFT);
             Image.setHorizontalTextPosition(SwingConstants.TRAILING);
+            Image.setToolTipText(pack.getDescription());
             BufferedImage icon;
             if (new File(SkyclientUniversal.cache, pack.getIcon()).exists()) {
                 icon = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
