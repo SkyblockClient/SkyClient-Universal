@@ -92,7 +92,7 @@ public class Installer {
                             if (mod.url != null) {
                                 Http.download(mod.url, SkyclientUniversal.skyclient + "/mods/" + mod.file);
                             } else if (!mod.id.equals("minecraft")) {
-                                Http.download(SkyclientUniversal.baseRepo + "/files/mods/" + mod.file, SkyclientUniversal.skyclient + "/mods/" + mod.file);
+                                Http.download(SkyclientUniversal.propertiesData.baseCdn + "/files/mods/" + mod.file, SkyclientUniversal.skyclient + "/mods/" + mod.file);
                             }
                             if (mod.hash != null) {
                                 try {
@@ -103,7 +103,7 @@ public class Installer {
                                         if (mod.url != null) {
                                             Http.download(mod.url, SkyclientUniversal.skyclient + "/mods/" + mod.file);
                                         } else if (!mod.id.equals("minecraft")) {
-                                            Http.download(SkyclientUniversal.baseRepo + "/files/mods/" + mod.file, SkyclientUniversal.skyclient + "/mods/" + mod.file);
+                                            Http.download(SkyclientUniversal.propertiesData.baseRepo + "/files/mods/" + mod.file, SkyclientUniversal.skyclient + "/mods/" + mod.file);
                                         }
                                     } else {
                                         System.out.println("Hash of " + mod.getDisplay() + " is correct");
@@ -119,7 +119,7 @@ public class Installer {
                                         File file1 = new File(SkyclientUniversal.skyclient, file);
 
                                         file1.getParentFile().mkdirs();
-                                        Http.download(SkyclientUniversal.baseRepo + "/files/mcdir/" + file, file1.getAbsolutePath());
+                                        Http.download(SkyclientUniversal.propertiesData.baseRepo + "/files/mcdir/" + file, file1.getAbsolutePath());
 
                                     } catch (Exception e1) {
                                         e1.printStackTrace();
@@ -136,7 +136,7 @@ public class Installer {
                                         if (mod2.url != null) {
                                             Http.download(mod2.url, SkyclientUniversal.skyclient + "/mods/" + mod2.file);
                                         } else if (!mod2.id.equals("minecraft")) {
-                                            Http.download(SkyclientUniversal.baseRepo + "/files/mods/" + mod2.file, SkyclientUniversal.skyclient + "/mods/" + mod2.file);
+                                            Http.download(SkyclientUniversal.propertiesData.baseRepo + "/files/mods/" + mod2.file, SkyclientUniversal.skyclient + "/mods/" + mod2.file);
                                         }
                                         if (mod2.hash != null) {
                                             try {
@@ -147,7 +147,7 @@ public class Installer {
                                                     if (mod2.url != null) {
                                                         Http.download(mod2.url, SkyclientUniversal.skyclient + "/mods/" + mod2.file);
                                                     } else if (!mod2.id.equals("minecraft")) {
-                                                        Http.download(SkyclientUniversal.baseRepo + "/files/mods/" + mod2.file, SkyclientUniversal.skyclient + "/mods/" + mod2.file);
+                                                        Http.download(SkyclientUniversal.propertiesData.baseRepo + "/files/mods/" + mod2.file, SkyclientUniversal.skyclient + "/mods/" + mod2.file);
                                                     }
                                                 } else {
                                                     System.out.println("Hash of " + mod2.getDisplay() + " is correct");
@@ -163,7 +163,7 @@ public class Installer {
                                                     File file1 = new File(SkyclientUniversal.skyclient, file);
 
                                                     file1.getParentFile().mkdirs();
-                                                    Http.download(SkyclientUniversal.baseRepo + "/files/mcdir/" + file, file1.getAbsolutePath());
+                                                    Http.download(SkyclientUniversal.propertiesData.baseRepo + "/files/mcdir/" + file, file1.getAbsolutePath());
 
                                                 } catch (Exception e1) {
                                                     e1.printStackTrace();
@@ -194,7 +194,7 @@ public class Installer {
                             if (pack.url != null) {
                                 Http.download(pack.url, SkyclientUniversal.skyclient + "/resourcepacks/" + pack.file);
                             } else {
-                                Http.download(SkyclientUniversal.baseRepo + "/files/packs/" + Http.urlEscape(pack.file), SkyclientUniversal.skyclient + "/resourcepacks/" + pack.file);
+                                Http.download(SkyclientUniversal.propertiesData.baseRepo + "/files/packs/" + Http.urlEscape(pack.file), SkyclientUniversal.skyclient + "/resourcepacks/" + pack.file);
                             }
                         }
                     }
@@ -218,7 +218,7 @@ public class Installer {
 
                         SkyclientUniversal.launcherProfiles.profiles.put("SkyClient", profile);
 
-                        FileUtil.writeFile(SkyclientUniversal.gson.toJson(SkyclientUniversal.launcherProfiles), new File(SkyclientUniversal.minecraft, "launcher_profiles.json"));
+                        FileUtil.writeFile(SkyclientUniversal.GSON.toJson(SkyclientUniversal.launcherProfiles), new File(SkyclientUniversal.minecraft, "launcher_profiles.json"));
                     }
                 } else {
                     //create a warning message that wars user about not being able to create a mc profile and that they can find on our discord how to do it manually
@@ -253,6 +253,9 @@ public class Installer {
         chooser.setFileHidingEnabled(false);
         chooser.setVisible(true);
         chooser.showOpenDialog(null);
+        if (!new File(chooser.getSelectedFile(), "/launcher_profiles.json").exists()) {
+            SkyclientUniversal.promptSelectMinecraftDirectory();
+        }
         return chooser.getSelectedFile();
     }
 
@@ -305,20 +308,20 @@ public class Installer {
             Image.setHorizontalTextPosition(SwingConstants.TRAILING);
             BufferedImage icon;
             if (mod.icon != null) {
-                if (new File(SkyclientUniversal.cache, mod.getIcon()).exists()) {
-                    icon = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
+                if (new File(SkyclientUniversal.CACHE, mod.getIcon()).exists()) {
+                    icon = resize(ImageIO.read(new File(SkyclientUniversal.CACHE, mod.getIcon())), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                 } else {
                     try {
                         icon = resize(ImageIO.read(Objects.requireNonNull(SkyclientUniversal.class.getResource("universal/SkyblockClient128.png"))), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                     } catch (Exception e) {
-                        icon = resize(ImageIO.read(new URL(SkyclientUniversal.baseCdn + "/files/icons/skyclient.png")), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
+                        icon = resize(ImageIO.read(new URL(SkyclientUniversal.propertiesData.baseCdn + "/files/icons/skyclient.png")), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                     }
                     Thread t = new Thread(() -> {
                         BufferedImage icon2;
                         try {
                             System.out.println("Downloading Icon for " + mod.getDisplay());
-                            Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + mod.getIcon(), SkyclientUniversal.cache + File.separator + mod.getIcon());
-                            icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, mod.getIcon())), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
+                            Http.download(SkyclientUniversal.propertiesData.baseCdn + "/files/icons/" + mod.getIcon(), SkyclientUniversal.CACHE + File.separator + mod.getIcon());
+                            icon2 = resize(ImageIO.read(new File(SkyclientUniversal.CACHE, mod.getIcon())), 50, 50, Objects.equals(mod.icon_scaling, "pixel"));
                             Image.setIcon(new ImageIcon(icon2));
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -470,20 +473,20 @@ public class Installer {
             Image.setHorizontalAlignment(SwingConstants.LEFT);
             Image.setHorizontalTextPosition(SwingConstants.TRAILING);
             BufferedImage icon;
-            if (new File(SkyclientUniversal.cache, pack.getIcon()).exists()) {
-                icon = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
+            if (new File(SkyclientUniversal.CACHE, pack.getIcon()).exists()) {
+                icon = resize(ImageIO.read(new File(SkyclientUniversal.CACHE, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
             } else {
                 try {
                     icon = resize(ImageIO.read(Objects.requireNonNull(SkyclientUniversal.class.getResource("universal/SkyblockClient128.png"))), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
                 } catch (Exception e) {
-                    icon = resize(ImageIO.read(new URL(SkyclientUniversal.baseCdn + "/files/icons/skyclient.png")), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
+                    icon = resize(ImageIO.read(new URL(SkyclientUniversal.propertiesData.baseCdn + "/files/icons/skyclient.png")), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
                 }
                 Thread t = new Thread(() -> {
                     BufferedImage icon2;
                     try {
                         System.out.println("Downloading Icon for " + pack.getDisplay());
-                        Http.download(SkyclientUniversal.baseCdn + "/files/icons/" + pack.getIcon(), SkyclientUniversal.cache + File.separator + pack.getIcon());
-                        icon2 = resize(ImageIO.read(new File(SkyclientUniversal.cache, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
+                        Http.download(SkyclientUniversal.propertiesData.baseCdn + "/files/icons/" + pack.getIcon(), SkyclientUniversal.CACHE + File.separator + pack.getIcon());
+                        icon2 = resize(ImageIO.read(new File(SkyclientUniversal.CACHE, pack.getIcon())), 50, 50, Objects.equals(pack.icon_scaling, "pixel"));
                         Image.setIcon(new ImageIcon(icon2));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -589,7 +592,7 @@ public class Installer {
         PackTabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         ModTabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        frame = new JFrame("Skyclient Universal Installer - " + SkyclientUniversal.version);
+        frame = new JFrame("Skyclient Universal Installer - " + SkyclientUniversal.propertiesData.version);
         frame.setContentPane(pane);
         frame.setResizable(false);
         frame.setIconImage(SkyclientUniversal.skyclientIcon);
