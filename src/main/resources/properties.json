@@ -1,0 +1,5 @@
+{
+  "version": "2.0.4",
+  "baseRepo": "https://raw.githubusercontent.com/SkyblockClient/SkyblockClient-REPO/main",
+  "baseCdn": "https://cdn.jsdelivr.net/gh/SkyblockClient/SkyblockClient-REPO@main"
+}
