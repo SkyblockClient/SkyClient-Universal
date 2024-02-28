@@ -35,7 +35,7 @@ import java.io.IOException;
 
 public class SkyclientUniversal {
 
-    public static BufferedImage skyclientIcon;//null;//
+    public static BufferedImage skyclientIcon;
 
     static {
         try {
@@ -103,7 +103,6 @@ public class SkyclientUniversal {
         for (int i = 0; i < packs.length-1; i++) {
             installer.addPackPanel(i, i-1);
         }
-        //
         installer.init();
 
     }
