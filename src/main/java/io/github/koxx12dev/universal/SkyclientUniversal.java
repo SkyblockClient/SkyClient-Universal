@@ -45,7 +45,7 @@ public class SkyclientUniversal {
         }
     }
 
-    public static String version = "2.0.4";
+    public static String version = "2.0.5";
     public static Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
     public static String baseRepo = "https://raw.githubusercontent.com/SkyblockClient/SkyblockClient-REPO/main";
     public static String baseCdn = "https://cdn.jsdelivr.net/gh/SkyblockClient/SkyblockClient-REPO@main";
