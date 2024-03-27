@@ -1,57 +1,57 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Method can be extracted",
-  "severity": "Moderate",
-  "comment": "It's possible to extract method returning 'item' from a long surrounding method",
-  "detailsInfo": "Suggests extracting fragments of code to a separate method to make code more clear. This inspection has a number of heuristics to select good candidates for extraction, including the following ones.\n\n* The extracted fragment has no non-local control flow\n* The extracted fragment has exactly one output variable\n* There are no similar uses of output variable inside the extracted fragment and outside it\n* The extracted fragment has only few input parameters (no more than three by default; configured with the inspection option)\n* The extracted fragment is not smaller than the configured length (500 characters by default) but no bigger than 60% of the containing method body",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
       "language": "JAVA",
-      "line": 534,
-      "offset": 33,
-      "length": 22,
+      "line": 50,
+      "offset": 15,
+      "length": 15,
       "code": {
-        "startLine": 532,
-        "length": 22,
-        "offset": 163,
-        "surroundingCode": "                            JPopupMenu popup = new JPopupMenu();\n                            for (Actions action : pack.actions) {\n                                JMenuItem item = null;\n                                if (!Objects.equals(action.method, \"hover\")) {\n                                    item = new JMenuItem(action.text);"
+        "startLine": 48,
+        "length": 15,
+        "offset": 108,
+        "surroundingCode": "            Files.write(file.toPath(), content.getBytes());\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "ExtractMethodRecommender"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "9ad55fdc47c658ffd88e067202fc056b987d7c1238e357dcdaf0c19f7c9b84d2"
+  "hash": "d0131c8d789bfd36ce97c5e0ea36cc6cd0faf6881954c2dd759c6e2bb87a2bb4"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Method can be extracted",
-  "severity": "Moderate",
-  "comment": "It's possible to extract method returning 'item' from a long surrounding method",
-  "detailsInfo": "Suggests extracting fragments of code to a separate method to make code more clear. This inspection has a number of heuristics to select good candidates for extraction, including the following ones.\n\n* The extracted fragment has no non-local control flow\n* The extracted fragment has exactly one output variable\n* There are no similar uses of output variable inside the extracted fragment and outside it\n* The extracted fragment has only few input parameters (no more than three by default; configured with the inspection option)\n* The extracted fragment is not smaller than the configured length (500 characters by default) but no bigger than 60% of the containing method body",
+  "type": "Call to 'printStackTrace()'",
+  "severity": "High",
+  "comment": "Call to `printStackTrace()` should probably be replaced with more robust logging",
+  "detailsInfo": "Reports calls to `Throwable.printStackTrace()` without arguments.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code\nor replaced with a more robust logging facility.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/io/github/koxx12dev/universal/guis/Installer.java",
+      "path": "src/main/java/io/github/koxx12dev/universal/utils/FileUtil.java",
       "language": "JAVA",
-      "line": 387,
-      "offset": 33,
-      "length": 22,
+      "line": 38,
+      "offset": 15,
+      "length": 15,
       "code": {
-        "startLine": 385,
-        "length": 22,
-        "offset": 162,
-        "surroundingCode": "                            JPopupMenu popup = new JPopupMenu();\n                            for (Actions action : mod.actions) {\n                                JMenuItem item = null;\n                                if (!Objects.equals(action.method, \"hover\")) {\n                                    item = new JMenuItem(action.text);"
+        "startLine": 36,
+        "length": 15,
+        "offset": 54,
+        "surroundingCode": "        catch (IOException e)\n        {\n            e.printStackTrace();\n        }\n"
       }
     }
   ],
   "attributes": {
     "module": "project.main",
-    "inspectionName": "ExtractMethodRecommender"
+    "inspectionName": "ThrowablePrintStackTrace"
   },
-  "hash": "dd992dde4334188531cc2ae2d84b6d66ef330034feb41fc4adfa268462af13f2"
+  "hash": "f9a1e5ba117be77ea260648a9ffc8ee99d60701b3f01a87eedce530377e0f471"
 }]}
